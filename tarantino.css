@@ -1,0 +1,19 @@
+body {
+    background-color: darkgrey;
+    font-family: sans-serif;
+}
+
+#myChart div {
+    background-color: aliceblue;
+    margin: 2px;
+}
+
+#myChart rect {
+    fill: steelblue;
+}
+
+#myChart text {
+    fill: white;
+    font: 10px sans-serif;
+    text-anchor: end;
+}

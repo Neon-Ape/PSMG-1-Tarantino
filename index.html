@@ -1,0 +1,26 @@
+ <!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursewords in the works of Quentin Tarantino</title>
+    <link rel="stylesheet" href="tarantino.css">
+</head>
+    
+<body>
+    <h1>Cursewords in the works of Quentin Tarantino</h1>
+    <p onclick="doChart()">Hier klicken um den Chart anzuzeigen!</p>
+    <p onclick="createBubbleData()">Hier klicken um den BubbleChart anzuzeigen!</p>
+    <center>
+    <svg id="myChart" width="800" height="800" style="top: 300px;">
+    
+    </svg>
+    </center>
+
+
+    <!-- Scripts should be loaded when the dom model is done and thus are included at the bottom -->
+    <!-- reasons: script error doesnt lead to blank page; receiving and parsing large scripts increases load time -->
+    <!-- dom model is ready and modifiable -->
+    <script src="./lib/d3/d3.js"></script>
+    <script src="tarantino.js"></script>
+</body>
+</html> 
