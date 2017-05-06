@@ -15,18 +15,18 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="bubble_chart.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bubble_chart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bubble_chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+            <state relative-caret-position="204">
+              <caret line="250" column="23" lean-forward="false" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
                 <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
                 <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
                 <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-                <element signature="e#10684#10786#0" expanded="false" />
+                <element signature="e#10535#10637#0" expanded="false" />
                 <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
                 <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
                 <element signature="n#!!block;n#getExtraData#0" expanded="false" />
@@ -48,7 +48,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tarantino_extra.csv" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tarantino_extra.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tarantino_extra.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
@@ -157,12 +157,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1494081811712</updated>
-      <workItem from="1494081813942" duration="11875000" />
+      <workItem from="1494081813942" duration="12156000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11875000" />
+    <option name="totallyTimeSpent" value="12156000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
@@ -197,27 +197,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bubble_chart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#10684#10786#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
-            <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="n#!!block;n#addCommas#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tarantino.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-15232">
@@ -231,6 +210,27 @@
         <state relative-caret-position="68">
           <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bubble_chart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="250" column="23" lean-forward="false" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10535#10637#0" expanded="false" />
+            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
+            <element signature="n#!!block;n#getExtraData#0" expanded="false" />
+            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
+            <element signature="n#!!block;n#setupButtons#0" expanded="false" />
+            <element signature="n#!!block;n#addCommas#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
