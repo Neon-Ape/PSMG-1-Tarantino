@@ -8,7 +8,7 @@
  */
 function bubbleChart() {
   // Constants for sizing
-  var width = 960;
+  var width = 1200;
   var height = 600;
 
   // tooltip for mouseover functionality
@@ -18,39 +18,24 @@ function bubbleChart() {
   // on which view mode is selected.
   var center = { x: width / 2, y: height / 2 };
 
-  var center2 = { x: width / 3, y: height / 3};
-
-  var yearCenters = {
-    1992: { x: width / 3, y: height / 2 },
-    1997: { x: width / 2, y: height / 2 },
-    2015: { x: 2 * width / 3, y: height / 2 }
-  };
-
-  // X locations of the year titles.
-  var yearsTitleX = {
-    2008: 160,
-    2009: width / 2,
-    2010: width - 160
-  };
-
   var movieTitleX = {
-    "Reservoir Dogs" : width/7,
-    "Pulp Fiction" : width*2/7,
-    "Jackie Brown" : width*3/7,
-    "Kill Bill: Vol. 1" : width*4/7,
-    "Kill Bill: Vol. 2" : width*5/7,
-    "Inglorious Basterds" : width*6/7,
-    "Django Unchained" : width
+    "Reservoir Dogs" : width*1.3/9,
+    "Pulp Fiction" : width*2.8/9,
+    "Jackie Brown" : width*4.2/9,
+    "Kill Bill: Vol. 1" : width*5/9,
+    "Kill Bill: Vol. 2" : width*6/9,
+    "Inglorious Basterds" : width*7/9,
+    "Django Unchained" : width*8/9
   };
 
   var movieCenters = {
-    "Reservoir Dogs" : { x: width/7, y: height/2},
-    "Pulp Fiction" : { x: width*2/7, y: height/2},
-    "Jackie Brown" : { x: width*3/7, y: height/2},
-    "Kill Bill: Vol. 1" : { x: width*4/7, y: height/2},
-    "Kill Bill: Vol. 2" : { x: width*5/7, y: height/2},
-    "Inglorious Basterds" : { x: width*6/7, y: height/2},
-    "Django Unchained" : { x: width, y: height/2}
+    "Reservoir Dogs" : { x: width*2/9, y: height/2},
+    "Pulp Fiction" : { x: width*3/9, y: height/2},
+    "Jackie Brown" : { x: width*4/9, y: height/2},
+    "Kill Bill: Vol. 1" : { x: width*5/9, y: height/2},
+    "Kill Bill: Vol. 2" : { x: width*6/9, y: height/2},
+    "Inglorious Basterds" : { x: width*7/9, y: height/2},
+    "Django Unchained" : { x: width*8/9, y: height/2}
   };
 
   console.log(movieCenters);
@@ -85,7 +70,7 @@ function bubbleChart() {
   // @v4 We create a force simulation now and
   //  add forces to it.
   var simulation = d3.forceSimulation()
-    .velocityDecay(0.2)
+    .velocityDecay(0.1)
     .force('x', d3.forceX().strength(forceStrength).x(center.x))
     .force('y', d3.forceY().strength(forceStrength).y(center.y))
     .force('charge', d3.forceManyBody().strength(charge))
@@ -122,7 +107,7 @@ function bubbleChart() {
       // @v4: new flattened scale names.
       var radiusScale = d3.scalePow()
           .exponent(0.5)
-          .range([2, 85])
+          .range([1, 65])
           .domain([0, maxAmount]);
 
       var myNodes = curseWords.children.map(function (d) {
