@@ -37,8 +37,8 @@ function bubbleChart() {
     "Reservoir Dogs" : width/7,
     "Pulp Fiction" : width*2/7,
     "Jackie Brown" : width*3/7,
-    "Kill Bill Vol.1" : width*4/7,
-    "Kill Bill Vol.2" : width*5/7,
+    "Kill Bill Vol. 1" : width*4/7,
+    "Kill Bill Vol. 2" : width*5/7,
     "Inglorious Basterds" : width*6/7,
     "Django Unchained" : width
   };
@@ -47,8 +47,8 @@ function bubbleChart() {
     "Reservoir Dogs" : { x: width/7, y: height/2},
     "Pulp Fiction" : { x: width*2/7, y: height/2},
     "Jackie Brown" : { x: width*3/7, y: height/2},
-    "Kill Bill Vol.1" : { x: width*4/7, y: height/2},
-    "Kill Bill Vol.2" : { x: width*5/7, y: height/2},
+    "Kill Bill Vol. 1" : { x: width*4/7, y: height/2},
+    "Kill Bill Vol. 2" : { x: width*5/7, y: height/2},
     "Inglorious Basterds" : { x: width*6/7, y: height/2},
     "Django Unchained" : { x: width, y: height/2}
   };
