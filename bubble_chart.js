@@ -8,7 +8,7 @@
  */
 function bubbleChart() {
   // Constants for sizing
-  var width = 940;
+  var width = 960;
   var height = 600;
 
   // tooltip for mouseover functionality
@@ -18,10 +18,12 @@ function bubbleChart() {
   // on which view mode is selected.
   var center = { x: width / 2, y: height / 2 };
 
+  var center2 = { x: width / 3, y: height / 3};
+
   var yearCenters = {
-    2008: { x: width / 3, y: height / 2 },
-    2009: { x: width / 2, y: height / 2 },
-    2010: { x: 2 * width / 3, y: height / 2 }
+    1992: { x: width / 3, y: height / 2 },
+    1997: { x: width / 2, y: height / 2 },
+    2015: { x: 2 * width / 3, y: height / 2 }
   };
 
   // X locations of the year titles.
@@ -50,6 +52,8 @@ function bubbleChart() {
     "Inglorious Basterds" : { x: width*6/7, y: height/2},
     "Django Unchained" : { x: width, y: height/2}
   };
+
+  console.log(movieCenters);
 
   // @v4 strength to apply to the position forces
   var forceStrength = 0.03;
@@ -132,11 +136,9 @@ function bubbleChart() {
               y: Math.random() * 800
           };
       });
-      console.log(myNodes);
 
       // sort them to prevent occlusion of smaller nodes.
       myNodes.sort(function (a, b) { return b.value - a.value; });
-      console.log(myNodes);
       return myNodes;
 
 
@@ -159,8 +161,6 @@ function bubbleChart() {
     // convert raw data into nodes data
     //nodes = createNodes(rawData);
     nodes = createNodes(rawData);
-    console.log("Nodes get created: ");
-    console.log(nodes);
     // Create a SVG element inside the provided selector
     // with desired size.
     svg = d3.select(selector)
@@ -221,7 +221,11 @@ function bubbleChart() {
    * x force.
    */
   function nodeYearPos(d) {
-    return yearCenters[d.year].x;
+    console.log(d);
+    console.log(d.movie);
+    console.log(movieCenters[d.movie]);
+    console.log(movieCenters[d.movie].x);
+    return movieCenters[d.movie].x;
   }
 
 
@@ -236,6 +240,7 @@ function bubbleChart() {
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
+    simulation.force('y', d3.forceY().strength(forceStrength).y(center.y));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -251,8 +256,10 @@ function bubbleChart() {
   function splitBubbles() {
     showYearTitles();
 
-    // @v4 Reset the 'x' force to draw the bubbles to their year centers
+    // @v4 Reset the 'x' force to draw the bubbles to their year center
     simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(center2.x));
+    simulation.force('y', d3.forceY().strength(forceStrength).y(center2.y));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -271,13 +278,13 @@ function bubbleChart() {
   function showYearTitles() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
-    var yearsData = d3.keys(yearsTitleX);
+    var yearsData = d3.keys(movieTitleX);
     var years = svg.selectAll('.year')
       .data(yearsData);
 
     years.enter().append('text')
       .attr('class', 'year')
-      .attr('x', function (d) { return yearsTitleX[d]; })
+      .attr('x', function (d) { return movieTitleX[d]; })
       .attr('y', 40)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
@@ -365,8 +372,7 @@ function makeCurseWords(data, movieDates) {
             curseWords = checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, currentMovie);
         }
     }
-    console.log("sortCurseWords, return value: ");
-    console.log(curseWords);
+
     return curseWords;
 }
 
@@ -393,7 +399,6 @@ function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, curr
                 break;
             }
         } else {
-            console.log(movieDates[currentMovie]);
             curseWords.children.push(new CurseWord(currentWord, 1, currentMovie, movieDates[currentMovie]));
             wordCheck.push(currentWord);
             break;
@@ -409,9 +414,6 @@ function getExtraData(data) {
     for (var i = 0; i <  data.length; i++) {
         movieDates[data[i]["movie"]] = data[i]["year"];
     }
-    console.log("extra Data now live");
-    console.log(movieDates['Jackie Brown']);
-
     return movieDates;
 }
 /*
@@ -428,9 +430,6 @@ function addExtraInfo(error, data) {
           console.log(error2);
       }
       var movieDates = getExtraData(extraData);
-
-      console.log(data);
-      console.log(movieDates);
 
       var curseWords = makeCurseWords(data, movieDates);
 
