@@ -16,7 +16,7 @@ function bubbleChart() {
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
-  var center = { x: width / 2, y: height / 2 };
+  var center = { x: width / 2, y: height *0.8/ 2 };
 
   var movieTitleX = {
     "Reservoir Dogs" : width*1.3/9,
@@ -391,10 +391,13 @@ function curseGroups(word) {
         "fuck": "fuck",
         "ass": "ass",
         "shit": "shit",
+        "merde" : "shit",
         // racial slurs
         "n-word": "racial",
+        "negro": "racial",
         "jap": "racial",
         "gook": "racial",
+        "jew": "racial",
         // genital related
         "dick": "genital",
         "cocksucker": "genital",
