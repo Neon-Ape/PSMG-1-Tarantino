@@ -83,8 +83,8 @@ function bubbleChart() {
   // Nice looking colors - no reason to buck the trend
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
-    .domain(['low', 'medium', 'high'])
-    .range(['#d84b2a', '#beccae', '#7aa25c']);
+    .domain(['fuck', 'shit', 'ass', 'racial', 'genital', 'blasphemy', 'other'])
+    .range(['#D8341A', '#C2A225', '#14A622', '#9C4917','#D826BA','#BDC8E7','#305060']);
 
 
   /*
@@ -117,6 +117,7 @@ function bubbleChart() {
               name: d.name,
               movie: d.movie,
               year: d.year,
+              group: d.group,
               x: Math.random() * 900,
               y: Math.random() * 800
           };
@@ -360,13 +361,45 @@ function makeCurseWords(data, movieDates) {
     return curseWords;
 }
 
+function curseGroups(word) {
+    var curseCategories = {
+        // word related
+        "fuck": "fuck",
+        "ass": "ass",
+        "shit": "shit",
+        // racial slurs
+        "n-word": "racial",
+        "jap": "racial",
+        "gook": "racial",
+        // genital related
+        "dick": "genital",
+        "cocksucker": "genital",
+        "pussy": "genital",
+        "cunt": "genital",
+        // blasphemy
+        "god": "blasphemy",
+        "damn": "blasphemy",
+        "hell": "blasphemy"
+    };
+
+    var group;
+    for(group in curseCategories) {
+        if(word.includes(group)) {
+            return curseCategories[group];
+        }
+    }
+    return "other";
+
+}
+
 function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, currentMovie) {
 
-    function CurseWord(word, count, movie, year) {
+    function CurseWord(word, count, movie, year, group) {
         this.name = word;
         this.value = count;
         this.movie = movie;
         this.year = year;
+        this.group = group;
     }
 
 
@@ -383,7 +416,8 @@ function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, curr
                 break;
             }
         } else {
-            curseWords.children.push(new CurseWord(currentWord, 1, currentMovie, movieDates[currentMovie]));
+            var group = curseGroups(currentWord);
+            curseWords.children.push(new CurseWord(currentWord, 1, currentMovie, movieDates[currentMovie], group));
             wordCheck.push(currentWord);
             break;
         }
@@ -408,7 +442,7 @@ function addExtraInfo(error, data) {
   if (error) {
     console.log(error);
   }
-  var extrasUrl = "https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/tarantino_extra.csv";
+  var extrasUrl = "https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/data/tarantino_extra.csv";
   d3.csv(extrasUrl,function (error2, extraData) {
       if (error2) {
           console.log(error2);
@@ -465,7 +499,7 @@ function addCommas(nStr) {
 }
 
 // Load the data.
-d3.csv('https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/tarantino.csv', addExtraInfo);
+d3.csv('https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/data/tarantino.csv', addExtraInfo);
 
 // setup the buttons.
 setupButtons();

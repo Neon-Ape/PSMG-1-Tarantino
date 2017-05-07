@@ -18,9 +18,12 @@
       <file leaf-file-name="bubble_chart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="467" column="75" lean-forward="false" selection-start-line="467" selection-start-column="75" selection-end-line="467" selection-end-column="75" />
-              <folding />
+            <state relative-caret-position="266">
+              <caret line="86" column="31" lean-forward="false" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+              <folding>
+                <element signature="n#!!block;n#getExtraData#0" expanded="false" />
+                <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -35,6 +38,8 @@
       <find>splitBubbl</find>
       <find>nodeYearPos</find>
       <find>ticked</find>
+      <find>fillColor</find>
+      <find>other</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -142,12 +147,12 @@
       <option name="presentableId" value="Default" />
       <updated>1494081811712</updated>
       <workItem from="1494081813942" duration="14492000" />
-      <workItem from="1494145357855" duration="47000" />
+      <workItem from="1494145357855" duration="3545000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14539000" />
+    <option name="totallyTimeSpent" value="18037000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
@@ -248,9 +253,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="467" column="75" lean-forward="false" selection-start-line="467" selection-start-column="75" selection-end-line="467" selection-end-column="75" />
-          <folding />
+        <state relative-caret-position="266">
+          <caret line="86" column="31" lean-forward="false" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!block;n#getExtraData#0" expanded="false" />
+            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
