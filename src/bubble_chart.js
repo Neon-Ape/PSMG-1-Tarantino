@@ -9,7 +9,7 @@
 function bubbleChart() {
   // Constants for sizing
   var width = 1200;
-  var height = 600;
+  var height = 800;
 
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('gates_tooltip', 240);
@@ -38,10 +38,20 @@ function bubbleChart() {
     "Django Unchained" : { x: width*8/9, y: height/2}
   };
 
+  var groupCenters = {
+    "ass" : {y: height*2/9},
+      "shit" : {y: height*2.8/9},
+      "fuck" : {y: height*3.7/9},
+      "racial" : {y: height*4.7/9},
+      "genital" : {y: height*5.4/9},
+      "blasphemy" : {y: height*6.3/9},
+      "other" : {y: height*7.1/9}
+  };
+
   console.log(movieCenters);
 
   // @v4 strength to apply to the position forces
-  var forceStrength = 0.03;
+  var forceStrength = 0.05; //default 0.03
 
   // These will be set in create_nodes and create_vis
   var svg = null;
@@ -70,7 +80,7 @@ function bubbleChart() {
   // @v4 We create a force simulation now and
   //  add forces to it.
   var simulation = d3.forceSimulation()
-    .velocityDecay(0.1)
+    .velocityDecay(0.15)
     .force('x', d3.forceX().strength(forceStrength).x(center.x))
     .force('y', d3.forceY().strength(forceStrength).y(center.y))
     .force('charge', d3.forceManyBody().strength(charge))
@@ -206,14 +216,17 @@ function bubbleChart() {
    * Provides a x value for each node to be used with the split by year
    * x force.
    */
-  function nodeYearPos(d) {
-    console.log(d);
-    console.log(d.movie);
-    console.log(movieCenters[d.movie]);
-    console.log(movieCenters[d.movie].x);
+  function nodeYearPosX(d) {
     return movieCenters[d.movie].x;
   }
 
+  function nodeYearPosY(d) {
+        return movieCenters[d.movie].y;
+    }
+
+  function nodeGroupPos(d) {
+      return groupCenters[d.group].y;
+  }
 
   /*
    * Sets visualization in "single group mode".
@@ -243,13 +256,23 @@ function bubbleChart() {
     showYearTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year center
-    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPosX));
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYearPosY));
 
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
   }
 
+  function vertSplitBubbles() {
+      // @v4 Reset the 'x' force to draw the bubbles to their year center
+      simulation.force('y', d3.forceY().strength(forceStrength).y(nodeGroupPos));
+
+
+      // @v4 We can reset the alpha value and restart the simulation
+      simulation.alpha(1).restart();
+
+  }
   /*
    * Hides Year title displays.
    */
@@ -274,7 +297,6 @@ function bubbleChart() {
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
-
 
   /*
    * Function called on mouseover to display the
@@ -321,6 +343,8 @@ function bubbleChart() {
   chart.toggleDisplay = function (displayName) {
     if (displayName === 'year') {
       splitBubbles();
+    } else if (displayName === 'group') {
+      vertSplitBubbles();
     } else {
       groupBubbles();
     }
