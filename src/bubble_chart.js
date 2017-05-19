@@ -140,6 +140,14 @@ function bubbleChart() {
 
   }
 
+
+  /*
+  Map data to show timing graphs
+   */
+  function createGraphs(data) {
+
+  }
+
   /*
    * Main entry point to the bubble chart. This function is returned
    * by the parent closure. It prepares the rawData for visualization
@@ -157,6 +165,7 @@ function bubbleChart() {
     // convert raw data into nodes data
     //nodes = createNodes(rawData);
     nodes = createNodes(rawData);
+    graphs = createGraphs(rawData);
     // Create a SVG element inside the provided selector
     // with desired size.
     svg = d3.select(selector)

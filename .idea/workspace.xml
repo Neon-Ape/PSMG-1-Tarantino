@@ -18,38 +18,25 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bubble_chart.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bubble_chart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="68" column="49" lean-forward="true" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+            <state relative-caret-position="267">
+              <caret line="437" column="27" lean-forward="true" selection-start-line="437" selection-start-column="27" selection-end-line="437" selection-end-column="27" />
               <folding>
-                <element signature="e#5201#6878#0" expanded="false" />
                 <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
                 <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
                 <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
                 <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-                <element signature="e#11267#11415#0" expanded="false" />
-                <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+                <element signature="e#11386#11534#0" expanded="false" />
                 <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-                <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
                 <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-                <element signature="e#13801#13915#0" expanded="false" />
-                <element signature="e#14377#14455#0" expanded="false" />
+                <element signature="e#13920#14034#0" expanded="false" />
+                <element signature="e#14496#14574#0" expanded="false" />
                 <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-                <element signature="e#15028#15136#0" expanded="false" />
+                <element signature="e#15147#15255#0" expanded="false" />
                 <element signature="n#!!block;n#addCommas#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -59,6 +46,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
               <caret line="20" column="18" lean-forward="true" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tarantino_extra.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/tarantino_extra.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="3" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -106,8 +103,8 @@
         <option value="$PROJECT_DIR$/bubble_chart.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/bubble_chart.css" />
-        <option value="$PROJECT_DIR$/src/bubble_chart.js" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/bubble_chart.js" />
       </list>
     </option>
   </component>
@@ -148,6 +145,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="PSMG-1-Tarantino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PSMG-1-Tarantino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PSMG-1-Tarantino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -196,12 +207,12 @@
       <workItem from="1494456346286" duration="879000" />
       <workItem from="1494497064086" duration="16000" />
       <workItem from="1494579388812" duration="32000" />
-      <workItem from="1495181819747" duration="3600000" />
+      <workItem from="1495181819747" duration="5648000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29708000" />
+    <option name="totallyTimeSpent" value="31756000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="780" extended-state="0" />
@@ -241,20 +252,17 @@
         <state relative-caret-position="7089">
           <caret line="487" column="26" lean-forward="false" selection-start-line="487" selection-start-column="22" selection-end-line="487" selection-end-column="26" />
           <folding>
-            <element signature="e#5201#6878#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11267#11415#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+            <element signature="e#11386#11534#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13801#13915#0" expanded="false" />
-            <element signature="e#14377#14455#0" expanded="false" />
+            <element signature="e#13920#14034#0" expanded="false" />
+            <element signature="e#14496#14574#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15028#15136#0" expanded="false" />
+            <element signature="e#15147#15255#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -297,20 +305,17 @@
         <state relative-caret-position="7089">
           <caret line="487" column="26" lean-forward="false" selection-start-line="487" selection-start-column="22" selection-end-line="487" selection-end-column="26" />
           <folding>
-            <element signature="e#5201#6878#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11267#11415#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+            <element signature="e#11386#11534#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13801#13915#0" expanded="false" />
-            <element signature="e#14377#14455#0" expanded="false" />
+            <element signature="e#13920#14034#0" expanded="false" />
+            <element signature="e#14496#14574#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15028#15136#0" expanded="false" />
+            <element signature="e#15147#15255#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -353,20 +358,17 @@
         <state relative-caret-position="7089">
           <caret line="487" column="26" lean-forward="false" selection-start-line="487" selection-start-column="22" selection-end-line="487" selection-end-column="26" />
           <folding>
-            <element signature="e#5201#6878#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11267#11415#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+            <element signature="e#11386#11534#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13801#13915#0" expanded="false" />
-            <element signature="e#14377#14455#0" expanded="false" />
+            <element signature="e#13920#14034#0" expanded="false" />
+            <element signature="e#14496#14574#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15028#15136#0" expanded="false" />
+            <element signature="e#15147#15255#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -409,20 +411,17 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#5201#6878#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11267#11415#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+            <element signature="e#11386#11534#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13801#13915#0" expanded="false" />
-            <element signature="e#14377#14455#0" expanded="false" />
+            <element signature="e#13920#14034#0" expanded="false" />
+            <element signature="e#14496#14574#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15028#15136#0" expanded="false" />
+            <element signature="e#15147#15255#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -465,20 +464,17 @@
         <state relative-caret-position="6001">
           <caret line="399" column="24" lean-forward="false" selection-start-line="399" selection-start-column="24" selection-end-line="399" selection-end-column="24" />
           <folding>
-            <element signature="e#5201#6878#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11267#11415#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+            <element signature="e#11386#11534#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13801#13915#0" expanded="false" />
-            <element signature="e#14377#14455#0" expanded="false" />
+            <element signature="e#13920#14034#0" expanded="false" />
+            <element signature="e#14496#14574#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15028#15136#0" expanded="false" />
+            <element signature="e#15147#15255#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -532,14 +528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/tarantino_extra.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/d3/d3.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-281004">
@@ -563,34 +551,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="68" column="49" lean-forward="true" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
-          <folding>
-            <element signature="e#5201#6878#0" expanded="false" />
-            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11267#11415#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
-            <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
-            <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13801#13915#0" expanded="false" />
-            <element signature="e#14377#14455#0" expanded="false" />
-            <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15028#15136#0" expanded="false" />
-            <element signature="n#!!block;n#addCommas#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -600,6 +572,35 @@
         <state relative-caret-position="51">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/tarantino_extra.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="3" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="437" column="27" lean-forward="true" selection-start-line="437" selection-start-column="27" selection-end-line="437" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="n#!!block;n#curseGroups#0" expanded="false" />
+            <element signature="n#!!block;n#getExtraData#0" expanded="false" />
+            <element signature="e#13920#14034#0" expanded="false" />
+            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="n#!!block;n#setupButtons#0" expanded="false" />
+            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="n#!!block;n#addCommas#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
