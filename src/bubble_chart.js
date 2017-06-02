@@ -792,7 +792,7 @@ function addExtraInfo(error, data) {
 
 
       myBubbleChart('#vis', curseWords);
-      myLineGraph('#vis', curseTimes);
+      //myLineGraph('#vis', curseTimes);
 
   });
 
