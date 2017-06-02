@@ -414,24 +414,27 @@ function lineGraph(){
     function createNodes(curseWords) {
 
         var myNodes = {
-            divider: 4,
             'Reservoir Dogs': [
                 {
+                    id: 0,
                     words: {
                         word: 3
                     }
                 },
                 {
+                    id: 1,
                     words: {
                         word: 10
                     }
                 },
                 {
+                    id: 2,
                     words: {
                         word: 7
                     }
                 },
                 {
+                    id: 3,
                     words: {
                         word: 22
                     }
@@ -480,21 +483,20 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 0)
-            .attr('fill', function (d) { return fillColor(d.group); })
-            .attr('stroke', function (d) { return d3.rgb(fillColor(d.group)).darker(); })
-            .attr('stroke-width', 2)
+            .attr('r', 30)
+            .attr('fill', rgb(0,0,0,0))
+            .attr('x', 0)
             .on('mouseover', showDetail)
             .on('mouseout', hideDetail);
 
         // @v4 Merge the original empty selection and the enter selection
-        points = points.merge(bubblesE);
+        points = points.merge(pointsE);
 
         // Fancy transition to make bubbles appear, ending with the
         // correct radius
         points.transition()
             .duration(2000)
-            .attr('r', function (d) { return d.radius; });
+            .attr('x', function (d) { return d.x; });
 
         // Set the simulation's nodes to our newly created nodes array.
         // @v4 Once we set the nodes, the simulation will start running automatically!
@@ -692,7 +694,7 @@ function makeCurseWords(data, movieDates) {
 }
 
 function makeCurseTimes(data, extraData){
-    
+
 }
 
 function curseGroups(word) {
