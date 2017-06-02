@@ -666,6 +666,7 @@ function lineGraph(){
  */
 
 var myBubbleChart = bubbleChart();
+var myLineGraph = lineGraph();
 
 
 function makeCurseWords(data, movieDates) {
@@ -688,6 +689,10 @@ function makeCurseWords(data, movieDates) {
     }
 
     return curseWords;
+}
+
+function makeCurseTimes(data, extraData){
+    
 }
 
 function curseGroups(word) {
@@ -780,11 +785,13 @@ function addExtraInfo(error, data) {
           console.log(error2);
       }
       var movieDates = getExtraData(extraData);
-
+      var curseTimes = makeCurseTimes(data, extraData);
       var curseWords = makeCurseWords(data, movieDates);
 
 
       myBubbleChart('#vis', curseWords);
+      myLineGraph('#vis', curseTimes);
+
   });
 
 }
