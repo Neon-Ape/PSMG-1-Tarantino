@@ -18,26 +18,82 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bubble_chart.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bubble_chart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="370" column="0" lean-forward="true" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
+            <state relative-caret-position="392">
+              <caret line="444" column="5" lean-forward="true" selection-start-line="444" selection-start-column="5" selection-end-line="444" selection-end-column="5" />
               <folding>
+                <element signature="e#444#491#0" expanded="false" />
+                <element signature="e#602#859#0" expanded="false" />
+                <element signature="e#883#1267#0" expanded="false" />
+                <element signature="e#1291#1539#0" expanded="false" />
+                <element signature="e#1781#1829#0" expanded="false" />
+                <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#2434#2470#0" expanded="false" />
+                <element signature="e#2822#2859#0" expanded="false" />
+                <element signature="e#2941#2993#0" expanded="false" />
+                <element signature="e#3253#3716#0" expanded="false" />
+                <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#4572#5153#0" expanded="false" />
+                <element signature="e#5202#6915#0" expanded="false" />
+                <element signature="e#6920#7204#0" expanded="false" />
+                <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#7343#7437#0" expanded="false" />
+                <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#7658#7852#0" expanded="false" />
+                <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#8233#8427#0" expanded="false" />
+                <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#9123#9163#0" expanded="false" />
                 <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#9238#9278#0" expanded="false" />
                 <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#9742#9840#0" expanded="false" />
                 <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+                <element signature="e#10560#10587#0" expanded="false" />
                 <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-                <element signature="e#11386#11534#0" expanded="false" />
+                <element signature="e#10751#11018#0" expanded="false" />
+                <element signature="e#11066#11236#0" expanded="false" />
+                <element signature="e#11304#11342#0" expanded="false" />
+                <element signature="e#11762#11798#0" expanded="false" />
+                <element signature="e#12116#12153#0" expanded="false" />
+                <element signature="e#12241#12293#0" expanded="false" />
+                <element signature="e#12689#13174#0" expanded="false" />
+                <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#13910#14515#0" expanded="false" />
+                <element signature="e#16420#16716#0" expanded="false" />
+                <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#16877#16977#0" expanded="false" />
+                <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#17216#17420#0" expanded="false" />
+                <element signature="e#17831#18035#0" expanded="false" />
+                <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#18773#18817#0" expanded="false" />
+                <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#18902#18946#0" expanded="false" />
+                <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#19472#19576#0" expanded="false" />
+                <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#20252#20283#0" expanded="false" />
+                <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+                <element signature="e#20471#20750#0" expanded="false" />
+                <element signature="e#20800#21006#0" expanded="false" />
+                <element signature="e#21078#21226#0" expanded="false" />
                 <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
                 <element signature="n#!!block;n#curseGroups#0" expanded="false" />
                 <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
                 <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-                <element signature="e#13920#14034#0" expanded="false" />
-                <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-                <element signature="e#14496#14574#0" expanded="false" />
+                <element signature="e#23612#23726#0" expanded="false" />
+                <element signature="e#24188#24266#0" expanded="false" />
                 <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-                <element signature="e#15147#15255#0" expanded="false" />
+                <element signature="e#24839#24947#0" expanded="false" />
                 <element signature="n#!!block;n#addCommas#0" expanded="false" />
               </folding>
             </state>
@@ -54,7 +110,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tarantino_extra.csv" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tarantino_extra.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/tarantino_extra.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -91,7 +147,7 @@
       <find>butt</find>
       <find>vertsp</find>
       <find>selector</find>
-      <find>selector</find>
+      <find>createGr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -107,8 +163,8 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/bubble_chart.css" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/bubble_chart.js" />
         <option value="$PROJECT_DIR$/data/tarantino_extra.csv" />
+        <option value="$PROJECT_DIR$/src/bubble_chart.js" />
       </list>
     </option>
   </component>
@@ -195,6 +251,68 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
@@ -214,12 +332,12 @@
       <workItem from="1495181819747" duration="5669000" />
       <workItem from="1495549178330" duration="955000" />
       <workItem from="1496391671934" duration="16000" />
-      <workItem from="1496391733359" duration="587000" />
+      <workItem from="1496391733359" duration="4212000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33335000" />
+    <option name="totallyTimeSpent" value="36960000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="2" width="1316" height="773" extended-state="0" />
@@ -250,7 +368,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -267,20 +387,76 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
             <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
             <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -315,20 +491,76 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
             <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
             <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -363,20 +595,76 @@
         <state relative-caret-position="7089">
           <caret line="487" column="26" lean-forward="false" selection-start-line="487" selection-start-column="22" selection-end-line="487" selection-end-column="26" />
           <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
             <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
             <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -418,20 +706,76 @@
         <state relative-caret-position="7089">
           <caret line="487" column="26" lean-forward="false" selection-start-line="487" selection-start-column="22" selection-end-line="487" selection-end-column="26" />
           <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
             <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
             <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -473,20 +817,76 @@
         <state relative-caret-position="7089">
           <caret line="487" column="26" lean-forward="false" selection-start-line="487" selection-start-column="22" selection-end-line="487" selection-end-column="26" />
           <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
             <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
             <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -528,20 +928,76 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
             <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
             <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -583,20 +1039,76 @@
         <state relative-caret-position="6001">
           <caret line="399" column="24" lean-forward="false" selection-start-line="399" selection-start-column="24" selection-end-line="399" selection-end-column="24" />
           <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
             <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
             <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
             <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
             <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
             <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
             <element signature="n#!!block;n#curseGroups#0" expanded="false" />
             <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
             <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
             <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
             <element signature="n#!!block;n#addCommas#0" expanded="false" />
           </folding>
         </state>
@@ -684,30 +1196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="370" column="0" lean-forward="true" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
-            <element signature="e#11386#11534#0" expanded="false" />
-            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
-            <element signature="n#!!block;n#curseGroups#0" expanded="false" />
-            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
-            <element signature="n#!!block;n#getExtraData#0" expanded="false" />
-            <element signature="e#13920#14034#0" expanded="false" />
-            <element signature="n#!!block;n#addExtraInfo#0" expanded="false" />
-            <element signature="e#14496#14574#0" expanded="false" />
-            <element signature="n#!!block;n#setupButtons#0" expanded="false" />
-            <element signature="e#15147#15255#0" expanded="false" />
-            <element signature="n#!!block;n#addCommas#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -721,6 +1209,86 @@
         <state relative-caret-position="153">
           <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bubble_chart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="444" column="5" lean-forward="true" selection-start-line="444" selection-start-column="5" selection-end-line="444" selection-end-column="5" />
+          <folding>
+            <element signature="e#444#491#0" expanded="false" />
+            <element signature="e#602#859#0" expanded="false" />
+            <element signature="e#883#1267#0" expanded="false" />
+            <element signature="e#1291#1539#0" expanded="false" />
+            <element signature="e#1781#1829#0" expanded="false" />
+            <element signature="n#!!block;n#charge#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#2434#2470#0" expanded="false" />
+            <element signature="e#2822#2859#0" expanded="false" />
+            <element signature="e#2941#2993#0" expanded="false" />
+            <element signature="e#3253#3716#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#4572#5153#0" expanded="false" />
+            <element signature="e#5202#6915#0" expanded="false" />
+            <element signature="e#6920#7204#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7343#7437#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#7658#7852#0" expanded="false" />
+            <element signature="n#!!block;n#groupBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#8233#8427#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9123#9163#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9238#9278#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#9742#9840#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10560#10587#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#bubbleChart#0" expanded="false" />
+            <element signature="e#10751#11018#0" expanded="false" />
+            <element signature="e#11066#11236#0" expanded="false" />
+            <element signature="e#11304#11342#0" expanded="false" />
+            <element signature="e#11762#11798#0" expanded="false" />
+            <element signature="e#12116#12153#0" expanded="false" />
+            <element signature="e#12241#12293#0" expanded="false" />
+            <element signature="e#12689#13174#0" expanded="false" />
+            <element signature="n#!!block;n#createNodes#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#13910#14515#0" expanded="false" />
+            <element signature="e#16420#16716#0" expanded="false" />
+            <element signature="n#!!block;n#ticked#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#16877#16977#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosX#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeYearPosY#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#nodeGroupPos#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#17216#17420#0" expanded="false" />
+            <element signature="e#17831#18035#0" expanded="false" />
+            <element signature="n#!!block;n#splitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="n#!!block;n#vertSplitBubbles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18773#18817#0" expanded="false" />
+            <element signature="n#!!block;n#hideYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#18902#18946#0" expanded="false" />
+            <element signature="n#!!block;n#showYearTitles#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#19472#19576#0" expanded="false" />
+            <element signature="n#!!block;n#showDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20252#20283#0" expanded="false" />
+            <element signature="n#!!block;n#hideDetail#0;n#!!block;n#lineGraph#0" expanded="false" />
+            <element signature="e#20471#20750#0" expanded="false" />
+            <element signature="e#20800#21006#0" expanded="false" />
+            <element signature="e#21078#21226#0" expanded="false" />
+            <element signature="n#!!block;n#makeCurseWords#0" expanded="false" />
+            <element signature="n#!!block;n#curseGroups#0" expanded="false" />
+            <element signature="n#!!block;n#checkForDuplicates#0" expanded="false" />
+            <element signature="n#!!block;n#getExtraData#0" expanded="false" />
+            <element signature="e#23612#23726#0" expanded="false" />
+            <element signature="e#24188#24266#0" expanded="false" />
+            <element signature="n#!!block;n#setupButtons#0" expanded="false" />
+            <element signature="e#24839#24947#0" expanded="false" />
+            <element signature="n#!!block;n#addCommas#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
