@@ -365,31 +365,21 @@ function lineGraph(){
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
 
-    // @v4 strength to apply to the position forces
-    var forceStrength = 0.05; //default 0.03
+    var movieColors = {
+        "Reservoir Dogs" : '#F00',
+        "Pulp Fiction" : '#D90',
+        "Jackie Brown" : '#644',
+        "Kill Bill: Vol. 1" : '#FF0',
+        "Kill Bill: Vol. 2" : '#02F',
+        "Inglorious Basterds" : '#090',
+        "Django Unchained" : '#707'
+    };
 
     // These will be set in create_nodes and create_vis
     var svg = null;
     var points = null;
     var links = null;
     var nodes = [];
-
-    // Locations to move bubbles towards, depending
-    // on which view mode is selected.
-    var center = { x: width / 2, y: height *0.8/ 2 };
-
-    // Here we create a force layout and
-    // @v4 We create a force simulation now and
-    //  add forces to it.
-    var simulation = d3.forceSimulation()
-        .velocityDecay(0.15)
-        .force('x', d3.forceX().strength(forceStrength).x(center.x))
-        .force('y', d3.forceY().strength(forceStrength).y(center.y))
-        .on('tick', ticked);
-
-    // @v4 Force starts up automatically,
-    //  which we don't want as there aren't any nodes yet.
-    simulation.stop();
 
     // Nice looking colors - no reason to buck the trend
     // @v4 scales now have a flattened naming scheme
@@ -411,83 +401,63 @@ function lineGraph(){
      */
     //TODO: insert grouping of Data here, now just static Object
 
-    function createNodes(data) {
+    function createNodes(data, separator) {
+        function Node(movie, count, x, words) {
+            this.movie = movie;
+            this.count = count;
+            this.x = x;
+            this.y = 300 - count * 2;
+            this.words = words;
+        }
 
-        var myNodes = [
-                {
-                    index: 0,
-                    x: 100,
-                    y: 300-30,
-                    words: {
-                        word: 3.2,
-                        fuck: 3.5,
-                        dick: 4.2,
-                        cunt: 5.3
-                    }
-                },
-                {
-                    index: 1,
-                    x: 200,
-                    y: 300-100,
-                    words: {
-                        word: 10
-                    }
-                },
-                {
-                    index: 2,
-                    x: 300,
-                    y: 300-70,
-                    words: {
-                        word: 7
-                    }
-                },
-                {
-                    index: 3,
-                    x: 400,
-                    y: 300-220,
-                    words: {
-                        word: 22
-                    }
+        var myNodes = [];
+
+        for (var movie in data){
+            var runtime = data[movie].runtime;
+
+            var currentTimeSlot = runtime/separator;
+            var collectorNode = {
+                count : 0,
+                words : {}
+            };
+            for (time in data[movie].children) {
+                if (time > currentTimeSlot) {
+                    myNodes.push(new Node(movie, collectorNode.count, currentTimeSlot * 10, collectorNode.words));
+                    collectorNode.words = [];
+                    collectorNode.count = 0;
+                    currentTimeSlot += separator;
                 }
-            ];
+                collectorNode.words[time] = data[movie].children[time];
+                collectorNode.count++;
+            }
 
+
+        };
+
+        console.log(myNodes);
         return myNodes;
     }
 
-    function createLinks(data) {
-        var myLinks = [
-            {
-                index: 0,
-                source: {
-                    x: 100,
-                    y: 300-30
-                },
-                target: {
-                    x: 200,
-                    y: 300-100
-                }
-            },{
-                index: 1,
-                source: {
-                    x: 200,
-                    y: 300-100
-                },
-                target: {
-                    x: 300,
-                    y: 300-70
-                }
-            },{
-                index: 2,
-                source: {
-                    x: 300,
-                    y: 300-70
-                },
-                target: {
-                    x: 400,
-                    y: 300-220
-                }
+    function createLinks(nodes) {
+        function Link(source, target, movie) {
+            this.movie = movie;
+            this.source = {
+                x: source.x,
+                y: source.y
+            };
+            this.target = {
+                x: target.x,
+                y: target.y
+            };
+        }
+        var myLinks = [];
+        for (var i = 0; i < nodes.length - 1; i++) {
+            if (nodes[i].movie === nodes[i+1].movie) {
+                myLinks.push(new Link(nodes[i], nodes[i + 1], nodes[i].movie));
             }
-        ];
+        }
+
+        console.log(myLinks);
         return myLinks;
 
     }
@@ -507,9 +477,24 @@ function lineGraph(){
      * a d3 loading function like d3.csv.
      */
     var chart = function chart(selector, rawData) {
+
+        var separator = 20;
+        /*
+        var maxAmount = d3.max(rawData.children, function (d) { return +d.value; });
+
+        // Sizes bubbles based on area.
+        // @v4: new flattened scale names.
+        var radiusScale = d3.scalePow()
+            .exponent(0.5)
+            .range([1, 65])
+            .domain([0, maxAmount]);
+
+
+        */
+
         // convert raw data into nodes data
-        nodes = createNodes(rawData);
-        links = createLinks(rawData);
+        nodes = createNodes(rawData, separator);
+        links = createLinks(nodes);
         // Create a SVG element inside the provided selector
         // with desired size.
         svg = d3.select(selector)
@@ -529,10 +514,12 @@ function lineGraph(){
         var linksE = links.enter().append('line')
             .classed('link', true)
             .attr('x1', function (d) { return d.source.x})
-            .attr('y1', 300)
+            .attr('y1', height + 10)
             .attr('x2', function (d) { return d.target.x})
-            .attr('y2', 300)
-            .attr('stroke', '#000')
+            .attr('y2', height + 10)
+            .attr('stroke', function (d) { return d3.rgb(fillColor(d.movie))
+
+            })
             .attr('stroke-width', 4);
 
         links = links.merge(linksE);
@@ -546,7 +533,8 @@ function lineGraph(){
             .classed('bubble', true)
             .attr('r', 20)
             .attr('fill', d3.rgb(0,0,0,0))
-            .attr('y', 0)
+            .attr('cx', function (d) { return Number(d.x)})
+            .attr('cy', function (d) { return Number(d.y)})
             .on('mouseover', showDetail)
             .on('mouseout', hideDetail);
 
@@ -563,14 +551,6 @@ function lineGraph(){
             .duration(2000)
             .attr('y1', function (d) { return d.source.y })
             .attr('y2', function (d) { return d.target.y });
-
-        // Set the simulation's nodes to our newly created nodes array.
-        // @v4 Once we set the nodes, the simulation will start running automatically!
-        simulation.nodes(nodes);
-
-
-        // Set initial layout to single group.
-        groupBubbles();
     };
 
     /*
@@ -600,21 +580,6 @@ function lineGraph(){
     }
 
     /*
-     * Sets visualization in "single group mode".
-     * The year labels are hidden and the force layout
-     * tick function is set to move all nodes to the
-     * center of the visualization.
-     */
-    function groupBubbles() {
-        // @v4 Reset the 'x' force to draw the bubbles to the center.
-        simulation.force('x', d3.forceX().strength(forceStrength).x(getPosX));
-        simulation.force('y', d3.forceY().strength(forceStrength).y(getPosY));
-
-        // @v4 We can reset the alpha value and restart the simulation
-        simulation.alpha(1).restart();
-    }
-
-    /*
      * Function called on mouseover to display the
      * details of a bubble in the tooltip.
      */
@@ -626,7 +591,7 @@ function lineGraph(){
 
         for(var word in d.words) {
             if(d.words.hasOwnProperty(word)) {
-                content += '<span class="name">' + d.words[word] + '</span><span class="value">: ' + word + '</span><br/>'
+                content += '<span class="name">' + word + '</span><span class="value">: ' + d.words[word] + '</span><br/>'
             }
         }
 
@@ -671,7 +636,7 @@ var myLineGraph = lineGraph();
 function runtimeLookup(data) {
     var runtimes = {};
     for (var i = 0; i < data.length; i++) {
-        runtimes[data[i]["movie"]] = data[i]["runtime"];
+        runtimes[data[i]["movie"]] = Number(data[i]["runtime"]);
     }
     return runtimes;
 }
@@ -679,15 +644,10 @@ function runtimeLookup(data) {
 function makeTiming(data, extraData) {
 
     var runTimes = runtimeLookup(extraData);
-    console.log(runTimes);
-    function TimedWord(word, minutes_in) {
-        this.word = word;
-        this.time = minutes_in;
-    }
 
     function MovieBlock(runtime) {
         this.runtime = runtime;
-        this.children = [];
+        this.children = {};
     }
 
     var timeLine = {
@@ -708,7 +668,7 @@ function makeTiming(data, extraData) {
         }
 
         if (currentType === "word") {
-            timeLine[movieBlockActive].children.push(new TimedWord(currentWord, currentTime));
+            timeLine[movieBlockActive].children[currentTime] = currentWord;
         }
     }
     console.log(timeLine);
