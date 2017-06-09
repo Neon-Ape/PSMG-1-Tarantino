@@ -1,4 +1,4 @@
-movie,year,imdb_rating,top_250, runtime
+movie,year,imdb_rating,top_250,runtime
 Reservoir Dogs,1992,8.3,74, 99
 Pulp Fiction,1994,8.9,7, 154
 Jackie Brown,1997,7.5,-1, 154

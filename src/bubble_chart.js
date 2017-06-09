@@ -525,13 +525,13 @@ function lineGraph(){
             .data(nodes, function (d) { return d.id; });
 
 
-        
+
         var linksE = links.enter().append('line')
             .classed('link', true)
             .attr('x1', function (d) { return d.source.x})
-            .attr('y1', function (d) { return d.source.y})
+            .attr('y1', 300)
             .attr('x2', function (d) { return d.target.x})
-            .attr('y2', function (d) { return d.target.y})
+            .attr('y2', 300)
             .attr('stroke', '#000')
             .attr('stroke-width', 4);
 
@@ -559,9 +559,15 @@ function lineGraph(){
             .duration(2000)
             .attr('y', function (d) { return d.y; });
 
+        links.transition()
+            .duration(2000)
+            .attr('y1', function (d) { return d.source.y })
+            .attr('y2', function (d) { return d.target.y });
+
         // Set the simulation's nodes to our newly created nodes array.
         // @v4 Once we set the nodes, the simulation will start running automatically!
         simulation.nodes(nodes);
+
 
         // Set initial layout to single group.
         groupBubbles();
@@ -579,11 +585,6 @@ function lineGraph(){
             .attr('cx', function (d) { return d.x; })
             .attr('cy', function (d) { return d.y; });
 
-        links
-            .attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
     }
 
     /*
@@ -667,8 +668,51 @@ function lineGraph(){
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
 
+function runtimeLookup(data) {
+    var runtimes = {};
+    for (var i = 0; i < data.length; i++) {
+        runtimes[data[i]["movie"]] = data[i]["runtime"];
+    }
+    return runtimes;
+}
+
 function makeTiming(data, extraData) {
-    return 0;
+
+    var runTimes = runtimeLookup(extraData);
+    console.log(runTimes);
+    function TimedWord(word, minutes_in) {
+        this.word = word;
+        this.time = minutes_in;
+    }
+
+    function MovieBlock(runtime) {
+        this.runtime = runtime;
+        this.children = [];
+    }
+
+    var timeLine = {
+    };
+
+    movieBlockActive = "";
+
+    for(var i = 0; i < data.length; i++) {
+        var currentType = data[i]["type"];
+        var currentWord = data[i]["word"];
+        var currentTime = data[i]["minutes_in"];
+        var currentMovie = data[i]["movie"];
+
+        if (currentMovie !== movieBlockActive) {
+            movieBlockActive = currentMovie;
+            var runtime = runTimes[movieBlockActive];
+            timeLine[currentMovie] = new MovieBlock(runtime);
+        }
+
+        if (currentType === "word") {
+            timeLine[movieBlockActive].children.push(new TimedWord(currentWord, currentTime));
+        }
+    }
+    console.log(timeLine);
+    return timeLine;
 }
 
 function makeCurseWords(data, movieDates) {
@@ -816,6 +860,7 @@ function setupButtons() {
       // the currently clicked button.
       myBubbleChart.toggleDisplay(buttonId);
     });
+
     d3.select('#graphSelect')
         .selectAll('.button')
         .on('click', function () {
