@@ -135,6 +135,7 @@ function bubbleChart() {
 
       // sort them to prevent occlusion of smaller nodes.
       myNodes.sort(function (a, b) { return b.value - a.value; });
+      console.log(myNodes);
       return myNodes;
 
 
@@ -158,7 +159,6 @@ function bubbleChart() {
     // convert raw data into nodes data
     //nodes = createNodes(rawData);
     nodes = createNodes(rawData);
-    graphs = createGraphs(rawData);
     // Create a SVG element inside the provided selector
     // with desired size.
     svg = d3.select(selector)
@@ -357,17 +357,13 @@ function bubbleChart() {
   return chart;
 }
 
-/*
- Map data to show timing graphs
- */
 function lineGraph(){
     // Constants for sizing
-    var width = 1200;
-    var height = 800;
+    var width = 1000;
+    var height = 300;
 
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
-
 
     // @v4 strength to apply to the position forces
     var forceStrength = 0.05; //default 0.03
@@ -375,7 +371,12 @@ function lineGraph(){
     // These will be set in create_nodes and create_vis
     var svg = null;
     var points = null;
+    var links = null;
     var nodes = [];
+
+    // Locations to move bubbles towards, depending
+    // on which view mode is selected.
+    var center = { x: width / 2, y: height *0.8/ 2 };
 
     // Here we create a force layout and
     // @v4 We create a force simulation now and
@@ -396,7 +397,6 @@ function lineGraph(){
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
         .range(['#D8341A', '#C2A225', '#14A622', '#9C4917','#D826BA','#BDC8E7','#305060','#505050', '#AAAAAA']);
 
-
     /*
      * This data manipulation function takes the raw data from
      * the CSV file and converts it into an array of node objects.
@@ -411,39 +411,84 @@ function lineGraph(){
      */
     //TODO: insert grouping of Data here, now just static Object
 
-    function createNodes(curseWords) {
+    function createNodes(data) {
 
-        var myNodes = {
-            'Reservoir Dogs': [
+        var myNodes = [
                 {
-                    id: 0,
+                    index: 0,
+                    x: 100,
+                    y: 300-30,
                     words: {
-                        word: 3
+                        word: 3.2,
+                        fuck: 3.5,
+                        dick: 4.2,
+                        cunt: 5.3
                     }
                 },
                 {
-                    id: 1,
+                    index: 1,
+                    x: 200,
+                    y: 300-100,
                     words: {
                         word: 10
                     }
                 },
                 {
-                    id: 2,
+                    index: 2,
+                    x: 300,
+                    y: 300-70,
                     words: {
                         word: 7
                     }
                 },
                 {
-                    id: 3,
+                    index: 3,
+                    x: 400,
+                    y: 300-220,
                     words: {
                         word: 22
                     }
                 }
-                ]
-        };
+            ];
 
         return myNodes;
+    }
 
+    function createLinks(data) {
+        var myLinks = [
+            {
+                index: 0,
+                source: {
+                    x: 100,
+                    y: 300-30
+                },
+                target: {
+                    x: 200,
+                    y: 300-100
+                }
+            },{
+                index: 1,
+                source: {
+                    x: 200,
+                    y: 300-100
+                },
+                target: {
+                    x: 300,
+                    y: 300-70
+                }
+            },{
+                index: 2,
+                source: {
+                    x: 300,
+                    y: 300-70
+                },
+                target: {
+                    x: 400,
+                    y: 300-220
+                }
+            }
+        ];
+        return myLinks;
 
     }
 
@@ -463,8 +508,8 @@ function lineGraph(){
      */
     var chart = function chart(selector, rawData) {
         // convert raw data into nodes data
-        //nodes = createNodes(rawData);
         nodes = createNodes(rawData);
+        links = createLinks(rawData);
         // Create a SVG element inside the provided selector
         // with desired size.
         svg = d3.select(selector)
@@ -473,8 +518,24 @@ function lineGraph(){
             .attr('height', height);
 
         // Bind nodes data to what will become DOM elements to represent them.
+        links = svg.selectAll('.link')
+            .data(links, function (d) { return d.id; });
+
         points = svg.selectAll('.bubble')
             .data(nodes, function (d) { return d.id; });
+
+
+        
+        var linksE = links.enter().append('line')
+            .classed('link', true)
+            .attr('x1', function (d) { return d.source.x})
+            .attr('y1', function (d) { return d.source.y})
+            .attr('x2', function (d) { return d.target.x})
+            .attr('y2', function (d) { return d.target.y})
+            .attr('stroke', '#000')
+            .attr('stroke-width', 4);
+
+        links = links.merge(linksE);
 
         // Create new circle elements each with class `bubble`.
         // There will be one circle.bubble for each object in the nodes array.
@@ -483,9 +544,9 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 30)
-            .attr('fill', rgb(0,0,0,0))
-            .attr('x', 0)
+            .attr('r', 20)
+            .attr('fill', d3.rgb(0,0,0,0))
+            .attr('y', 0)
             .on('mouseover', showDetail)
             .on('mouseout', hideDetail);
 
@@ -496,7 +557,7 @@ function lineGraph(){
         // correct radius
         points.transition()
             .duration(2000)
-            .attr('x', function (d) { return d.x; });
+            .attr('y', function (d) { return d.y; });
 
         // Set the simulation's nodes to our newly created nodes array.
         // @v4 Once we set the nodes, the simulation will start running automatically!
@@ -514,25 +575,27 @@ function lineGraph(){
      * These x and y values are modified by the force simulation.
      */
     function ticked() {
-        bubbles
+        points
             .attr('cx', function (d) { return d.x; })
             .attr('cy', function (d) { return d.y; });
+
+        links
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
     }
 
     /*
      * Provides a x value for each node to be used with the split by year
      * x force.
      */
-    function nodeYearPosX(d) {
-        return movieCenters[d.movie].x;
+    function getPosX(d) {
+        return d.x;
     }
 
-    function nodeYearPosY(d) {
-        return movieCenters[d.movie].y;
-    }
-
-    function nodeGroupPos(d) {
-        return groupCenters[d.group].y;
+    function getPosY(d) {
+        return d.y;
     }
 
     /*
@@ -542,67 +605,12 @@ function lineGraph(){
      * center of the visualization.
      */
     function groupBubbles() {
-        hideYearTitles();
-
         // @v4 Reset the 'x' force to draw the bubbles to the center.
-        simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
-        simulation.force('y', d3.forceY().strength(forceStrength).y(center.y));
+        simulation.force('x', d3.forceX().strength(forceStrength).x(getPosX));
+        simulation.force('y', d3.forceY().strength(forceStrength).y(getPosY));
 
         // @v4 We can reset the alpha value and restart the simulation
         simulation.alpha(1).restart();
-    }
-
-
-    /*
-     * Sets visualization in "split by year mode".
-     * The year labels are shown and the force layout
-     * tick function is set to move nodes to the
-     * yearCenter of their data's year.
-     */
-    function splitBubbles() {
-        showYearTitles();
-
-        // @v4 Reset the 'x' force to draw the bubbles to their year center
-        simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPosX));
-        simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYearPosY));
-
-
-        // @v4 We can reset the alpha value and restart the simulation
-        simulation.alpha(1).restart();
-    }
-
-    function vertSplitBubbles() {
-        // @v4 Reset the 'x' force to draw the bubbles to their year center
-        simulation.force('y', d3.forceY().strength(forceStrength).y(nodeGroupPos));
-
-
-        // @v4 We can reset the alpha value and restart the simulation
-        simulation.alpha(1).restart();
-
-    }
-    /*
-     * Hides Year title displays.
-     */
-    function hideYearTitles() {
-        svg.selectAll('.year').remove();
-    }
-
-    /*
-     * Shows Year title displays.
-     */
-    function showYearTitles() {
-        // Another way to do this would be to create
-        // the year texts once and then just hide them.
-        var yearsData = d3.keys(movieTitleX);
-        var years = svg.selectAll('.year')
-            .data(yearsData);
-
-        years.enter().append('text')
-            .attr('class', 'year')
-            .attr('x', function (d) { return movieTitleX[d]; })
-            .attr('y', 40)
-            .attr('text-anchor', 'middle')
-            .text(function (d) { return d; });
     }
 
     /*
@@ -613,18 +621,13 @@ function lineGraph(){
         // change outline to indicate hover state.
         d3.select(this).attr('stroke', 'black');
 
-        var content = '<span class="name">Word: </span><span class="value">' +
-            d.name +
-            '</span><br/>' +
-            '<span class="name">Amount: </span><span class="value">' +
-            d.value +
-            '</span><br/>' +
-            '<span class="name">Movie: </span><span class="value">' +
-            d.movie +
-            '</span><br/>' +
-            '<span class="name">Year: </span><span class="value">' +
-            d.year +
-            '</span>';
+        var content = "";
+
+        for(var word in d.words) {
+            if(d.words.hasOwnProperty(word)) {
+                content += '<span class="name">' + d.words[word] + '</span><span class="value">: ' + word + '</span><br/>'
+            }
+        }
 
         tooltip.showTooltip(content, d3.event);
     }
@@ -635,7 +638,7 @@ function lineGraph(){
     function hideDetail(d) {
         // reset outline
         d3.select(this)
-            .attr('stroke', d3.rgb(fillColor(d.group)).darker());
+            .attr('stroke', d3.rgb(0,0,0,0));
 
         tooltip.hideTooltip();
     }
@@ -648,13 +651,7 @@ function lineGraph(){
      * displayName is expected to be a string and either 'year' or 'all'.
      */
     chart.toggleDisplay = function (displayName) {
-        if (displayName === 'year') {
-            splitBubbles();
-        } else if (displayName === 'group') {
-            vertSplitBubbles();
-        } else {
-            groupBubbles();
-        }
+        // TODO: toggle opacity of grpahs on per movie basis
     };
 
 
@@ -670,6 +667,9 @@ function lineGraph(){
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
 
+function makeTiming(data, extraData) {
+    return 0;
+}
 
 function makeCurseWords(data, movieDates) {
 
@@ -691,10 +691,6 @@ function makeCurseWords(data, movieDates) {
     }
 
     return curseWords;
-}
-
-function makeCurseTimes(data, extraData){
-
 }
 
 function curseGroups(word) {
@@ -787,12 +783,12 @@ function addExtraInfo(error, data) {
           console.log(error2);
       }
       var movieDates = getExtraData(extraData);
-      var curseTimes = makeCurseTimes(data, extraData);
+      var wordTiming = makeTiming(data, extraData);
       var curseWords = makeCurseWords(data, movieDates);
 
 
-      myBubbleChart('#vis', curseWords);
-      //myLineGraph('#vis', curseTimes);
+      myLineGraph('#lineGraph', wordTiming);
+      myBubbleChart('#bubbleChart', curseWords);
 
   });
 
@@ -806,7 +802,7 @@ function setupButtons() {
     .selectAll('.button')
     .on('click', function () {
       // Remove active class from all buttons
-      d3.selectAll('.button').classed('active', false);
+      d3.select('#toolbar').selectAll('.button').classed('active', false);
       // Find the button just clicked
       var button = d3.select(this);
 
@@ -820,23 +816,27 @@ function setupButtons() {
       // the currently clicked button.
       myBubbleChart.toggleDisplay(buttonId);
     });
-}
+    d3.select('#graphSelect')
+        .selectAll('.button')
+        .on('click', function () {
 
-/*
- * Helper function to convert a number into a string
- * and add commas to it to improve presentation.
- */
-function addCommas(nStr) {
-  nStr += '';
-  var x = nStr.split('.');
-  var x1 = x[0];
-  var x2 = x.length > 1 ? '.' + x[1] : '';
-  var rgx = /(\d+)(\d{3})/;
-  while (rgx.test(x1)) {
-    x1 = x1.replace(rgx, '$1' + ',' + '$2');
-  }
+            // Find the button just clicked
+            var button = d3.select(this);
 
-  return x1 + x2;
+            // Toggle the active state
+            if (button.classed('active')) {
+                button.classed('active', false);
+            } else {
+                button.classed('active', true);
+            }
+
+            // Get the id of the button
+            var buttonId = button.attr('id');
+
+            // Toggle the bubble chart based on
+            // the currently clicked button.
+            myLineGraph.toggleDisplay(buttonId);
+        });
 }
 
 // Load the data.
