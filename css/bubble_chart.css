@@ -23,6 +23,33 @@ a, a:visited, a:active {
   color: #fff;
 }
 
+.button#dogs.active {
+    background: #D8341A;
+}
+
+.button#pulp.active {
+    background: #C2A225;
+}
+
+.button#jackie.active {
+    background: #14A622;
+}
+
+.button#bill1.active {
+    background: #9C4917;
+}
+
+.button#bill2.active {
+    background: #D826BA;
+}
+
+.button#basterds.active {
+    background: #305060;
+}
+
+.button#django.active {
+    background: #505050;
+}
 
 #vis {
   width: 1200px;

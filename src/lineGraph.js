@@ -30,7 +30,7 @@ function lineGraph(){
     // Here we create a force layout and
     // @v4 We create a force simulation now and
     //  add forces to it.
-    var simulation = d3.forceSimulation()
+    var lineSimulation = d3.forceSimulation()
         .velocityDecay(0.15)
         .force('x', d3.forceX().strength(forceStrength).x(start.x))
         .force('y', d3.forceY().strength(forceStrength).y(start.y))
@@ -38,7 +38,7 @@ function lineGraph(){
 
     // @v4 Force starts up automatically,
     //  which we don't want as there aren't any nodes yet.
-    simulation.stop();
+    lineSimulation.stop();
 
     // Nice looking colors - no reason to buck the trend
     // @v4 scales now have a flattened naming scheme
@@ -181,7 +181,7 @@ function lineGraph(){
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
             .attr('r', 20)
-            .attr('fill', d3.rgb(0,0,0,255))
+            .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
             .attr('cx', function (d) { return Number(d.x)})
             .attr('cy', function (d) { return Number(d.y)})
             .on('mouseover', showDetail)
@@ -207,7 +207,7 @@ function lineGraph(){
 
         // Set the simulation's nodes to our newly created nodes array.
         // @v4 Once we set the nodes, the simulation will start running automatically!
-        simulation.nodes(points);
+        lineSimulation.nodes(points);
 
 
         setStartState();
@@ -227,11 +227,13 @@ function lineGraph(){
             .attr('cx', getX)
             .attr('cy', getY);
 
+
         links
-            .attr('x1', getX)
-            .attr('y1', getY)
-            .attr('x2', getX)
-            .attr('y2', getY);
+            .attr('y1', function(d){return getY(d.source);})
+            .attr('y2', function(d){return getY(d.target);});
+
+
+
 
     }
 
@@ -267,6 +269,7 @@ function lineGraph(){
     }
 
     function getX(d) {
+        return d.x;
         if(activeGraphs[d.movie]) {
             return d.x;
         }
@@ -283,17 +286,17 @@ function lineGraph(){
 
     function setStartState() {
         // @v4 Reset the 'x' force to draw the bubbles to their year center
-        simulation.force('x', d3.forceX().strength(forceStrength).x(getX));
-        simulation.force('y', d3.forceY().strength(forceStrength).y(getY));
+        lineSimulation.force('x', d3.forceX().strength(forceStrength).x(getX));
+        lineSimulation.force('y', d3.forceY().strength(forceStrength).y(getY));
 
 
         // @v4 We can reset the alpha value and restart the simulation
-        simulation.alpha(1).restart();
+        lineSimulation.alpha(1).restart();
     }
 
     function toggleGraph(movie) {
         activeGraphs[movie] = !activeGraphs[movie];
-        simulation.alpha(1).restart();
+        lineSimulation.alpha(1).restart();
     }
 
 
@@ -330,7 +333,7 @@ function lineGraph(){
                 break;
         }
         toggleGraph(movie);
-        console.log(activeGraphs);
+        //console.log(activeGraphs);
     };
 
 
