@@ -1,7 +1,8 @@
 function lineGraph(){
     // Constants for sizing
-    var width = 1500;
+    var width = 1000;
     var height = 400;
+    var yOffset = 100;
 
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
@@ -18,8 +19,15 @@ function lineGraph(){
         "Django Unchained" : false
     };
 
-    // @v4 strength to apply to the position forces
-    var forceStrength = 0.03; //default 0.03
+    var xAxis = [
+        {
+            x1: width/10,
+            y1: height-yOffset,
+            x2: width*9/10,
+            y2: height-yOffset
+        }
+    ];
+
 
     // These will be set in create_nodes and create_vis
     var svg = null;
@@ -45,34 +53,68 @@ function lineGraph(){
      * This function returns the new node array, with a node in that
      * array for each element in the rawData input.
      */
-    function createNodes(data, separator) {
-        function Node(movie, count, x, words) {
+    function createNodes(data, separator, rawWidth, rawHeight) {
+        function Node(movie, count, x, words, separator) {
             this.movie = movie;
             this.count = count;
             this.x = x;
-            this.y = 300 - count * 2;
+            this.y = rawHeight - count * 2;
             this.words = words;
+            this.separator = separator;
         }
+
+        var width = rawWidth*8/10;
+        var offset = rawWidth/10;
+        var pixelPerSeparator = width/separator;
 
         var myNodes = [];
 
         for (var movie in data){
-            var runtime = data[movie].runtime;
 
-            var currentTimeSlot = runtime/separator;
+            var runtime = data[movie].runtime;
+            var minsPerSeparator = runtime/separator;
+            //console.log(movie + " --- width: " + width + ", runtime: " + runtime + ", pixelPerSeparator: " + pixelPerSeparator + ", minsPerSeparator: " + minsPerSeparator);
+            var currentTimeSlot = minsPerSeparator;
+            var currentXPos = offset;
+
+            var currentSeparator = 1;
+
             var collectorNode = {
                 count : 0,
                 words : {}
             };
+
             for (time in data[movie].children) {
-                if (time > currentTimeSlot) {
-                    myNodes.push(new Node(movie, collectorNode.count, currentTimeSlot * 10, collectorNode.words));
+
+                while (time > currentTimeSlot) {
+                    myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
                     collectorNode.words = [];
                     collectorNode.count = 0;
-                    currentTimeSlot += separator;
+                    currentTimeSlot += minsPerSeparator;
+                    currentXPos += pixelPerSeparator;
+                    currentSeparator ++;
                 }
+
                 collectorNode.words[time] = data[movie].children[time];
                 collectorNode.count++;
+            }
+            // add last Node
+            if (collectorNode.count !== 0) {
+                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
+                collectorNode.words = [];
+                collectorNode.count = 0;
+                currentTimeSlot += minsPerSeparator;
+                currentXPos += pixelPerSeparator;
+                currentSeparator ++;
+            }
+
+            while(currentTimeSlot <= runtime ) {
+                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
+                collectorNode.words = [];
+                collectorNode.count = 0;
+                currentTimeSlot += minsPerSeparator;
+                currentXPos += pixelPerSeparator;
+                currentSeparator ++;
             }
 
 
@@ -114,24 +156,14 @@ function lineGraph(){
      * rawData is expected to be an array of data objects as provided by
      * a d3 loading function like d3.csv.
      */
-    var chart = function chart(selector, rawData) {
+    var chart = function chart(selector, rawData, separator) {
 
-        var separator = 20;
-        /*
-         var maxAmount = d3.max(rawData.children, function (d) { return +d.value; });
-
-         // Sizes bubbles based on area.
-         // @v4: new flattened scale names.
-         var radiusScale = d3.scalePow()
-         .exponent(0.5)
-         .range([1, 65])
-         .domain([0, maxAmount]);
-
-
-         */
+        if(typeof(separator)==='undefined') {
+            separator = 10;
+        }
 
         // convert raw data into nodes data
-        nodes = createNodes(rawData, separator);
+        nodes = createNodes(rawData, separator, width, height - yOffset);
         links = createLinks(nodes);
         // Create a SVG element inside the provided selector
         // with desired size.
@@ -147,8 +179,28 @@ function lineGraph(){
         points = svg.selectAll('.bubble')
             .data(nodes, function (d) { return d.id; });
 
+        var axis = svg.selectAll('.axis')
+            .data(xAxis, function (d) { return d.id; });
 
+        console.log(xAxis);
+        console.log(axis);
 
+        var axisE = axis.enter().append('line')
+            .classed('axis', true)
+            .attr('x1', function (d) { return d.x1;})
+            .attr('y1', function (d) { return d.y1;})
+            .attr('x2', function (d) { return d.x2;})
+            .attr('y2', function (d) { return d.y2;})
+            .attr('stroke', '#000')
+            .attr('stroke-width', 2);
+
+        console.log(axisE);
+
+        axis = axis.merge(axisE);
+
+        console.log(axis);
+
+        // uncomment commented lines for dotted links
         var linksE = links.enter().append('line')
             .classed('link', true)
             .attr('x1', function (d) { return Number(d.source.x);})
@@ -156,9 +208,9 @@ function lineGraph(){
             .attr('x2', function (d) { return Number(d.target.x);})
             .attr('y2', start.y)
             .attr('stroke', function (d) { return d3.rgb(fillColor(d.movie));})
-            .attr('stroke-width', 5)
-            .attr('stroke-linecap', 'round')
-            .attr('stroke-dasharray', '1, 30');
+            //.attr('stroke-linecap', 'round')
+            //.attr('stroke-dasharray', '1, 30')
+            .attr('stroke-width', 5);
 
         links = links.merge(linksE);
 
@@ -169,7 +221,7 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 15)
+            .attr('r', 10)
             .attr('cy', start.y)
             .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
             .attr('cx', function (d) { return Number(d.x)})
@@ -179,9 +231,9 @@ function lineGraph(){
         // @v4 Merge the original empty selection and the enter selection
         points = points.merge(pointsE);
 
-        // Fancy transition to make bubbles appear, ending with the
-        // correct y-value
 
+
+        console.log(points);
         refreshPoints(points);
         refreshLinks(links);
 
@@ -224,7 +276,7 @@ function lineGraph(){
         // change outline to indicate hover state.
         d3.select(this).attr('stroke', 'black');
 
-        var content = "";
+        var content = '<span class="name">separator</span><span class="value">: ' + d.separator + '</span><br/>';
 
         for(var word in d.words) {
             if(d.words.hasOwnProperty(word)) {
