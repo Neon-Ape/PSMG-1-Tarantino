@@ -13,12 +13,24 @@
 <body>
   <div class="container">
     <h1>Cursewords in Tarantino Movies</h1>
-    <div id="toolbar">
-      <a href="#" id="all" class="button active">All Curses</a>
-      <a href="#" id="year" class="button">Curses By Movie</a>
-      <a href="#" id="group" class="button">Curses By Type</a>
+      <div id="toolbar">
+          <a href="javascript:void(0)" id="all" class="button active">All Curses</a>
+          <a href="javascript:void(0)" id="year" class="button">Curses By Movie</a>
+          <a href="javascript:void(0)" id="group" class="button">Curses By Type</a>
+      </div>
+      <div id="bubbleChart"></div>
+    <div id="graphSelect">
+      <a href="javascript:void(0)" id="dogs" class="button active">Reservoir Dogs</a>
+      <a href="javascript:void(0)" id="pulp" class="button">Pulp Fiction</a>
+      <a href="javascript:void(0)" id="jackie" class="button">Jackie Brown</a>
+      <a href="javascript:void(0)" id="bill1" class="button">Kill Bill: Vol. 1</a>
+      <a href="javascript:void(0)" id="bill2" class="button">Kill Bill: Vol. 2</a>
+      <a href="javascript:void(0)" id="basterds" class="button">Inglorious Basterds</a>
+      <a href="javascript:void(0)" id="django" class="button">Django Unchained</a>
+
     </div>
-    <div id="vis"></div>
+    <div id="lineGraph"></div>
+
 
     <div class="footer">
       </div>
@@ -27,6 +39,9 @@
   <script src="./lib/d3/d3.js"></script>
   <script src="src/tooltip.js"></script>
   <script src="src/bubble_chart.js"></script>
+  <script src="src/lineGraph.js"></script>
+  <script src="src/generateData.js"></script>
+
 
 
 </body>
