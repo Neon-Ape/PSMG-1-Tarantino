@@ -58,7 +58,7 @@ function lineGraph(){
             this.movie = movie;
             this.count = count;
             this.x = x;
-            this.y = rawHeight - count * 2;
+            this.y = rawHeight - count * 4;
             this.words = words;
             this.separator = separator;
         }
