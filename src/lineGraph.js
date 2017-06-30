@@ -1,7 +1,7 @@
 function lineGraph(){
     // Constants for sizing
-    var width = 1000;
-    var height = 300;
+    var width = 1500;
+    var height = 400;
 
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
@@ -26,19 +26,6 @@ function lineGraph(){
     var points = null;
     var links = null;
     var nodes = [];
-
-    // Here we create a force layout and
-    // @v4 We create a force simulation now and
-    //  add forces to it.
-    var lineSimulation = d3.forceSimulation()
-        .velocityDecay(0.15)
-        .force('x', d3.forceX().strength(forceStrength).x(start.x))
-        .force('y', d3.forceY().strength(forceStrength).y(start.y))
-        .on('tick', ticked);
-
-    // @v4 Force starts up automatically,
-    //  which we don't want as there aren't any nodes yet.
-    lineSimulation.stop();
 
     // Nice looking colors - no reason to buck the trend
     // @v4 scales now have a flattened naming scheme
@@ -165,11 +152,13 @@ function lineGraph(){
         var linksE = links.enter().append('line')
             .classed('link', true)
             .attr('x1', function (d) { return Number(d.source.x);})
-            .attr('y1', function (d) { return Number(d.source.y);})
+            .attr('y1', start.y)
             .attr('x2', function (d) { return Number(d.target.x);})
-            .attr('y2', function (d) { return Number(d.target.y);})
+            .attr('y2', start.y)
             .attr('stroke', function (d) { return d3.rgb(fillColor(d.movie));})
-            .attr('stroke-width', 4);
+            .attr('stroke-width', 5)
+            .attr('stroke-linecap', 'round')
+            .attr('stroke-dasharray', '1, 30');
 
         links = links.merge(linksE);
 
@@ -180,10 +169,10 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 20)
+            .attr('r', 15)
+            .attr('cy', start.y)
             .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
             .attr('cx', function (d) { return Number(d.x)})
-            .attr('cy', function (d) { return Number(d.y)})
             .on('mouseover', showDetail)
             .on('mouseout', hideDetail);
 
@@ -191,52 +180,41 @@ function lineGraph(){
         points = points.merge(pointsE);
 
         // Fancy transition to make bubbles appear, ending with the
-        // correct radius
-        points.transition()
-            .duration(2000)
-            .attr('y', function (d) { return d.y; });
-        /*
-        links.transition()
-            .duration(2000)
-            .attr('y1', function (d) { return d.source.y })
-            .attr('y2', function (d) { return d.target.y });
-        */
+        // correct y-value
 
-        console.log(points);
-        console.log(links);
-
-        // Set the simulation's nodes to our newly created nodes array.
-        // @v4 Once we set the nodes, the simulation will start running automatically!
-        lineSimulation.nodes(points);
-
-
-        setStartState();
+        refreshPoints(points);
+        refreshLinks(links);
 
     };
 
-    /*
-     * Callback function that is called after every tick of the
-     * force simulation.
-     * Here we do the acutal repositioning of the SVG circles
-     * based on the current x and y values of their bound node data.
-     * These x and y values are modified by the force simulation.
-     * TODO: links
-     */
-    function ticked() {
-        points
-            .attr('cx', getX)
-            .attr('cy', getY);
-
-
-        links
-            .attr('y1', function(d){return getY(d.source);})
-            .attr('y2', function(d){return getY(d.target);});
-
-
-
-
+    function refreshLinks(links) {
+        links.transition()
+            .duration(1000)
+            .attr('opacity', getOpacity)
+            .attr('y1', function (d) { return getY(d.source); })
+            .attr('y2', function (d) { return getY(d.target); });
     }
 
+    function refreshPoints(points) {
+        points.transition()
+            .duration(1000)
+            .attr('opacity', getOpacity)
+            .attr('cy', function (d) { return getY(d); });
+    }
+
+    function getOpacity(d) {
+        if(activeGraphs[d.movie]) {
+            return 1;
+        }
+        return 0;
+    }
+
+    function getY(d) {
+        if(activeGraphs[d.movie]) {
+            return d.y
+        }
+        return start.y;
+    }
 
     /*
      * Function called on mouseover to display the
@@ -268,37 +246,11 @@ function lineGraph(){
         tooltip.hideTooltip();
     }
 
-    function getX(d) {
-        return d.x;
-        if(activeGraphs[d.movie]) {
-            return d.x;
-        }
-        return start.x;
-    }
-
-    function getY(d) {
-        if(activeGraphs[d.movie]) {
-            return d.y
-        }
-        return start.y;
-    }
-
-
-    function setStartState() {
-        // @v4 Reset the 'x' force to draw the bubbles to their year center
-        lineSimulation.force('x', d3.forceX().strength(forceStrength).x(getX));
-        lineSimulation.force('y', d3.forceY().strength(forceStrength).y(getY));
-
-
-        // @v4 We can reset the alpha value and restart the simulation
-        lineSimulation.alpha(1).restart();
-    }
-
     function toggleGraph(movie) {
         activeGraphs[movie] = !activeGraphs[movie];
-        lineSimulation.alpha(1).restart();
+        refreshPoints(points);
+        refreshLinks(links);
     }
-
 
     /*
      * Externally accessible function (this is attached to the
