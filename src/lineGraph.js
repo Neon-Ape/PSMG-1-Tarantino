@@ -1,6 +1,6 @@
 function lineGraph(){
     // Constants for sizing
-    var width = 1000;
+    var width = 1200;
     var height = 400;
     var yOffset = 100;
 

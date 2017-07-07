@@ -9,7 +9,8 @@ a, a:visited, a:active {
 }
 
 .button {
-  min-width: 130px;
+  display: inline-block;
+  width: 150px;
   padding: 4px 5px;
   cursor: pointer;
   text-align: center;
