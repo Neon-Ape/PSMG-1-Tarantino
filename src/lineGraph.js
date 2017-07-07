@@ -1,13 +1,15 @@
 function lineGraph(){
     // Constants for sizing
+
     var width = 1200;
     var height = 400;
     var yOffset = 100;
 
+
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
 
-    var start = {x: width/2, y: height - 10};
+    var start = {x: width/2, y: height + 20};
 
     var activeGraphs = {
         "Reservoir Dogs" : true,
