@@ -40,7 +40,7 @@ function lineGraph(){
     // @v4 scales now have a flattened naming scheme
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
-        .range(['#D8341A', '#C2A225', '#14A622', '#fff11b','#D826BA','#BDC8E7','#305060','#505050', '#AAAAAA']);
+        .range(['#c28e5e', '#C2A225', '#14A622', '#fff11b','#ea1f18','#BDC8E7','#305060','#505050', '#AAAAAA']);
 
     /*
      * This data manipulation function takes the raw data from
