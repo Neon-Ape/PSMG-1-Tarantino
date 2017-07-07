@@ -8,8 +8,16 @@ a, a:visited, a:active {
   margin: auto;
 }
 
+#covers img {
+    display: inline-block;
+    width: 150px;
+    padding: 4px 5px;
+    margin-right: 6px;
+}
+
 .button {
-  min-width: 130px;
+  display: inline-block;
+  width: 150px;
   padding: 4px 5px;
   cursor: pointer;
   text-align: center;
@@ -22,7 +30,6 @@ a, a:visited, a:active {
   background: #000;
   color: #fff;
 }
-
 
 #vis {
   width: 1200px;
