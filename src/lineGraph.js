@@ -21,12 +21,18 @@ function lineGraph(){
         "Django Unchained" : false
     };
 
-    var xAxis = [
+    var axisData = [
         {
             x1: width/10,
             y1: height-yOffset,
             x2: width*9/10,
             y2: height-yOffset
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset,
+            x2: width/10,
+            y2: 20
         }
     ];
 
@@ -181,10 +187,7 @@ function lineGraph(){
             .data(nodes, function (d) { return d.id; });
 
         var axis = svg.selectAll('.axis')
-            .data(xAxis, function (d) { return d.id; });
-
-        console.log(xAxis);
-        console.log(axis);
+            .data(axisData, function (d) { return d.id; });
 
         var axisE = axis.enter().append('line')
             .classed('axis', true)
@@ -195,11 +198,7 @@ function lineGraph(){
             .attr('stroke', '#000')
             .attr('stroke-width', 2);
 
-        console.log(axisE);
-
         axis = axis.merge(axisE);
-
-        console.log(axis);
 
         // uncomment commented lines for dotted links
         var linksE = links.enter().append('line')
@@ -231,8 +230,6 @@ function lineGraph(){
 
         // @v4 Merge the original empty selection and the enter selection
         points = points.merge(pointsE);
-
-
 
         console.log(points);
         refreshPoints(points);
