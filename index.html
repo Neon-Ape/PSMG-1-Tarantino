@@ -9,34 +9,61 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bubble_chart.css">
+  <link rel="stylesheet" href="css/line_graph.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+  <link rel="stylesheet" href="css/tab_layout.css">
+
 </head>
 <body>
   <div class="container">
     <h1>Cursewords in Tarantino Movies</h1>
-      <div id="toolbar">
-          <a href="javascript:void(0)" id="all" class="button active">All Curses</a>
-          <a href="javascript:void(0)" id="year" class="button">Curses By Movie</a>
-          <a href="javascript:void(0)" id="group" class="button">Curses By Type</a>
+
+    <p>einleitender Text.....</p>
+      
+      <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Bubblechart')"><h2>Bubblechart</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
       </div>
-      <div id="bubbleChart"></div>
-    <div id="graphSelect">
-      <a href="javascript:void(0)" id="dogs" class="button active">Reservoir Dogs</a>
-      <a href="javascript:void(0)" id="pulp" class="button">Pulp Fiction</a>
-      <a href="javascript:void(0)" id="jackie" class="button">Jackie Brown</a>
-      <a href="javascript:void(0)" id="bill1" class="button">Kill Bill: Vol. 1</a>
-      <a href="javascript:void(0)" id="bill2" class="button">Kill Bill: Vol. 2</a>
-      <a href="javascript:void(0)" id="basterds" class="button">Inglorious Basterds</a>
-      <a href="javascript:void(0)" id="django" class="button">Django Unchained</a>
 
-    </div>
-    <div id="lineGraph"></div>
+      <div id="Bubblechart" class="tabcontent">
+        <div id="toolbar">
+            <a href="javascript:void(0)" id="all" class="button active">All Curses</a>
+            <a href="javascript:void(0)" id="year" class="button">Curses By Movie</a>
+            <a href="javascript:void(0)" id="group" class="button">Curses By Type</a>
+        </div>
+        <div id="bubbleChart"></div>
+      </div>
 
+
+      <div id="LineGraph" class="tabcontent">
+        <div id="graphSelect">
+          <a href="javascript:void(0)" id="dogs" class="button active">Reservoir Dogs</a>
+          <a href="javascript:void(0)" id="pulp" class="button">Pulp Fiction</a>
+          <a href="javascript:void(0)" id="jackie" class="button">Jackie Brown</a>
+          <a href="javascript:void(0)" id="bill1" class="button">Kill Bill: Vol. 1</a>
+          <a href="javascript:void(0)" id="bill2" class="button">Kill Bill: Vol. 2</a>
+          <a href="javascript:void(0)" id="basterds" class="button">Inglorious Basterds</a>
+          <a href="javascript:void(0)" id="django" class="button">Django Unchained</a>
+        </div>
+        <div id="lineGraph"></div>
+      </div>
+
+      <div id="SankeyFlow">
+        <div></div>
+      </div>
+
+ 
+
+      
 
     <div class="footer">
-      </div>
+    </div>
   </div>
 
+
   <script src="./lib/d3/d3.js"></script>
+  <script src="src/openTab.js"></script>
   <script src="src/tooltip.js"></script>
   <script src="src/bubble_chart.js"></script>
   <script src="src/lineGraph.js"></script>
