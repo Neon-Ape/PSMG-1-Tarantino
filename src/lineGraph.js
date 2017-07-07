@@ -1,12 +1,12 @@
 function lineGraph(){
     // Constants for sizing
-    var width = 1000;
-    var height = 300;
+    var width = 1600;
+    var height = 450;
 
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
 
-    var start = {x: width/2, y: height - 10};
+    var start = {x: width/2, y: height + 20};
 
     var activeGraphs = {
         "Reservoir Dogs" : true,
@@ -62,8 +62,8 @@ function lineGraph(){
         function Node(movie, count, x, words) {
             this.movie = movie;
             this.count = count;
-            this.x = x;
-            this.y = 300 - count * 2;
+            this.x = x/1.3;
+            this.y = 400 - count * 3;
             this.words = words;
         }
 
@@ -180,7 +180,7 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 20)
+            .attr('r', 15)
             .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
             .attr('cx', function (d) { return Number(d.x)})
             .attr('cy', function (d) { return Number(d.y)})
