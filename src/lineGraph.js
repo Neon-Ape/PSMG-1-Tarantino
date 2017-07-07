@@ -28,7 +28,6 @@ function lineGraph(){
         }
     ];
 
-
     // These will be set in create_nodes and create_vis
     var svg = null;
     var points = null;
@@ -39,7 +38,7 @@ function lineGraph(){
     // @v4 scales now have a flattened naming scheme
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
-        .range(['#D8341A', '#C2A225', '#14A622', '#9C4917','#D826BA','#BDC8E7','#305060','#505050', '#AAAAAA']);
+        .range(['#D8341A', '#C2A225', '#14A622', '#fff11b','#D826BA','#BDC8E7','#305060','#505050', '#AAAAAA']);
 
     /*
      * This data manipulation function takes the raw data from
