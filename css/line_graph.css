@@ -1,14 +1,18 @@
-#covers img {
-    display: inline-block;
+#graphSelect img {
     width: 150px;
     padding: 4px 5px;
     margin-right: 6px;
 }
 
-#covers img:last-child {
-    margin-right: 0px;
+.cover{
+    display: inline-block;
+    width: 160px;
+    margin-bottom: 30px;
 }
 
+.cover img:last-child {
+    margin-right: 0px;
+}
 
 .button#dogs.active {
     background: #c28e5e;

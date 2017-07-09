@@ -11,9 +11,12 @@ var coverLookup = {
 
 };
 
+var i = 1;
 for(movie in coverLookup) {
     var img = "<img src='" + imageRoot + coverLookup[movie] + "'>";
-    document.getElementById("covers").innerHTML += img;
+    var elem = document.getElementById("box"+i);
+    elem.insertAdjacentHTML('afterbegin', img);
+    i++;
 }
 
 

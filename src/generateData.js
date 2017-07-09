@@ -196,7 +196,7 @@ function setupButtons() {
         });
 
     d3.select('#graphSelect')
-        .selectAll('.button')
+        .selectAll('.cover').selectAll('.button')
         .on('click', function () {
 
             // Find the button just clicked
