@@ -1,0 +1,31 @@
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+
+label {
+	color: #999;
+  min-width: 130px;
+  padding: 4px 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+  border: 1px solid #e0e0e0;
+  text-decoration: none;
+}
+
+input[type="radio"]:checked+label{
+  background: black;
+  color: white;
+}
+
+.legend{
+	font-size: 15px;
+}
+
+.tick{
+	font-size: 12px;
+}
+

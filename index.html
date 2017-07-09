@@ -8,25 +8,30 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/bubble_chart.css">
   <link rel="stylesheet" href="css/line_graph.css">
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/tab_layout.css">
+  <link rel="stylesheet" href="css/bar_chart.css">
+  <link rel="stylesheet" href="css/sankey_flow.css">
 
 </head>
 <body>
   <div class="container">
-    <h1>Cursewords in Tarantino Movies</h1>
+    <h1>Cursewords and Deaths in Tarantino Movies</h1>
 
-    <p>einleitender Text.....</p>
+    <p>detailed description</p>
       
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Bubblechart')"><h2>Bubblechart</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'Bubblechart')" id="defaultOpen"><h2>Bubblechart</h2></button>
         <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
         <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'BarChart')"><h2>Bar Chart</h2></button>
       </div>
 
       <div id="Bubblechart" class="tabcontent">
+        <p class="tool-description">...</p>
         <div id="toolbar">
             <a href="javascript:void(0)" id="all" class="button active">All Curses</a>
             <a href="javascript:void(0)" id="year" class="button">Curses By Movie</a>
@@ -37,6 +42,7 @@
 
 
       <div id="LineGraph" class="tabcontent">
+        <p class="tool-description">...</p>
         <div id="graphSelect">
           <a href="javascript:void(0)" id="dogs" class="button active">Reservoir Dogs</a>
           <a href="javascript:void(0)" id="pulp" class="button">Pulp Fiction</a>
@@ -49,13 +55,19 @@
         <div id="lineGraph"></div>
       </div>
 
-      <div id="SankeyFlow">
-        <div></div>
+      <div id="SankeyFlow" class="tabcontent">
+        <p class="tool-description">...</p>
+        <div id="sankeyFlow"></div>
       </div>
 
- 
-
-      
+      <div id="BarChart" class="tabcontent">
+        <p class="tool-description">...</p>
+        <div id = "barchartSelect">
+          <input type="radio" name="mode" value="grouped"><label>Grouped</label>
+          <input type="radio" name="mode" value="stacked"><label>Stacked</label>
+        </div>
+        <div id="barChart"></div>
+      </div>
 
     <div class="footer">
     </div>
@@ -66,9 +78,17 @@
   <script src="src/openTab.js"></script>
   <script src="src/tooltip.js"></script>
   <script src="src/bubble_chart.js"></script>
+  <script type="text/javascript">document.getElementById("defaultOpen").click();</script>
+  
   <script src="src/lineGraph.js"></script>
   <script src="src/generateData.js"></script>
+  
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="src/sankey.js"></script>
+  <script src="src/sankey_flow.js"></script>
 
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="src/bar_chart.js"></script>
 
 
 </body>
