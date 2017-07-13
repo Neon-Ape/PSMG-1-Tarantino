@@ -3,7 +3,7 @@
   d3.csv("./data/tarantino.csv", function(err, data) {
 
   var wordOrDeath = ["word","death"];
-  var movies = ["Reservoir Dogs", "Pulp Fiction", "Kill Bill: Vol. 1", "Kill Bill: Vol. 2", "Inglorious Basterds", "Django Unchained", "Jackie Brown"];
+  var movies = ["Reservoir Dogs", "Pulp Fiction", "Jackie Brown", "Kill Bill: Vol. 1", "Kill Bill: Vol. 2", "Inglorious Basterds", "Django Unchained"];
   
   //"pivot" the data into deaths and words by movie
   var groups = {}
