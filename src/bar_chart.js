@@ -1,6 +1,6 @@
 (function barChart() {
 
-  d3.csv("./data/tarantino.csv", function(err, data) {
+  d3.csv('https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/data/tarantino.csv', function(err, data) {
 
   var wordOrDeath = ["word","death"];
   var movies = ["Reservoir Dogs", "Pulp Fiction", "Jackie Brown", "Kill Bill: Vol. 1", "Kill Bill: Vol. 2", "Inglorious Basterds", "Django Unchained"];
