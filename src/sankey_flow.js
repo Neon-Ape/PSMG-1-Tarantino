@@ -13,7 +13,7 @@
               color = d3.scale.category20();
 
           // append the svg canvas to the page
-          var svg = d3.select("#sankeyFlow").append("svg")
+          var svg = d3.select("#sankeyflow").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
             .append("g")

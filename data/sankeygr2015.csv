@@ -1,0 +1,15 @@
+source,type,target,value,color
+Reservoir Dogs,word,fucked,6,yellowgreen
+Reservoir Dogs,word,fucking,180,yellowgreen
+Reservoir Dogs,word,motherfucker,12,yellowgreen
+Reservoir Dogs,word,fucker,1,yellowgreen
+Reservoir Dogs,word,fucks,2,yellowgreen
+Reservoir Dogs,word,fuckup,1,yellowgreen
+Reservoir Dogs,word,fuck,68,yellowgreen
+Pulp Fiction,word,shit,0.52,firebrick
+Pulp Fiction,word,fucking,0.82,firebrick
+Pulp Fiction,word,fuck,1.37,firebrick
+Pulp Fiction,word,fucking,1.62,firebrick
+Kill Bill: Vol. 1,word,dick,0.12,blue
+Kill Bill: Vol. 1,word,fucked,1.10,blue
+Kill Bill: Vol. 1,word,bullshit,0.9,blue
