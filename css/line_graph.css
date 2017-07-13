@@ -1,0 +1,42 @@
+#covers img {
+    display: inline-block;
+    width: 150px;
+    padding: 4px 5px;
+    margin-right: 6px;
+}
+
+#covers img:last-child {
+    margin-right: 0px;
+}
+
+
+.button#dogs.active {
+    background: #c28e5e;
+    color: #000;
+}
+
+.button#pulp.active {
+    background: #C2A225;
+}
+
+.button#jackie.active {
+    background: #14A622;
+}
+
+.button#bill1.active {
+    color: #000;
+    background: #fff11b;
+}
+
+.button#bill2.active {
+    background: #ea1f18;
+    color: #fff11b;
+}
+
+.button#basterds.active {
+    background: #305060;
+}
+
+.button#django.active {
+    background: #505050;
+}
