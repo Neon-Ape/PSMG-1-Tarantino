@@ -74,7 +74,7 @@ var yGroupMax = d3.max(layers, function(layer) {
   var y = d3.scaleLinear()
       .domain([0, yStackMax])
       .range([height, 0]);
-  var z = d3.scaleBand().domain(wordOrDeath).rangeRound([0, x.bandwidth()-35]);
+  var z = d3.scaleBand().domain(wordOrDeath).rangeRound([0, x.bandwidth()]);
   var color = d3.scaleOrdinal(d3.schemeCategory20c)
       .domain([0, n-1])
 
@@ -153,7 +153,7 @@ var yGroupMax = d3.max(layers, function(layer) {
         .attr("x", function(d) {
                     return x(d.movie)+ z(d.type);
                 })
-                .attr("width", x.bandwidth() / m)
+                .attr("width", (x.bandwidth()) / 2)
                 .transition()
                 .attr("y", function(d) {
                     return y(d.data[d.type]);
