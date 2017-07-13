@@ -1,5 +1,18 @@
+#covers img {
+    display: inline-block;
+    width: 150px;
+    padding: 4px 5px;
+    margin-right: 6px;
+}
+
+#covers img:last-child {
+    margin-right: 0px;
+}
+
+
 .button#dogs.active {
-    background: #D8341A;
+    background: #c28e5e;
+    color: #000;
 }
 
 .button#pulp.active {
@@ -11,11 +24,13 @@
 }
 
 .button#bill1.active {
-    background: #9C4917;
+    color: #000;
+    background: #fff11b;
 }
 
 .button#bill2.active {
-    background: #D826BA;
+    background: #ea1f18;
+    color: #fff11b;
 }
 
 .button#basterds.active {

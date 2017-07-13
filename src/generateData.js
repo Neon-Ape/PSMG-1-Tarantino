@@ -165,7 +165,7 @@ function addExtraInfo(error, data) {
         var curseWords = makeCurseWords(data, movieDates);
 
         myBubbleChart('#bubbleChart', curseWords);
-        myLineGraph('#lineGraph', wordTiming);
+        myLineGraph('#lineGraph', wordTiming, 20);
 
 
     });

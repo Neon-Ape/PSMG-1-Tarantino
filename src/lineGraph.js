@@ -1,7 +1,10 @@
 function lineGraph(){
     // Constants for sizing
-    var width = 1600;
-    var height = 450;
+
+    var width = 1200;
+    var height = 400;
+    var yOffset = 100;
+
 
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
@@ -18,8 +21,14 @@ function lineGraph(){
         "Django Unchained" : false
     };
 
-    // @v4 strength to apply to the position forces
-    var forceStrength = 0.03; //default 0.03
+    var xAxis = [
+        {
+            x1: width/10,
+            y1: height-yOffset,
+            x2: width*9/10,
+            y2: height-yOffset
+        }
+    ];
 
     // These will be set in create_nodes and create_vis
     var svg = null;
@@ -27,24 +36,11 @@ function lineGraph(){
     var links = null;
     var nodes = [];
 
-    // Here we create a force layout and
-    // @v4 We create a force simulation now and
-    //  add forces to it.
-    var lineSimulation = d3.forceSimulation()
-        .velocityDecay(0.15)
-        .force('x', d3.forceX().strength(forceStrength).x(start.x))
-        .force('y', d3.forceY().strength(forceStrength).y(start.y))
-        .on('tick', ticked);
-
-    // @v4 Force starts up automatically,
-    //  which we don't want as there aren't any nodes yet.
-    lineSimulation.stop();
-
     // Nice looking colors - no reason to buck the trend
     // @v4 scales now have a flattened naming scheme
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
-        .range(['#D8341A', '#C2A225', '#14A622', '#9C4917','#D826BA','#BDC8E7','#305060','#505050', '#AAAAAA']);
+        .range(['#c28e5e', '#C2A225', '#14A622', '#fff11b','#ea1f18','#BDC8E7','#305060','#505050', '#AAAAAA']);
 
     /*
      * This data manipulation function takes the raw data from
@@ -58,34 +54,68 @@ function lineGraph(){
      * This function returns the new node array, with a node in that
      * array for each element in the rawData input.
      */
-    function createNodes(data, separator) {
-        function Node(movie, count, x, words) {
+    function createNodes(data, separator, rawWidth, rawHeight) {
+        function Node(movie, count, x, words, separator) {
             this.movie = movie;
             this.count = count;
-            this.x = x/1.3;
-            this.y = 400 - count * 3;
+            this.x = x;
+            this.y = rawHeight - count * 4;
             this.words = words;
+            this.separator = separator;
         }
+
+        var width = rawWidth*8/10;
+        var offset = rawWidth/10;
+        var pixelPerSeparator = width/separator;
 
         var myNodes = [];
 
         for (var movie in data){
-            var runtime = data[movie].runtime;
 
-            var currentTimeSlot = runtime/separator;
+            var runtime = data[movie].runtime;
+            var minsPerSeparator = runtime/separator;
+            //console.log(movie + " --- width: " + width + ", runtime: " + runtime + ", pixelPerSeparator: " + pixelPerSeparator + ", minsPerSeparator: " + minsPerSeparator);
+            var currentTimeSlot = minsPerSeparator;
+            var currentXPos = offset;
+
+            var currentSeparator = 1;
+
             var collectorNode = {
                 count : 0,
                 words : {}
             };
+
             for (time in data[movie].children) {
-                if (time > currentTimeSlot) {
-                    myNodes.push(new Node(movie, collectorNode.count, currentTimeSlot * 10, collectorNode.words));
+
+                while (time > currentTimeSlot) {
+                    myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
                     collectorNode.words = [];
                     collectorNode.count = 0;
-                    currentTimeSlot += separator;
+                    currentTimeSlot += minsPerSeparator;
+                    currentXPos += pixelPerSeparator;
+                    currentSeparator ++;
                 }
+
                 collectorNode.words[time] = data[movie].children[time];
                 collectorNode.count++;
+            }
+            // add last Node
+            if (collectorNode.count !== 0) {
+                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
+                collectorNode.words = [];
+                collectorNode.count = 0;
+                currentTimeSlot += minsPerSeparator;
+                currentXPos += pixelPerSeparator;
+                currentSeparator ++;
+            }
+
+            while(currentTimeSlot <= runtime ) {
+                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
+                collectorNode.words = [];
+                collectorNode.count = 0;
+                currentTimeSlot += minsPerSeparator;
+                currentXPos += pixelPerSeparator;
+                currentSeparator ++;
             }
 
 
@@ -127,24 +157,14 @@ function lineGraph(){
      * rawData is expected to be an array of data objects as provided by
      * a d3 loading function like d3.csv.
      */
-    var chart = function chart(selector, rawData) {
+    var chart = function chart(selector, rawData, separator) {
 
-        var separator = 20;
-        /*
-         var maxAmount = d3.max(rawData.children, function (d) { return +d.value; });
-
-         // Sizes bubbles based on area.
-         // @v4: new flattened scale names.
-         var radiusScale = d3.scalePow()
-         .exponent(0.5)
-         .range([1, 65])
-         .domain([0, maxAmount]);
-
-
-         */
+        if(typeof(separator)==='undefined') {
+            separator = 10;
+        }
 
         // convert raw data into nodes data
-        nodes = createNodes(rawData, separator);
+        nodes = createNodes(rawData, separator, width, height - yOffset);
         links = createLinks(nodes);
         // Create a SVG element inside the provided selector
         // with desired size.
@@ -160,16 +180,38 @@ function lineGraph(){
         points = svg.selectAll('.bubble')
             .data(nodes, function (d) { return d.id; });
 
+        var axis = svg.selectAll('.axis')
+            .data(xAxis, function (d) { return d.id; });
 
+        console.log(xAxis);
+        console.log(axis);
 
+        var axisE = axis.enter().append('line')
+            .classed('axis', true)
+            .attr('x1', function (d) { return d.x1;})
+            .attr('y1', function (d) { return d.y1;})
+            .attr('x2', function (d) { return d.x2;})
+            .attr('y2', function (d) { return d.y2;})
+            .attr('stroke', '#000')
+            .attr('stroke-width', 2);
+
+        console.log(axisE);
+
+        axis = axis.merge(axisE);
+
+        console.log(axis);
+
+        // uncomment commented lines for dotted links
         var linksE = links.enter().append('line')
             .classed('link', true)
             .attr('x1', function (d) { return Number(d.source.x);})
-            .attr('y1', function (d) { return Number(d.source.y);})
+            .attr('y1', start.y)
             .attr('x2', function (d) { return Number(d.target.x);})
-            .attr('y2', function (d) { return Number(d.target.y);})
+            .attr('y2', start.y)
             .attr('stroke', function (d) { return d3.rgb(fillColor(d.movie));})
-            .attr('stroke-width', 4);
+            //.attr('stroke-linecap', 'round')
+            //.attr('stroke-dasharray', '1, 30')
+            .attr('stroke-width', 5);
 
         links = links.merge(linksE);
 
@@ -180,63 +222,52 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 15)
+            .attr('r', 10)
+            .attr('cy', start.y)
             .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
             .attr('cx', function (d) { return Number(d.x)})
-            .attr('cy', function (d) { return Number(d.y)})
             .on('mouseover', showDetail)
             .on('mouseout', hideDetail);
 
         // @v4 Merge the original empty selection and the enter selection
         points = points.merge(pointsE);
 
-        // Fancy transition to make bubbles appear, ending with the
-        // correct radius
-        points.transition()
-            .duration(2000)
-            .attr('y', function (d) { return d.y; });
-        /*
-        links.transition()
-            .duration(2000)
-            .attr('y1', function (d) { return d.source.y })
-            .attr('y2', function (d) { return d.target.y });
-        */
+
 
         console.log(points);
-        console.log(links);
-
-        // Set the simulation's nodes to our newly created nodes array.
-        // @v4 Once we set the nodes, the simulation will start running automatically!
-        lineSimulation.nodes(points);
-
-
-        setStartState();
+        refreshPoints(points);
+        refreshLinks(links);
 
     };
 
-    /*
-     * Callback function that is called after every tick of the
-     * force simulation.
-     * Here we do the acutal repositioning of the SVG circles
-     * based on the current x and y values of their bound node data.
-     * These x and y values are modified by the force simulation.
-     * TODO: links
-     */
-    function ticked() {
-        points
-            .attr('cx', getX)
-            .attr('cy', getY);
-
-
-        links
-            .attr('y1', function(d){return getY(d.source);})
-            .attr('y2', function(d){return getY(d.target);});
-
-
-
-
+    function refreshLinks(links) {
+        links.transition()
+            .duration(1000)
+            .attr('opacity', getOpacity)
+            .attr('y1', function (d) { return getY(d.source); })
+            .attr('y2', function (d) { return getY(d.target); });
     }
 
+    function refreshPoints(points) {
+        points.transition()
+            .duration(1000)
+            .attr('opacity', getOpacity)
+            .attr('cy', function (d) { return getY(d); });
+    }
+
+    function getOpacity(d) {
+        if(activeGraphs[d.movie]) {
+            return 1;
+        }
+        return 0;
+    }
+
+    function getY(d) {
+        if(activeGraphs[d.movie]) {
+            return d.y
+        }
+        return start.y;
+    }
 
     /*
      * Function called on mouseover to display the
@@ -246,7 +277,7 @@ function lineGraph(){
         // change outline to indicate hover state.
         d3.select(this).attr('stroke', 'black');
 
-        var content = "";
+        var content = '<span class="name">separator</span><span class="value">: ' + d.separator + '</span><br/>';
 
         for(var word in d.words) {
             if(d.words.hasOwnProperty(word)) {
@@ -268,37 +299,11 @@ function lineGraph(){
         tooltip.hideTooltip();
     }
 
-    function getX(d) {
-        return d.x;
-        if(activeGraphs[d.movie]) {
-            return d.x;
-        }
-        return start.x;
-    }
-
-    function getY(d) {
-        if(activeGraphs[d.movie]) {
-            return d.y
-        }
-        return start.y;
-    }
-
-
-    function setStartState() {
-        // @v4 Reset the 'x' force to draw the bubbles to their year center
-        lineSimulation.force('x', d3.forceX().strength(forceStrength).x(getX));
-        lineSimulation.force('y', d3.forceY().strength(forceStrength).y(getY));
-
-
-        // @v4 We can reset the alpha value and restart the simulation
-        lineSimulation.alpha(1).restart();
-    }
-
     function toggleGraph(movie) {
         activeGraphs[movie] = !activeGraphs[movie];
-        lineSimulation.alpha(1).restart();
+        refreshPoints(points);
+        refreshLinks(links);
     }
-
 
     /*
      * Externally accessible function (this is attached to the
