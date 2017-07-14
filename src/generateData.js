@@ -6,7 +6,7 @@
 
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
-//var mySankeyFlow = sankeyFlow();
+var mySankeyFlow = sankeyFlow();
 
 function runtimeLookup(data) {
     var runtimes = {};
@@ -142,20 +142,20 @@ function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, curr
 
 function makeSankey(curseWords) {
 
-    function Node(index, name) {
+    function sankeyNode(index, name) {
         this.name = name;
         this.node = index;
     }
 
-    function Link(source, target, value) {
+
+    function sankeyLink(source, target, value) {
         this.source = source;
         this.target = target;
         this.value = value;
     }
-
     //var categories = ["fuck", "ass", "shit", "racial", "genital", "blashemy", "other"];
 
-    var sankey = {
+    var sankey420 = {
         nodes: [],
         links: []
     };
@@ -180,28 +180,33 @@ function makeSankey(curseWords) {
         }
     };
 
-    for(word in curseWords.children) {
-        word = curseWords.children[word];
-        if (-1 === movieLookup.value.indexOf(word.movie)) {
-            movieLookup.value.push(word.movie);
-            movieLookup.index.push(i);
-            sankey.nodes.push(new Node(i,word.movie));
-            i++;
-        }
-        if (-1 === wordLookup.value.indexOf(word.name)) {
-            wordLookup.value.push(word.name);
-            wordLookup.index.push(i);
-            sankey.nodes.push(new Node(i,word.name));
-            i++;
-        }
+    for(var word in curseWords.children) {
 
-        var source = movieLookup.getIndex(word.movie);
-        var target = wordLookup.getIndex(word.name);
-        sankey.links.push(new Link(source, target, word.value));
+        word = curseWords.children[word];
+//        if (word.movie != "Pulp Fiction" && word.movie != "Jackie Brown" && word.movie != "Reservoir Dogs" && word.movie != "Django Unchained") {
+
+            if (-1 === movieLookup.value.indexOf(word.movie)) {
+                movieLookup.value.push(word.movie);
+                movieLookup.index.push(i);
+                sankey420.nodes.push(new sankeyNode(i, word.movie));
+                i++;
+            }
+            if (-1 === wordLookup.value.indexOf(word.name)) {
+                wordLookup.value.push(word.name);
+                wordLookup.index.push(i);
+                sankey420.nodes.push(new sankeyNode(i, word.name));
+                i++;
+            }
+
+            var source = movieLookup.getIndex(word.movie);
+            var target = wordLookup.getIndex(word.name);
+            sankey420.links.push(new sankeyLink(source, target, word.value));
+
     }
     console.log("sankey:");
-    console.log(sankey);
-    return sankey;
+    console.log(sankey420);
+    console.log("sankey done");
+    return sankey420;
 }
 
 function getExtraData(data) {
@@ -230,8 +235,9 @@ function addExtraInfo(error, data) {
         var curseWords = makeCurseWords(data, movieDates);
         var sankeyFlow = makeSankey(curseWords);
 
-        myBubbleChart('#bubbleChart', curseWords);
-        myLineGraph('#lineGraph', wordTiming, 20);
+       // myBubbleChart('#bubbleChart', curseWords);
+       // myLineGraph('#lineGraph', wordTiming, 20);
+        mySankeyFlow('#sankeyFlow', sankeyFlow);
 
 
     });
