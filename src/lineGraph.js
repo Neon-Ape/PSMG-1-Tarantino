@@ -3,7 +3,10 @@ function lineGraph(){
 
     var width = 1200;
     var height = 400;
+    var timelineHeight = 100;
     var yOffset = 100;
+
+    var animationDuration = 800;
 
 
     // tooltip for mouseover functionality
@@ -30,7 +33,7 @@ function lineGraph(){
         },
         {
             x1: width/10,
-            y1: height-yOffset,
+            y1: height-yOffset+50,
             x2: width/10,
             y2: 20
         }
@@ -38,8 +41,10 @@ function lineGraph(){
 
     // These will be set in create_nodes and create_vis
     var svg = null;
+    var svg2 = null;
     var points = null;
     var links = null;
+    var times = null;
     var nodes = [];
 
     // Nice looking colors - no reason to buck the trend
@@ -61,13 +66,12 @@ function lineGraph(){
      * array for each element in the rawData input.
      */
     function createNodes(data, separator, rawWidth, rawHeight) {
-        function Node(movie, count, x, words, separator) {
+        function Node(movie, count, x, timeline) {
             this.movie = movie;
             this.count = count;
             this.x = x;
             this.y = rawHeight - count * 4;
-            this.words = words;
-            this.separator = separator;
+            this.timeline = timeline;
         }
 
         var width = rawWidth*8/10;
@@ -84,22 +88,21 @@ function lineGraph(){
             var currentTimeSlot = minsPerSeparator;
             var currentXPos = offset;
 
-            var currentSeparator = 1;
-
             var collectorNode = {
                 count : 0,
-                words : {}
+                words : {},
+                times: {}
             };
 
             for (time in data[movie].children) {
 
                 while (time > currentTimeSlot) {
-                    myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
+                    var timeline = createTimeline(collectorNode, currentTimeSlot-minsPerSeparator, currentTimeSlot, rawWidth, offset);
+                    myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline));
                     collectorNode.words = [];
                     collectorNode.count = 0;
                     currentTimeSlot += minsPerSeparator;
                     currentXPos += pixelPerSeparator;
-                    currentSeparator ++;
                 }
 
                 collectorNode.words[time] = data[movie].children[time];
@@ -107,21 +110,21 @@ function lineGraph(){
             }
             // add last Node
             if (collectorNode.count !== 0) {
-                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
+                var timeline = createTimeline(collectorNode, currentTimeSlot-minsPerSeparator, currentTimeSlot, rawWidth, offset);
+                myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline));
                 collectorNode.words = [];
                 collectorNode.count = 0;
                 currentTimeSlot += minsPerSeparator;
                 currentXPos += pixelPerSeparator;
-                currentSeparator ++;
             }
 
             while(currentTimeSlot <= runtime ) {
-                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
+                var timeline = createTimeline(collectorNode, currentTimeSlot-minsPerSeparator, currentTimeSlot, rawWidth, offset);
+                myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline));
                 collectorNode.words = [];
                 collectorNode.count = 0;
                 currentTimeSlot += minsPerSeparator;
                 currentXPos += pixelPerSeparator;
-                currentSeparator ++;
             }
 
 
@@ -129,6 +132,23 @@ function lineGraph(){
 
         console.log(myNodes);
         return myNodes;
+    }
+
+    function createTimeline(data, start, end, rawWidth, offset) {
+        var timeline = {};
+        var duration = end - start;
+        var visWidth = rawWidth - offset*2;
+
+        for(time in data) {
+
+            var relativeTime = time - start;
+            var scalingFactor = relativeTime/duration;
+            var xPos = scalingFactor*visWidth+offset;
+
+            timeline[time]["word"] = data[time];
+            timeline[time]["xPos"] = xPos;
+        }
+        return timeline;
     }
 
     function createLinks(nodes) {
@@ -149,6 +169,22 @@ function lineGraph(){
 
     }
 
+    function createTimes(nodes) {
+        function Time(time, xPos, word, movie) {
+            this.movie = movie;
+            this.time = time;
+            this.x = xPos;
+            this.word = word;
+        }
+        var times = [];
+
+        for (var i = 0; i < nodes.length - 1; i++) {
+            for (time in nodes[i].timeline) {
+                times.push(new Time(time, time["xPos"], time["word"], nodes[i].movie));
+            }
+        }
+        return times;
+    }
 
     /*
      * Main entry point to the bubble chart. This function is returned
@@ -163,7 +199,7 @@ function lineGraph(){
      * rawData is expected to be an array of data objects as provided by
      * a d3 loading function like d3.csv.
      */
-    var chart = function chart(selector, rawData, separator) {
+    var chart = function chart(selector, selector2, rawData, separator) {
 
         if(typeof(separator)==='undefined') {
             separator = 10;
@@ -172,6 +208,7 @@ function lineGraph(){
         // convert raw data into nodes data
         nodes = createNodes(rawData, separator, width, height - yOffset);
         links = createLinks(nodes);
+        times = createTimes(nodes);
         // Create a SVG element inside the provided selector
         // with desired size.
         svg = d3.select(selector)
@@ -231,7 +268,26 @@ function lineGraph(){
         // @v4 Merge the original empty selection and the enter selection
         points = points.merge(pointsE);
 
-        console.log(points);
+        // build the timeline
+        svg2 = d3.select(selector2)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', timelineHeight);
+
+        times = svg.selectAll('.circle')
+            .data(times, function (d) { return d.id; });
+
+        var timesE = times.enter().append('circle')
+            .classed('timeStamp', true)
+            .attr('r', 10)
+            .attr('cy', 10)
+            .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
+            .attr('cx', function (d) { return Number(d.x)})
+            .on('mouseover', showDetail)
+            .on('mouseout', hideDetail);
+
+        times = times.merge(timesE);
+
         refreshPoints(points);
         refreshLinks(links);
 
@@ -239,7 +295,7 @@ function lineGraph(){
 
     function refreshLinks(links) {
         links.transition()
-            .duration(1000)
+            .duration(animationDuration)
             .attr('opacity', getOpacity)
             .attr('y1', function (d) { return getY(d.source); })
             .attr('y2', function (d) { return getY(d.target); });
@@ -247,7 +303,7 @@ function lineGraph(){
 
     function refreshPoints(points) {
         points.transition()
-            .duration(1000)
+            .duration(animationDuration)
             .attr('opacity', getOpacity)
             .attr('cy', function (d) { return getY(d); });
     }
