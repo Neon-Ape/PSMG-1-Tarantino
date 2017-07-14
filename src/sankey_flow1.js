@@ -33,15 +33,16 @@ var color = d3.scale.ordinal()
     .domain(["Reservoir Dogs", "Pulp Fiction", "Kill Bill: Vol. 1", "fucked", "fucking", "fuck", "motherfucker", "fucker", "fucks", "fuckup", "dick", "dicks",  "shit", "fucking", "bullshit"])
     .range(["#c28e5e", '#C2A225', "#fff11b", "grey", "grey", "grey","grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey"]);
 
-var rect
-var node
-var link
+var rect;
+var node;
+var link;
 	
 d3.csv("./data/sankeygr2015.csv", function(error, data) {
-daten = data
+daten = data;
   graph = {"nodes" : [], "links" : []};
 
     data.forEach(function (d) {
+      console.log(d.source);
       graph.nodes.push({ "name": d.source });
       graph.nodes.push({ "name": d.target });
       graph.links.push({ "source": d.source,
@@ -56,6 +57,8 @@ daten = data
 
      graph.links.forEach(function (d, i) {
        graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
+       console.log(graph.links[i].source);
+
        graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
      });
 
