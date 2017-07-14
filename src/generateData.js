@@ -235,8 +235,8 @@ function addExtraInfo(error, data) {
         var curseWords = makeCurseWords(data, movieDates);
         var sankeyFlow = makeSankey(curseWords);
 
-       // myBubbleChart('#bubbleChart', curseWords);
-       // myLineGraph('#lineGraph', wordTiming, 20);
+        myBubbleChart('#bubbleChart', curseWords);
+        myLineGraph('#lineGraph', wordTiming, 20);
         mySankeyFlow('#sankeyFlow', sankeyFlow);
 
 
