@@ -78,6 +78,7 @@ var yGroupMax = d3.max(layers, function(layer) {
   
   var color = d3.scaleOrdinal()
     .domain(['word', 'death'])
+    .range(['#c09551', '#5f1020']);
 
   var svg = d3.select("#barChart").append("svg")
       .attr("width", width + margin.left + margin.right)
