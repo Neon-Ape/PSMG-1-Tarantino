@@ -6,7 +6,7 @@ path {
 
 .graph {
 	font-family: sans-serif;
-	font-size: 11px;
+	font-size: 15px;
 }
 
 .nodesankey rect {
@@ -32,7 +32,7 @@ path {
 div.tooltipsankey {   
   position: absolute;           
   text-align: left;           
-  width: 95px;                  
+  width: 120px;                  
   height: 40px;                 
   padding: 4px;             
   font: 11px sans-serif;        

@@ -62,7 +62,7 @@ var yGroupMax = d3.max(layers, function(layer) {
         return d[1];
       });
     });
-  var margin = {top: 40, right: 10, bottom: 20, left: 10},
+  var margin = {top: 40, right: 10, bottom: 50, left: 10},
       width = 1100 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
@@ -75,8 +75,9 @@ var yGroupMax = d3.max(layers, function(layer) {
       .domain([0, yStackMax])
       .range([height, 0]);
   var z = d3.scaleBand().domain(wordOrDeath).rangeRound([0, x.bandwidth()]);
-  var color = d3.scaleOrdinal(d3.schemeCategory10)
-      .domain([0, n-1])
+  
+  var color = d3.scaleOrdinal()
+    .domain(['word', 'death'])
 
   var svg = d3.select("#barChart").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -108,8 +109,9 @@ var yGroupMax = d3.max(layers, function(layer) {
       .attr("height", function(d) {
           return y(d[0]) - y(d[1]);
       });
+
   svg.append("g")
-      .attr("class", "x axis")
+      .attr("class", "xaxis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x).tickSizeOuter(0));
 
@@ -131,6 +133,7 @@ var yGroupMax = d3.max(layers, function(layer) {
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d; });
+
 
   d3.selectAll("input").on("change", change);
 

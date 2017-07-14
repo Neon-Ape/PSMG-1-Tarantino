@@ -1,9 +1,12 @@
-.axis path, .axis line {
+.xaxis path, .xaxis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
+.xaxis {
+  padding: 100px;
+}
 
 label {
 	color: #999;
@@ -26,6 +29,6 @@ input[type="radio"]:checked+label{
 }
 
 .tick{
-	font-size: 12px;
+	font-size: 14px;
 }
 

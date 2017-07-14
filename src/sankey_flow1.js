@@ -1,12 +1,10 @@
 (function sankeyFloow(){
 
-var units = "Stimmen";
+var units = "Vorkommnisse";
 
-var aspect = 0.8;
-
-var margin = {top: 5, right: 40, bottom: 5, left: 40},
-    height = 800 - margin.top - margin.bottom,
-    width = (height+margin.top+margin.bottom)/aspect - margin.left - margin.right;
+var margin = {top: 5, right: 125, bottom: 5, left: 125},
+    height = 850;
+    width = 950;
 	
 var formatNumber = d3.format(",.0f"),
     format = function(d) { return formatNumber(d) + " " + units; },
@@ -33,7 +31,7 @@ var div = d3.select("body").append("div")
 
 var color = d3.scale.ordinal()
     .domain(["Reservoir Dogs", "Pulp Fiction", "Kill Bill: Vol. 1", "fucked", "fucking", "fuck", "motherfucker", "fucker", "fucks", "fuckup", "dick", "dicks",  "shit", "fucking", "bullshit"])
-    .range(["yellowgreen", "firebrick", "blue", "grey", "grey", "grey","grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey"]);
+    .range(["#c28e5e", '#C2A225', "#fff11b", "grey", "grey", "grey","grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey"]);
 
 var rect
 var node
