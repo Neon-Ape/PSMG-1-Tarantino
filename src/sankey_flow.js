@@ -1,23 +1,16 @@
-(function sankeyFloow(){
+function sankeyFlow(){
 
     var units = "Widgets";
 
 // set the dimensions and margins of the graph
     var margin = {top: 10, right: 40, bottom: 10, left: 40},
-        width = 700 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+        width = 1000 - margin.left - margin.right,
+        height = 2000 - margin.top - margin.bottom;
 // format variables
     var formatNumber = d3.format(",.0f"),    // zero decimal places
         format = function(d) { return formatNumber(d) + " " + units; },
         color = d3.scaleOrdinal(d3.schemeCategory20);
 
-// append the svg object to the body of the page
-    var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
 
 // Set the sankey diagram properties
     var sankey = d3.sankey()
@@ -27,17 +20,31 @@
 
     var path = sankey.link();
 
-    var div = d3.select("body").append("div")
-        .attr("class", "tooltipsankey")
-        .style("opacity", 0);
+
 
 // load the data
-    d3.json("./data/sankey.json", function(error, graph) {
+    var chart = function chart(selector, graph) {
+        console.log("we are in sankey function");
+        console.log(graph);
+
+        var div = d3.select(selector).append("div")
+            .attr("class", "tooltipsankey")
+            .style("opacity", 0);
+
+        // append the svg object to the body of the page
+        var svg = d3.select(selector).append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
         sankey
             .nodes(graph.nodes)
             .links(graph.links)
             .layout(32);
 
+        console.log(graph.links);
 // add in the links
         var link = svg.append("g").selectAll(".link")
             .data(graph.links)
@@ -113,5 +120,6 @@
             sankey.relayout();
 
         }
-    });
-}());
+    };
+    return chart;
+};

@@ -8,12 +8,10 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/bubble_chart.css">
   <link rel="stylesheet" href="css/line_graph.css">
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/tab_layout.css">
-  <link rel="stylesheet" href="css/bar_chart.css">
   <link rel="stylesheet" href="css/sankey_v4.css">
 
 </head>
@@ -65,14 +63,6 @@
         <div id="sankeyFlow"></div>
       </div>
 
-      <div id="BarChart" class="tabcontent">
-        <p class="tool-description">...</p>
-        <div id = "barchartSelect">
-          <input type="radio" name="mode" value="grouped"><label>Grouped</label>
-          <input type="radio" name="mode" value="stacked"><label>Stacked</label>
-        </div>
-        <div id="barChart"></div>
-      </div>
 
       <div id="IMDbChart" class="tabcontent">
         <p class="tool-description">...</p>
@@ -91,14 +81,17 @@
   <script type="text/javascript">document.getElementById("defaultOpen").click();</script>
   
   <script src="src/lineGraph.js"></script>
-  <script src="src/generateData.js"></script>
 
   <script src="src/sankey.js"></script>
   <script src="src/sankey_flow.js"></script>
+
   <script src="src/getCovers.js"></script>
 
-  <!--<script src="http://d3js.org/d3.v4.min.js"></script>-->
-  <script src="src/bar_chart.js"></script>
+  <script src="src/generateData.js"></script>
+
+
+
+
 
 
 </body>
