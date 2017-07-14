@@ -6,6 +6,7 @@
 
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
+//var mySankeyFlow = sankeyFlow();
 
 function runtimeLookup(data) {
     var runtimes = {};
@@ -139,6 +140,70 @@ function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, curr
     return curseWords;
 }
 
+function makeSankey(curseWords) {
+
+    function Node(index, name) {
+        this.name = name;
+        this.node = index;
+    }
+
+    function Link(source, target, value) {
+        this.source = source;
+        this.target = target;
+        this.value = value;
+    }
+
+    //var categories = ["fuck", "ass", "shit", "racial", "genital", "blashemy", "other"];
+
+    var sankey = {
+        nodes: [],
+        links: []
+    };
+
+    var i = 0;
+
+    //categories.forEach(pushNode(d));
+
+    var movieLookup = {
+        value: [],
+        index: [],
+        getIndex: function (d) {
+            return this.index[this.value.indexOf(d)];
+        }
+    };
+
+    var wordLookup = {
+        value: [],
+        index: [],
+        getIndex: function (d) {
+            return this.index[this.value.indexOf(d)];
+        }
+    };
+
+    for(word in curseWords.children) {
+        word = curseWords.children[word];
+        if (-1 === movieLookup.value.indexOf(word.movie)) {
+            movieLookup.value.push(word.movie);
+            movieLookup.index.push(i);
+            sankey.nodes.push(new Node(i,word.movie));
+            i++;
+        }
+        if (-1 === wordLookup.value.indexOf(word.name)) {
+            wordLookup.value.push(word.name);
+            wordLookup.index.push(i);
+            sankey.nodes.push(new Node(i,word.name));
+            i++;
+        }
+
+        var source = movieLookup.getIndex(word.movie);
+        var target = wordLookup.getIndex(word.name);
+        sankey.links.push(new Link(source, target, word.value));
+    }
+    console.log("sankey:");
+    console.log(sankey);
+    return sankey;
+}
+
 function getExtraData(data) {
     var movieDates = [];
 
@@ -163,6 +228,7 @@ function addExtraInfo(error, data) {
         var movieDates = getExtraData(extraData);
         var wordTiming = makeTiming(data, extraData);
         var curseWords = makeCurseWords(data, movieDates);
+        var sankeyFlow = makeSankey(curseWords);
 
         myBubbleChart('#bubbleChart', curseWords);
         myLineGraph('#lineGraph', wordTiming, 20);
