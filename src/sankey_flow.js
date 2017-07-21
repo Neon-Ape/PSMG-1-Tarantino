@@ -61,7 +61,7 @@ function sankeyFlow(){
             })
             //show tooltip on link
             .on('mouseover', showLinkDetail)
-            .on('mouseout', hideDetail());
+            .on('mouseout', hideDetail);
 
 
 // add the link titles
@@ -112,8 +112,10 @@ function sankeyFlow(){
         });
         node.on("mouseout", function(d) { svg.selectAll(".link").transition()
                 .duration(700)
-                .style("opacity", 1)} );
-        hideDetail();
+                .style("opacity", 1);
+                hideDetail();
+                });
+
 
 
 
