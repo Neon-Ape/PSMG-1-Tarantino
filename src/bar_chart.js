@@ -11,6 +11,8 @@
 
   var xkey = "type"
   var gkey = "movie" // what we group by
+
+  var axisposition =40;
  
   // group all the events by type
   data.forEach(function(d) {
@@ -97,7 +99,7 @@ var yGroupMax = d3.max(layers, function(layer) {
     .enter().append("rect")
       .attr("x", function(d) { 
         
-        return x(d.movie); })
+        return x(d.movie)+axisposition; })
       .attr("y", height)
       .attr("width", x.bandwidth())
       .attr("height", 0);
@@ -113,8 +115,13 @@ var yGroupMax = d3.max(layers, function(layer) {
 
   svg.append("g")
       .attr("class", "xaxis")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate("+axisposition+"," + height + ")")
       .call(d3.axisBottom(x).tickSizeOuter(0));
+
+  svg.append("g")
+      .attr("class", "yaxis")
+      .attr("transform", "translate("+axisposition+",0)")
+      .call(d3.axisLeft(y).tickSizeOuter(0));
 
   var legend = svg.selectAll(".legend")
       .data(wordOrDeath)
@@ -155,7 +162,7 @@ var yGroupMax = d3.max(layers, function(layer) {
         .duration(500)
         .delay(function(d, i) { return i * 10; })
         .attr("x", function(d) {
-                    return x(d.movie)+ z(d.type);
+                    return x(d.movie)+axisposition+ z(d.type);
                 })
                 .attr("width", (x.bandwidth()) / 2)
                 .transition()
@@ -180,7 +187,7 @@ var yGroupMax = d3.max(layers, function(layer) {
             return y(d[0]) - y(d[1]);
         })
       .transition()
-        .attr("x", function(d) { return x(d.movie); })
+        .attr("x", function(d) { return x(d.movie)+axisposition; })
         .attr("width", x.bandwidth());
   }
 });
