@@ -1,8 +1,33 @@
+header {
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+#logo {
+	height: 25%;
+	width: 25%;
+	transform: rotate(-10deg);
+	float: left;
+	margin-right: 40px;
+}
+
+#title {
+	font-size: 35pt;
+	margin-top: 0px;
+}
+
 .container {
   max-width: 1200px;
   margin: auto;
+  margin-top: 20px;
+}
+
+.tab{
+	clear: left;
 }
 
 .footer {
   text-align: center;
 }
+
