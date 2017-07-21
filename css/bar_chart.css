@@ -1,10 +1,10 @@
-.xaxis path, .xaxis line {
+.xaxis path, .xaxis line, .yaxis path, .yaxis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
-.xaxis {
+.xaxis, .yaxis {
   padding: 100px;
 }
 
