@@ -1,132 +1,141 @@
-(function sankeyFloow(){
-      
-          var tooltipSource = "cursewords"
-              tooltipTarget = "movies";
+function sankeyFlow(){
 
-          var margin = {top: 10, right: 10, bottom: 10, left: 10},
-              width = 1100 - margin.left - margin.right,
-              height = 500 - margin.top - margin.bottom;
+    var units = "Words";
+    var aspect = 1.75;
 
-          var formatNumber = d3.format(",.0f"),    // zero decimal places
-              format = function(d) { return formatNumber(d) + " " + tooltipSource; },
-              format2 = function(d) { return formatNumber(d) + " "+ tooltipTarget; },
-              color = d3.scale.category20();
+    var tooltip = floatingTooltip('gates_tooltip', 240);
 
-          // append the svg canvas to the page
-          var svg = d3.select("#sankeyflow").append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
+// set the dimensions and margins of the graph
+    var margin = {top: 10, right: 100, bottom: 10, left: 135},
+        height = 2000 - margin.top - margin.bottom,
+        width = (height+margin.top+margin.bottom)/aspect - margin.left - margin.right;
+// format variables
+    var formatNumber = d3.format(",.0f"),    // zero decimal places
+        format = function(d) { return formatNumber(d) + " " + units; },
+        color = d3.scaleOrdinal(d3.schemeCategory20);
+
+// Set the sankey diagram properties
+    var sankey = d3.sankey()
+        .nodeWidth(30) // sets the size of the rect
+        .nodePadding(17) // distance from the rects underneath each other (before value 17)
+        .size([width, height]);
+
+    var path = sankey.link();
+
+// load the data
+    var chart = function chart(selector, graph) {
+        console.log("we are in sankey function");
+        console.log(graph);
+
+        // append the svg object to the body of the page
+        var svg = d3.select(selector).append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
             .append("g")
-              .attr("transform", 
-                    "translate(" + margin.left + "," + margin.top + ")");
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
 
-          // Set the sankey diagram properties
-          var sankey = d3.sankey()
-              .nodeWidth(36)
-              .nodePadding(40)
-              .size([width, height]);
+        var div = d3.select(selector).append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
-          var path = sankey.link();
 
-          // load the data
-          //ACHTUNG - DAS IST NOCH NICHT DER ORIGINALDATENSATZ
-          d3.csv("./data/sankey.csv", function(error, data) {
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
 
-            //set up graph in same style as original example but empty
-            var graph = {"nodes" : [], "links" : []};
+        console.log(graph.links);
+// add in the links
+        var link = svg.append("g").selectAll(".link")
+            .data(graph.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .attr("id", function(d) { return "link" + d.source.name; })
+            .style("stroke-width", function(d) {
+                return Math.max(1, d.dy / 2);
+            })
+            .style("stroke", function(d) {
+                return d.color;
+            })
+            //show tooltip on link
+            .on('mouseover', showLinkDetail)
+            .on('mouseout', hideDetail());
 
-              data.forEach(function (d) {
-                var source = { "name": d.movie },
-                    target = { "name": d.word };
-                graph.nodes.push(source);
-                graph.nodes.push(target);
-                graph.links.push({ "source": d.movie,
-                                   "target": d.word,
-                                   "value": +d.value });
-               });
 
-               // return only the distinct / unique nodes
-               graph.nodes = d3.keys(d3.nest()
-                 .key(function (d) { return d.name; })
-                 .map(graph.nodes));
+// add the link titles
+        link.append("title");
 
-               // loop through each link replacing the text with its index from node
-               graph.links.forEach(function (d, i) {
-                 graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
-                 graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
-               });
 
-               //now loop through each nodes to make nodes an array of objects
-               // rather than an array of strings
-               graph.nodes.forEach(function (d, i) {
-                 graph.nodes[i] = { "name": d };
-               });
 
-            sankey
-              .nodes(graph.nodes)
-              .links(graph.links)
-              .layout(32);
+// add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) {
+                return "translate(" + d.x + "," + d.y  / 2+ ")"; });
 
-          // add in the links
-            var link = svg.append("g").selectAll(".link")
-                .data(graph.links)
-              .enter().append("path")
-                .attr("class", "link")
-                .attr("d", path)
-                .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-                .sort(function(a, b) { return b.dy - a.dy; });
+// add the rectangles for the nodes
+        var rect = node.append("rect")
+            .attr("height", function(d) { return d.dy / 2 + 1; })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function(d) {
+                return d.color = color(d.name); });
 
-          // add the link titles
-            link.append("title")
-                  .text(function(d) {
-                  return d.source.name + " → " + 
-                          d.target.name + "\n" + format(d.value); });
+// add in the title for the nodes
+        node.append("text")
+            .attr("x", 45)
+            .attr("y", function(d) { return d.dy / 4; })
+            .attr("dy", ".35em")
+            .attr("text-anchor", "start")
+            .attr("transform", null)
+            .text(function(d) { return d.name; })
+            .filter(function(d) { return d.x < width / 2; })
+            .attr("x", -55 + sankey.nodeWidth())
+            .attr("text-anchor", "end");
 
-          // add in the nodes
-            var node = svg.append("g").selectAll(".node")
-                .data(graph.nodes)
-              .enter().append("g")
-                .attr("class", "node")
-                .attr("transform", function(d) { 
-                return "translate(" + d.x + "," + d.y + ")"; })
-              .call(d3.behavior.drag()
-                .origin(function(d) { return d; })
-                .on("dragstart", function() { 
-                this.parentNode.appendChild(this); })
-                .on("drag", dragmove));
+        // Fade-Effect on mouseover
+        node.on("mouseover", function(d) {
+            link.transition()
+                .duration(700)
+                .style("opacity", .1);
 
-          // add the rectangles for the nodes
-            node.append("rect")
-                .attr("height", function(d) { return d.dy; })
-                .attr("width", sankey.nodeWidth())
-                .style("fill", function(d) { 
-                return d.color = color(d.name.replace(/ .*/, "")); })
-                .style("stroke", function(d) { 
-                return d3.rgb(d.color).darker(2); })
-              .append("title")
-                .text(function(d) { 
-                return d.name + "\n" + format(d.value); });
+            link.filter(function(s) { return d.name === s.source.name; }).transition()
+                .duration(700)
+                .style("opacity", 1);
+            link.filter(function(t) { return d.name === t.target.name; }).transition()
+                .duration(700)
+                .style("opacity", 1);
+            showDetail(d);
+        });
+        node.on("mouseout", function(d) { svg.selectAll(".link").transition()
+                .duration(700)
+                .style("opacity", 1)} );
+        hideDetail();
 
-          // add in the title for the nodes
-            node.append("text")
-                .attr("x", -6)
-                .attr("y", function(d) { return d.dy / 2; })
-                .attr("dy", ".35em")
-                .attr("text-anchor", "end")
-                .attr("transform", null)
-                .text(function(d) { return d.name; })
-              .filter(function(d) { return d.x < width / 2; })
-                .attr("x", 6 + sankey.nodeWidth())
-                .attr("text-anchor", "start");
 
-          // the function for moving the nodes
-            function dragmove(d) {
-              d3.select(this).attr("transform", 
-                  "translate(" + d.x + "," + (
-                          d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
-                      ) + ")");
-              sankey.relayout();
-              link.attr("d", path);
-            }
-          });
-}());
+
+        // Function called on mouseover to display details in a tooltip
+        function showDetail(d) {
+            var content = '<span class="name">Word occurrences: </span><span class="value">' +
+                d.value +
+                '</span><br/>';
+            tooltip.showTooltip(content, d3.event);
+        }
+
+        function showLinkDetail(d) {
+            var content = '<span class="name">Movie: </span><span class="value">' + d.source.name + '</span><br/>' +
+            '<span class="name">Word: </span><span class="value">' + d.target.name + '</span><br/>' +
+            '<span class="name">Word occurrences: </span><span class="value">' + d.value + '</span><br/>';
+            tooltip.showTooltip(content, d3.event);
+        }
+
+        // Hides tooltip
+        function hideDetail() {
+            tooltip.hideTooltip();
+        }
+    };
+    return chart;
+};
