@@ -1,3 +1,13 @@
+@font-face{
+  font-family: 'Tarantino';
+  src: url('./fonts/WebFont.woff') format('woff');
+  src: url('./fonts/WebFont.woff2') format('woff');
+}
+
+h1 {
+  font-family: Tarantino, arial, sans-serif
+}
+
 header {
 	display: flex;
   	align-items: center;
