@@ -22,7 +22,11 @@ function sankeyFlow(){
 
     var path = sankey.link();
 
-// load the data
+    var fillColor = d3.scaleOrdinal()
+        .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Inglorious Basterds', 'Django Unchained', 'other'])
+        .range(["yellowgreen", "darkblue", "orange", "gold", "lawngreen", "black", "yellowgreen", "grey"]);
+
+    // load the data
     var chart = function chart(selector, graph) {
         console.log("we are in sankey function");
         console.log(graph);
@@ -57,7 +61,7 @@ function sankeyFlow(){
                 return Math.max(1, d.dy / 2);
             })
             .style("stroke", function(d) {
-                return d.color;
+                return fillColor(d.source.name);
             })
             //show tooltip on link
             .on('mouseover', showLinkDetail)
@@ -81,8 +85,7 @@ function sankeyFlow(){
         var rect = node.append("rect")
             .attr("height", function(d) { return d.dy / 2 + 1; })
             .attr("width", sankey.nodeWidth())
-            .style("fill", function(d) {
-                return d.color = color(d.name); });
+            .style("fill", function(d){return fillColor(d.type)});
 
 // add in the title for the nodes
         node.append("text")

@@ -142,9 +142,10 @@ function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, curr
 
 function makeSankey(curseWords) {
 
-    function sankeyNode(index, name) {
+    function sankeyNode(index, name, type) {
         this.name = name;
         this.node = index;
+        this.type = type;
     }
 
 
@@ -188,13 +189,13 @@ function makeSankey(curseWords) {
             if (-1 === movieLookup.value.indexOf(word.movie)) {
                 movieLookup.value.push(word.movie);
                 movieLookup.index.push(i);
-                sankey420.nodes.push(new sankeyNode(i, word.movie));
+                sankey420.nodes.push(new sankeyNode(i, word.movie, word.movie));
                 i++;
             }
             if (-1 === wordLookup.value.indexOf(word.name)) {
                 wordLookup.value.push(word.name);
                 wordLookup.index.push(i);
-                sankey420.nodes.push(new sankeyNode(i, word.name));
+                sankey420.nodes.push(new sankeyNode(i, word.name, "other"));
                 i++;
             }
 
