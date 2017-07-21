@@ -8,11 +8,14 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/bubble_chart.css">
   <link rel="stylesheet" href="css/line_graph.css">
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/tab_layout.css">
+  <link rel="stylesheet" href="css/bar_chart.css">
   <link rel="stylesheet" href="css/sankey_v4.css">
+
 
 </head>
 <body>
@@ -46,6 +49,7 @@
 
         <div id="covers"></div>
 
+
           <div id="graphSelect">
             <div id="box1" class="cover"><a href="javascript:void(0)" id="dogs" class="button active">Reservoir Dogs</a></div>
             <div id="box2" class="cover"><a href="javascript:void(0)" id="pulp" class="button">Pulp Fiction</a></div>
@@ -53,21 +57,30 @@
             <div id="box4" class="cover"><a href="javascript:void(0)" id="bill1" class="button">Kill Bill: Vol. 1</a></div>
             <div id="box5" class="cover"><a href="javascript:void(0)" id="bill2" class="button">Kill Bill: Vol. 2</a></div>
             <div id="box6" class="cover"><a href="javascript:void(0)" id="basterds" class="button">Inglorious Basterds</a></div>
-            <div id="box7" class="cover"><a href="javascript:void(0)" id="django" class="button">Django Unchained</a></div></div>
+            <div id="box7" class="cover"><a href="javascript:void(0)" id="django" class="button">Django Unchained</a></div>
+        </div>
         <div id="lineGraph"></div>
       </div>
 
       <div id="SankeyFlow" class="tabcontent">
         <p class="tool-description">...</p>
         <div id="sankeyFlow"></div>
+
       </div>
 
+      <div id="BarChart" class="tabcontent">
+        <p class="tool-description">...</p>
+        <div id = "barchartSelect">
+          <input type="radio" name="mode" value="grouped"><label>Grouped</label>
+          <input type="radio" name="mode" value="stacked"><label>Stacked</label>
+        </div>
+        <div id="barChart"></div>
+      </div>
 
       <div id="IMDbChart" class="tabcontent">
         <p class="tool-description">...</p>
         <div id="imdbChart"></div>
       </div>
-
 
     <div class="footer"></div>
   </div>
@@ -80,18 +93,12 @@
   <script type="text/javascript">document.getElementById("defaultOpen").click();</script>
   
   <script src="src/lineGraph.js"></script>
-
+  <script src="src/bar_chart.js"></script>
   <script src="src/sankey.js"></script>
   <script src="src/sankey_flow.js"></script>
-
   <script src="src/getCovers.js"></script>
 
   <script src="src/generateData.js"></script>
-
-
-
-
-
 
 </body>
 </html>

@@ -285,7 +285,7 @@ function bubbleChart() {
   /*
    * Shows Year title displays.
    */
-  function showYearTitles() {
+  function showMovieTitles() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
     var yearsData = d3.keys(movieTitleX);
@@ -293,7 +293,7 @@ function bubbleChart() {
       .data(yearsData);
 
     years.enter().append('text')
-      .attr('class', 'year')
+      .attr('class', 'movietitle')
       .attr('x', function (d) { return movieTitleX[d]; })
       .attr('y', 40)
       .attr('text-anchor', 'middle')

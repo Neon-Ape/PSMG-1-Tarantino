@@ -1,0 +1,43 @@
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: lightgrey;
+}
+
+.graph {
+	font-family: sans-serif;
+	font-size: 15px;
+}
+
+.nodesankey rect {
+  cursor: pointer;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.nodesankey text {
+  pointer-events: none;
+}
+
+.linksankey {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .6;
+}
+
+.linksankey:hover {
+  stroke-opacity: .9;
+}
+
+div.tooltipsankey {   
+  position: absolute;           
+  text-align: left;           
+  width: 120px;                  
+  height: 40px;                 
+  padding: 4px;             
+  font: 11px sans-serif;        
+  background: silver;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
