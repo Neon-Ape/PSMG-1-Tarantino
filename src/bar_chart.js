@@ -1,3 +1,14 @@
+/** http://bl.ocks.org/mashehu/de923d763a53d523596ba81c6d1f3233
+
+ Copyright 2016, mashehu (github-name)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 (function barChart() {
 
   d3.csv('https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/data/tarantino.csv', function(err, data) {
@@ -127,17 +138,17 @@ var yGroupMax = d3.max(layers, function(layer) {
       .data(wordOrDeath)
     .enter().append("g")
       .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      .attr("transform", function(d, i) { return "translate(0," + i * 35 + ")"; });
 
   legend.append("rect")
       .attr("x", width - 18)
-      .attr("width", 18)
-      .attr("height", 18)
+      .attr("width", 25)
+      .attr("height", 25)
       .style("fill", function(d,i) { return color(i) });
 
   legend.append("text")
       .attr("x", width - 24)
-      .attr("y", 9)
+      .attr("y", 13)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d; });

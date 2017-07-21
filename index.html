@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>PSMG-I: Tarantino</title>
+  
   <meta name="description" content="PSMG Project, Visualizing cursewords in Trantino movies">
   <meta name="author" content="">
-
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500" rel="stylesheet"> 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/bubble_chart.css">
@@ -25,8 +26,8 @@
   <header>
     <img id="logo" src="./data/images/sh!t2.png" alt="logo"></img>
     <div id="textbox">
-      <h1 id="title">Cursewords and Deaths in Tarantino Movies</h1>
-      <p>detailed description of this project</p>
+      <h1 id="title">Cursewords and Deaths <br> in Tarantino Movies</h1>
+      <p>detailed description of this project. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
   </header>
     
@@ -80,8 +81,8 @@
       <div id="BarChart" class="tabcontent">
         <p class="tool-description">...</p>
         <div id = "barchartSelect">
-          <input type="radio" name="mode" value="grouped"><label>Grouped</label>
-          <input type="radio" name="mode" value="stacked"><label>Stacked</label>
+          <input id="rg" type="radio" name="mode" value="grouped" class="radio"><label for="rg" class="button">Grouped</label>
+          <input id="rs" type="radio" name="mode" value="stacked" class="radio"><label for= "rs" class="button">Stacked</label>
         </div>
         <div id="barChart"></div>
       </div>

@@ -15,10 +15,6 @@
     margin-right: 0px;
 }
 
-.button {
-    font-weight: bold;
-}
-
 .button#dogs.active {
     background: #c28e5e;
     color: #d40000;
