@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/line_graph.css">
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/tab_layout.css">
+    <link rel="stylesheet" href="css/liquid_fill.css">
 
 </head>
 <body>
@@ -24,6 +25,7 @@
         <button class="tablinks" onclick="openTab(event, 'Bubblechart')"><h2>Bubblechart</h2></button>
         <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
         <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
+          <button class="tablinks" onclick="openTab(event, 'IMDbChart')"><h2>IMDb Rating</h2></button>
       </div>
 
       <div id="Bubblechart" class="tabcontent">
@@ -54,9 +56,18 @@
         <div></div>
       </div>
 
- 
+      <div id="IMDbChart" class="tabcontent">
+        <div id="liquidfill">
+            <svg id="fillgauge2" class="liquidfill" width="120" height="250"></svg>
+            <svg id="fillgauge3" class="liquidfill" width="120" height="250"></svg>
+            <svg id="fillgauge4" class="liquidfill" width="120" height="250"></svg>
+            <svg id="fillgauge5" class="liquidfill" width="120" height="250"></svg>
+            <svg id="fillgauge6" class="liquidfill" width="120" height="250"></svg>
+            <svg id="fillgauge7" class="liquidfill" width="120" height="250"></svg>
+            <svg id="fillgauge8" class="liquidfill" width="120" height="250"></svg>
+        </div>
+      </div>
 
-      
 
     <div class="footer">
     </div>
@@ -70,8 +81,8 @@
   <script src="src/lineGraph.js"></script>
   <script src="src/generateData.js"></script>
   <script src="src/getCovers.js"></script>
-
-
+  <script src="src/liquidFillGauge.js"></script>
+  <script src="src/liquidFill.js"></script>
 
 </body>
 </html>
