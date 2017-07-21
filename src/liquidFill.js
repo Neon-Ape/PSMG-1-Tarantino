@@ -36,7 +36,7 @@
     config.waveAnimate = false;
     config.waveOffset = 0.25;
     config.textSize = 1.2;
-    config.minValue = 8;
+    config.minValue = 0;
     config.maxValue = 10;
     config.displayPercent = false;
     var gauge2 = loadLiquidFillGauge("fillgauge2", 9, config);

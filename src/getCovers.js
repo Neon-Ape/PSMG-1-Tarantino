@@ -15,7 +15,9 @@ var i = 1;
 for(movie in coverLookup) {
     var img = "<img src='" + imageRoot + coverLookup[movie] + "'>";
     var elem = document.getElementById("box"+i);
+    var elems = document.getElementById("img"+i);
     elem.insertAdjacentHTML('afterbegin', img);
+    elems.insertAdjacentHTML('afterbegin', img);
     i++;
 }
 
