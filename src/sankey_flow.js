@@ -22,7 +22,11 @@ function sankeyFlow(){
 
     var path = sankey.link();
 
-// load the data
+    var fillColor = d3.scaleOrdinal()
+        .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Inglorious Basterds', 'Django Unchained'])
+        .range(["yellowgreen", "darkblue", "orange", "gold", "lawngreen", "grey", "yellowgreen"]);
+
+    // load the data
     var chart = function chart(selector, graph) {
         console.log("we are in sankey function");
         console.log(graph);
