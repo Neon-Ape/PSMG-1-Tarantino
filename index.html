@@ -8,27 +8,41 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/bubble_chart.css">
   <link rel="stylesheet" href="css/line_graph.css">
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/tab_layout.css">
     <link rel="stylesheet" href="css/liquid_fill.css">
+  <link rel="stylesheet" href="css/bar_chart.css">
+  <link rel="stylesheet" href="css/sankey_v4.css">
+
 
 </head>
 <body>
   <div class="container">
-    <h1>Cursewords in Tarantino Movies</h1>
+    
+  <header>
+    <img id="logo" src="./data/images/sh!t2.png" alt="logo"></img>
+    <div id="textbox">
+      <h1 id="title">Cursewords and Deaths in Tarantino Movies</h1>
+      <p>detailed description of this project</p>
+    </div>
+  </header>
+    
+  <article>   
 
-    <p>einleitender Text.....</p>
-      
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Bubblechart')"><h2>Bubblechart</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'Bubblechart')" id="defaultOpen"><h2>Bubblechart</h2></button>
         <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
         <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
-          <button class="tablinks" onclick="openTab(event, 'IMDbChart')"><h2>IMDb Rating</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'BarChart')"><h2>Bar Chart</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'IMDbChart')"><h2>IMDb Rating</h2></button>        
+
       </div>
 
       <div id="Bubblechart" class="tabcontent">
+        <p class="tool-description">...</p>
         <div id="toolbar">
             <a href="javascript:void(0)" id="all" class="button active">All Curses</a>
             <a href="javascript:void(0)" id="year" class="button">Curses By Movie</a>
@@ -39,38 +53,52 @@
 
 
       <div id="LineGraph" class="tabcontent">
+
+        <p class="tool-description">...</p>
+
         <div id="covers"></div>
-        <div id="graphSelect">
-          <a href="javascript:void(0)" id="dogs" class="button active">Reservoir Dogs</a>
-          <a href="javascript:void(0)" id="pulp" class="button">Pulp Fiction</a>
-          <a href="javascript:void(0)" id="jackie" class="button">Jackie Brown</a>
-          <a href="javascript:void(0)" id="bill1" class="button">Kill Bill: Vol. 1</a>
-          <a href="javascript:void(0)" id="bill2" class="button">Kill Bill: Vol. 2</a>
-          <a href="javascript:void(0)" id="basterds" class="button">Inglorious Basterds</a>
-          <a href="javascript:void(0)" id="django" class="button">Django Unchained</a>
+
+
+          <div id="graphSelect">
+            <div id="box1" class="cover"><a href="javascript:void(0)" id="dogs" class="button active">Reservoir Dogs</a></div>
+            <div id="box2" class="cover"><a href="javascript:void(0)" id="pulp" class="button">Pulp Fiction</a></div>
+            <div id="box3" class="cover"><a href="javascript:void(0)" id="jackie" class="button">Jackie Brown</a></div>
+            <div id="box4" class="cover"><a href="javascript:void(0)" id="bill1" class="button">Kill Bill: Vol. 1</a></div>
+            <div id="box5" class="cover"><a href="javascript:void(0)" id="bill2" class="button">Kill Bill: Vol. 2</a></div>
+            <div id="box6" class="cover"><a href="javascript:void(0)" id="basterds" class="button">Inglorious Basterds</a></div>
+            <div id="box7" class="cover"><a href="javascript:void(0)" id="django" class="button">Django Unchained</a></div>
         </div>
         <div id="lineGraph"></div>
       </div>
 
-      <div id="SankeyFlow">
-        <div></div>
+      <div id="SankeyFlow" class="tabcontent">
+        <p class="tool-description">...</p>
+        <div id="sankeyFlow"></div>
+
+      </div>
+
+      <div id="BarChart" class="tabcontent">
+        <p class="tool-description">...</p>
+        <div id = "barchartSelect">
+          <input type="radio" name="mode" value="grouped"><label>Grouped</label>
+          <input type="radio" name="mode" value="stacked"><label>Stacked</label>
+        </div>
+        <div id="barChart"></div>
       </div>
 
       <div id="IMDbChart" class="tabcontent">
-        <div id="liquidfill">
-            <svg id="fillgauge2" class="liquidfill" width="120" height="250"></svg>
-            <svg id="fillgauge3" class="liquidfill" width="120" height="250"></svg>
-            <svg id="fillgauge4" class="liquidfill" width="120" height="250"></svg>
-            <svg id="fillgauge5" class="liquidfill" width="120" height="250"></svg>
-            <svg id="fillgauge6" class="liquidfill" width="120" height="250"></svg>
-            <svg id="fillgauge7" class="liquidfill" width="120" height="250"></svg>
-            <svg id="fillgauge8" class="liquidfill" width="120" height="250"></svg>
-        </div>
+          <div id="liquidfill">
+              <svg id="fillgauge2" class="liquidfill" width="120" height="250"></svg>
+              <svg id="fillgauge3" class="liquidfill" width="120" height="250"></svg>
+              <svg id="fillgauge4" class="liquidfill" width="120" height="250"></svg>
+              <svg id="fillgauge5" class="liquidfill" width="120" height="250"></svg>
+              <svg id="fillgauge6" class="liquidfill" width="120" height="250"></svg>
+              <svg id="fillgauge7" class="liquidfill" width="120" height="250"></svg>
+              <svg id="fillgauge8" class="liquidfill" width="120" height="250"></svg>
+          </div>
       </div>
-
-
-    <div class="footer">
-    </div>
+  </article>
+  <div class="footer"></div>
   </div>
 
 
@@ -78,11 +106,16 @@
   <script src="src/openTab.js"></script>
   <script src="src/tooltip.js"></script>
   <script src="src/bubble_chart.js"></script>
+  <script type="text/javascript">document.getElementById("defaultOpen").click();</script>
   <script src="src/lineGraph.js"></script>
-  <script src="src/generateData.js"></script>
+  <script src="src/bar_chart.js"></script>
+  <script src="src/sankey.js"></script>
+  <script src="src/sankey_flow.js"></script>
   <script src="src/getCovers.js"></script>
   <script src="src/liquidFillGauge.js"></script>
   <script src="src/liquidFill.js"></script>
+  <script src="src/generateData.js"></script>
+
 
 </body>
 </html>

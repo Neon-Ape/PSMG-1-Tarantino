@@ -94,7 +94,7 @@ function bubbleChart() {
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
     .domain(['fuck', 'shit', 'ass', 'racial', 'genital', 'blasphemy', 'other'])
-    .range(['#D8341A', '#C2A225', '#14A622', '#9C4917','#D826BA','#BDC8E7','#305060']);
+    .range(['#d19b25', '#5f1020', '#e7d9c0', '#c09551','#261D22','#72613c','#140602']);
 
 
   /*
@@ -255,7 +255,7 @@ function bubbleChart() {
    * yearCenter of their data's year.
    */
   function splitBubbles() {
-    showYearTitles();
+    showMovieTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year center
     simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPosX));
@@ -285,7 +285,7 @@ function bubbleChart() {
   /*
    * Shows Year title displays.
    */
-  function showYearTitles() {
+  function showMovieTitles() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
     var yearsData = d3.keys(movieTitleX);
@@ -293,7 +293,7 @@ function bubbleChart() {
       .data(yearsData);
 
     years.enter().append('text')
-      .attr('class', 'year')
+      .attr('class', 'movietitle')
       .attr('x', function (d) { return movieTitleX[d]; })
       .attr('y', 40)
       .attr('text-anchor', 'middle')
