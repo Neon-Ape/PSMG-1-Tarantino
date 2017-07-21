@@ -255,7 +255,7 @@ function bubbleChart() {
    * yearCenter of their data's year.
    */
   function splitBubbles() {
-    showYearTitles();
+    showMovieTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year center
     simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPosX));
