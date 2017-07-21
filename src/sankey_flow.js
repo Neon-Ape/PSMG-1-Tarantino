@@ -1,3 +1,12 @@
+/**https://bl.ocks.org/cdermont/846051eb548e846eac60
+
+Where not otherwise covered by separate copyright or license:
+
+[![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+*/
+
 function sankeyFlow(){
 
     var units = "Words";
