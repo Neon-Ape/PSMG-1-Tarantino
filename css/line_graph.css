@@ -14,17 +14,23 @@
     margin-right: 0px;
 }
 
+.button {
+    font-weight: bold;
+}
+
 .button#dogs.active {
     background: #c28e5e;
-    color: #000;
+    color: #d40000;
 }
 
 .button#pulp.active {
-    background: #C2A225;
+    color: #fff11b;
+    background: #3c4e94;
 }
 
 .button#jackie.active {
-    background: #14A622;
+    color: #fff11b;
+    background: #000;
 }
 
 .button#bill1.active {
@@ -38,9 +44,9 @@
 }
 
 .button#basterds.active {
-    background: #305060;
+    background: #417d00;
 }
 
 .button#django.active {
-    background: #505050;
+    background: #730000;
 }
