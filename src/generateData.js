@@ -216,8 +216,20 @@ function getExtraData(data) {
     for (var i = 0; i <  data.length; i++) {
         movieDates[data[i]["movie"]] = data[i]["year"];
     }
+
     return movieDates;
 }
+
+function getMovieRankings(data){
+    var movieRanking = [];
+
+    for (var i = 0; i <  data.length; i++) {
+        movieRanking[data[i]["movie"]] = data[i]["imdb_rating"];
+    }
+    console.log("movieRanking: " + movieRanking);
+    return movieRanking;
+}
+
 /*
  * Function called once data is loaded from CSV.
  * Calls bubble chart function to display inside #vis div.
@@ -235,6 +247,7 @@ function addExtraInfo(error, data) {
         var wordTiming = makeTiming(data, extraData);
         var curseWords = makeCurseWords(data, movieDates);
         var sankeyFlow = makeSankey(curseWords);
+        var movieRanking = getMovieRankings(extraData);
 
         myBubbleChart('#bubbleChart', curseWords);
         myLineGraph('#lineGraph', wordTiming, 20);
