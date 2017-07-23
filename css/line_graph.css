@@ -24,23 +24,23 @@
 }
 
 .button#pulp.active {
-    color: #fff11b;
+    color: #ffda05;
     background: #3c4e94;
 }
 
 .button#jackie.active {
-    color: #fff11b;
+    color: #ffda05;
     background: #070707;
 }
 
 .button#bill1.active {
     color: #000;
-    background: #fff11b;
+    background: #ffda05;
 }
 
 .button#bill2.active {
     background: #ea1f18;
-    color: #fff11b;
+    color: #ffda05;
 }
 
 .button#basterds.active {
