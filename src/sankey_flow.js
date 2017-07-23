@@ -33,7 +33,7 @@ function sankeyFlow(){
 
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Inglorious Basterds', 'Django Unchained', 'other'])
-        .range(['#c28e5e', '#3c4e94', '#000', '#fff11b','#ea1f18','#417d00','#730000', 'grey']);
+        .range(['#c28e5e', '#3c4e94', '#000', '#ffda05','#ea1f18','#417d00','#730000', 'grey']);
 
     // load the data
     var chart = function chart(selector, graph) {

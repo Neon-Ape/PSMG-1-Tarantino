@@ -21,12 +21,70 @@ function lineGraph(){
         "Django Unchained" : false
     };
 
-    var xAxis = [
+    var axisData = [
         {
             x1: width/10,
             y1: height-yOffset,
             x2: width*9/10,
             y2: height-yOffset
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset+50,
+            x2: width/10,
+            y2: 10
+        }
+    ];
+
+    var scaleData = [
+        {
+            x1: width/10,
+            y1: height-yOffset-40,
+            x2:width*9/10,
+            y2:height-yOffset-40,
+            text: '10'
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset-80,
+            x2:width*9/10,
+            y2:height-yOffset-80,
+            text: '20'
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset-120,
+            x2:width*9/10,
+            y2:height-yOffset-120,
+            text: '30'
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset-160,
+            x2:width*9/10,
+            y2:height-yOffset-160,
+            text: '40'
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset-200,
+            x2:width*9/10,
+            y2:height-yOffset-200,
+            text: '50'
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset-240,
+            x2:width*9/10,
+            y2:height-yOffset-240,
+            text: '60'
+        },
+        {
+            x1: width/10,
+            y1: height-yOffset-280,
+            x2:width*9/10,
+            y2:height-yOffset-280,
+            text: '70'
         }
     ];
 
@@ -40,7 +98,11 @@ function lineGraph(){
     // @v4 scales now have a flattened naming scheme
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
-        .range(['#c28e5e', '#3c4e94', '#000', '#fff11b','#ea1f18','#BDC8E7','#417d00','#730000', '#AAAAAA']);
+        .range(['#c28e5e', '#3c4e94', '#070707', '#fff11b','#ea1f18','#BDC8E7','#417d00','#730000', '#AAAAAA']);
+
+    var linkColor = d3.scaleOrdinal()
+        .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
+        .range(['#d0a87b', '#446fd3', '#232323', '#ffda05','#ea1f18','#BDC8E7','#417d00','#730000', '#AAAAAA']);
 
     /*
      * This data manipulation function takes the raw data from
@@ -181,10 +243,7 @@ function lineGraph(){
             .data(nodes, function (d) { return d.id; });
 
         var axis = svg.selectAll('.axis')
-            .data(xAxis, function (d) { return d.id; });
-
-        console.log(xAxis);
-        console.log(axis);
+            .data(axisData, function (d) { return d.id; });
 
         var axisE = axis.enter().append('line')
             .classed('axis', true)
@@ -195,11 +254,34 @@ function lineGraph(){
             .attr('stroke', '#000')
             .attr('stroke-width', 2);
 
-        console.log(axisE);
-
         axis = axis.merge(axisE);
 
-        console.log(axis);
+        var scale = svg.selectAll('.scale')
+            .data(scaleData, function (d) { return d.id; });
+
+        var scaleE = scale.enter().append('line')
+            .classed('scale', true)
+            .attr('x1', function (d) { return d.x1;})
+            .attr('y1', function (d) { return d.y1;})
+            .attr('x2', function (d) { return d.x2;})
+            .attr('y2', function (d) { return d.y2;})
+            .attr('stroke', '#aaa')
+            .attr('stroke-width', 1);
+
+        scale = scale.merge(scaleE);
+
+        var scaleText = svg.selectAll('.scaleText')
+            .data(scaleData, function (d) { return d.id; });
+
+        scaleTextE = scaleText.enter().append("text")
+            .classed('scaleText', true)
+            .attr("y", function (d) { return d.y1+5;})
+            .attr("x", function(d){ return d.x2+10;})
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#aaa')
+            .text(function (d) { return d.text;});
+
+        scaleText = scaleText.merge(scaleTextE);
 
         // uncomment commented lines for dotted links
         var linksE = links.enter().append('line')
@@ -208,7 +290,7 @@ function lineGraph(){
             .attr('y1', start.y)
             .attr('x2', function (d) { return Number(d.target.x);})
             .attr('y2', start.y)
-            .attr('stroke', function(d) { return fillColor(d.movie);})
+            .attr('stroke', function(d) { return linkColor(d.movie)})
             //.attr('stroke-linecap', 'round')
             //.attr('stroke-dasharray', '1, 30')
             .attr('stroke-width', 5);
@@ -277,13 +359,7 @@ function lineGraph(){
         // change outline to indicate hover state.
         d3.select(this).attr('stroke', 'black');
 
-        var content = '<span class="name">separator</span><span class="value">: ' + d.separator + '</span><br/>';
-
-        for(var word in d.words) {
-            if(d.words.hasOwnProperty(word)) {
-                content += '<span class="name">' + word + '</span><span class="value">: ' + d.words[word] + '</span><br/>'
-            }
-        }
+        var content = '<span class="value">' + d.count + '</span><br/>';
 
         tooltip.showTooltip(content, d3.event);
     }
