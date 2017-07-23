@@ -269,11 +269,11 @@ function setupButtons() {
         });
 
     d3.select('#graphSelect')
-        .selectAll('.cover').selectAll('.button')
+        .selectAll('.cover')
         .on('click', function () {
 
             // Find the button just clicked
-            var button = d3.select(this);
+            var button = d3.select(this).select('.button');
 
             // Toggle the active state
             if (button.classed('active')) {
