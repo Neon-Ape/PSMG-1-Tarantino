@@ -142,14 +142,14 @@ function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, curr
 
 function makeSankey(curseWords) {
 
-    function sankeyNode(index, name, type) {
+    function SankeyNode(index, name, type) {
         this.name = name;
         this.node = index;
         this.type = type;
     }
 
 
-    function sankeyLink(source, target, value) {
+    function SankeyLink(source, target, value) {
         this.source = source;
         this.target = target;
         this.value = value;
@@ -189,19 +189,19 @@ function makeSankey(curseWords) {
             if (-1 === movieLookup.value.indexOf(word.movie)) {
                 movieLookup.value.push(word.movie);
                 movieLookup.index.push(i);
-                sankey420.nodes.push(new sankeyNode(i, word.movie, word.movie));
+                sankey420.nodes.push(new SankeyNode(i, word.movie, word.movie));
                 i++;
             }
             if (-1 === wordLookup.value.indexOf(word.name)) {
                 wordLookup.value.push(word.name);
                 wordLookup.index.push(i);
-                sankey420.nodes.push(new sankeyNode(i, word.name, "other"));
+                sankey420.nodes.push(new SankeyNode(i, word.name, "other"));
                 i++;
             }
 
             var source = movieLookup.getIndex(word.movie);
             var target = wordLookup.getIndex(word.name);
-            sankey420.links.push(new sankeyLink(source, target, word.value));
+            sankey420.links.push(new SankeyLink(source, target, word.value));
 
     }
     console.log("sankey:");
@@ -237,7 +237,7 @@ function addExtraInfo(error, data) {
         var sankeyFlow = makeSankey(curseWords);
 
         myBubbleChart('#bubbleChart', curseWords);
-        myLineGraph('#lineGraph', wordTiming, 20);
+        myLineGraph('#lineGraph','#timeline', wordTiming, 20);
         mySankeyFlow('#sankeyFlow', sankeyFlow);
 
 

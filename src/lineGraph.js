@@ -4,7 +4,10 @@ function lineGraph(){
     var width = 1200;
     var height = 400;
     var yOffset = 100;
-
+    var xOffset = width/20;
+    var xCutOff = width*9/10;
+    var timelineHeight = 100;
+    var animationDuration = 800;
 
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
@@ -21,68 +24,70 @@ function lineGraph(){
         "Django Unchained" : false
     };
 
+    var activeStep = 0;
+
     var axisData = [
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset,
-            x2: width*9/10,
+            x2: xCutOff,
             y2: height-yOffset
         },
-        {
-            x1: width/10,
+        /*{
+            x1: xOffset,
             y1: height-yOffset+50,
-            x2: width/10,
+            x2: xOffset,
             y2: 10
-        }
+        }*/
     ];
 
     var scaleData = [
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset-40,
-            x2:width*9/10,
+            x2:xCutOff,
             y2:height-yOffset-40,
             text: '10'
         },
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset-80,
-            x2:width*9/10,
+            x2:xCutOff,
             y2:height-yOffset-80,
             text: '20'
         },
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset-120,
-            x2:width*9/10,
+            x2:xCutOff,
             y2:height-yOffset-120,
             text: '30'
         },
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset-160,
-            x2:width*9/10,
+            x2:xCutOff,
             y2:height-yOffset-160,
             text: '40'
         },
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset-200,
-            x2:width*9/10,
+            x2:xCutOff,
             y2:height-yOffset-200,
             text: '50'
         },
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset-240,
-            x2:width*9/10,
+            x2:xCutOff,
             y2:height-yOffset-240,
             text: '60'
         },
         {
-            x1: width/10,
+            x1: 0,
             y1: height-yOffset-280,
-            x2:width*9/10,
+            x2:xCutOff,
             y2:height-yOffset-280,
             text: '70'
         }
@@ -92,7 +97,7 @@ function lineGraph(){
     var svg = null;
     var points = null;
     var links = null;
-    var nodes = [];
+    var nodeData = [];
 
     // Nice looking colors - no reason to buck the trend
     // @v4 scales now have a flattened naming scheme
@@ -116,72 +121,82 @@ function lineGraph(){
      * This function returns the new node array, with a node in that
      * array for each element in the rawData input.
      */
+
     function createNodes(data, separator, rawWidth, rawHeight) {
-        function Node(movie, count, x, words, separator) {
+        function Node(movie, count, x, timeline, step) {
             this.movie = movie;
             this.count = count;
             this.x = x;
             this.y = rawHeight - count * 4;
-            this.words = words;
-            this.separator = separator;
+            this.step = step;
+            this.timeline = timeline;
         }
 
         var width = rawWidth*8/10;
-        var offset = rawWidth/10;
+        var offset = rawWidth/20;
         var pixelPerSeparator = width/separator;
+
 
         var myNodes = [];
 
         for (var movie in data){
+            if(data.hasOwnProperty(movie)) {
+                var runtime = data[movie].runtime;
+                var minsPerSeparator = runtime / separator;
+                //console.log(movie + " --- width: " + width + ", runtime: " + runtime + ", pixelPerSeparator: " + pixelPerSeparator + ", minsPerSeparator: " + minsPerSeparator);
+                var currentTimeSlot = minsPerSeparator;
+                var currentXPos = offset;
+                var timeline = null;
+                var step = 0;
 
-            var runtime = data[movie].runtime;
-            var minsPerSeparator = runtime/separator;
-            //console.log(movie + " --- width: " + width + ", runtime: " + runtime + ", pixelPerSeparator: " + pixelPerSeparator + ", minsPerSeparator: " + minsPerSeparator);
-            var currentTimeSlot = minsPerSeparator;
-            var currentXPos = offset;
+                var collectorNode = {
+                    count: 0,
+                    words: {}
+                };
 
-            var currentSeparator = 1;
 
-            var collectorNode = {
-                count : 0,
-                words : {}
-            };
 
-            for (time in data[movie].children) {
+                for (var time in data[movie].children) {
+                    if(data[movie].children.hasOwnProperty(time)) {
+                        while (time > currentTimeSlot) {
+                            timeline = createTimeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, rawWidth, offset);
+                            myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
+                            collectorNode.words = {};
+                            collectorNode.count = 0;
+                            currentTimeSlot += minsPerSeparator;
+                            currentXPos += pixelPerSeparator;
+                            step++;
+                        }
 
-                while (time > currentTimeSlot) {
-                    myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
-                    collectorNode.words = [];
+                        collectorNode.words[time] = data[movie].children[time];
+                        collectorNode.count++;
+                    }
+                }
+                // add last Node
+                if (collectorNode.count !== 0) {
+                    timeline = createTimeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, rawWidth, offset);
+                    myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
+                    collectorNode.words = {};
                     collectorNode.count = 0;
                     currentTimeSlot += minsPerSeparator;
                     currentXPos += pixelPerSeparator;
-                    currentSeparator ++;
+                    step++;
                 }
 
-                collectorNode.words[time] = data[movie].children[time];
-                collectorNode.count++;
-            }
-            // add last Node
-            if (collectorNode.count !== 0) {
-                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
-                collectorNode.words = [];
-                collectorNode.count = 0;
-                currentTimeSlot += minsPerSeparator;
-                currentXPos += pixelPerSeparator;
-                currentSeparator ++;
-            }
+                while (currentTimeSlot <= runtime) {
+                    timeline = createTimeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, rawWidth, offset, step);
+                    myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline));
+                    collectorNode.words = {};
+                    collectorNode.count = 0;
+                    currentTimeSlot += minsPerSeparator;
+                    currentXPos += pixelPerSeparator;
+                    step++;
+                }
 
-            while(currentTimeSlot <= runtime ) {
-                myNodes.push(new Node(movie, collectorNode.count, currentXPos, collectorNode.words, currentSeparator));
-                collectorNode.words = [];
-                collectorNode.count = 0;
-                currentTimeSlot += minsPerSeparator;
-                currentXPos += pixelPerSeparator;
-                currentSeparator ++;
+                myNodes.push(new Node(movie, 0, currentXPos, timeline, step));
             }
 
-
-        };
+        }
 
         console.log(myNodes);
         return myNodes;
@@ -205,6 +220,71 @@ function lineGraph(){
 
     }
 
+    function createBars(nodes) {
+        function Bar(x,y,width,height,step) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+            this.step = step;
+        }
+
+        var myBars = [];
+        for (var i = 0; i < nodes.length - 1; i++) {
+            if (nodes[i+1].movie === 'Reservoir Dogs') {
+                myBars.push(new Bar(nodes[i].x,10,nodes[i+1].x-nodes[i].x, height-yOffset-10, nodes[i].step));
+            }
+        }
+
+        console.log(myBars);
+        return myBars;
+    }
+
+    function createTimeline(data, start, end, rawWidth, offset) {
+        console.log('start: ' + start + ', end: ' + end + ', rawWidth: ' + rawWidth + ", offset:" + offset);
+        var timeline = {};
+        var duration = end - start;
+        var visWidth = rawWidth - offset*2;
+
+        for(var time in data) {
+            if (data.hasOwnProperty(time)) {
+                timeline[time] = {};
+                var relativeTime = time - start;
+                var scalingFactor = relativeTime / duration;
+                var xPos = scalingFactor * visWidth + offset;
+
+                timeline[time]["word"] = data[time];
+                timeline[time]["xPos"] = xPos;
+            }
+        }
+        console.log(timeline);
+        return timeline;
+    }
+
+    function createTimes(nodes) {
+        function Time(time, xPos, word, movie, step) {
+            this.movie = movie;
+            this.time = time;
+            this.x = xPos;
+            this.word = word;
+            this.step = step;
+        }
+
+        var times = [];
+
+        for (var i = 0; i < nodes.length - 1; i++) {
+            var currentTimeline = nodes[i].timeline;
+            for (time in currentTimeline) {
+                if (currentTimeline.hasOwnProperty(time)) {
+                    times.push(new Time(time, currentTimeline[time]["xPos"], currentTimeline[time]["word"], nodes[i].movie, nodes[i].step));
+                }
+            }
+        }
+
+        console.log(times);
+        return times;
+    }
+
 
     /*
      * Main entry point to the bubble chart. This function is returned
@@ -219,15 +299,17 @@ function lineGraph(){
      * rawData is expected to be an array of data objects as provided by
      * a d3 loading function like d3.csv.
      */
-    var chart = function chart(selector, rawData, separator) {
+    var chart = function chart(selector, selector2, rawData, separator) {
 
         if(typeof(separator)==='undefined') {
             separator = 10;
         }
 
         // convert raw data into nodes data
-        nodes = createNodes(rawData, separator, width, height - yOffset);
-        links = createLinks(nodes);
+        nodeData = createNodes(rawData, separator, width, height - yOffset);
+        linkData = createLinks(nodeData);
+        timeData = createTimes(nodeData);
+        barData = createBars(nodeData);
         // Create a SVG element inside the provided selector
         // with desired size.
         svg = d3.select(selector)
@@ -237,10 +319,10 @@ function lineGraph(){
 
         // Bind nodes data to what will become DOM elements to represent them.
         links = svg.selectAll('.link')
-            .data(links, function (d) { return d.id; });
+            .data(linkData, function (d) { return d.id; });
 
         points = svg.selectAll('.bubble')
-            .data(nodes, function (d) { return d.id; });
+            .data(nodeData, function (d) { return d.id; });
 
         var axis = svg.selectAll('.axis')
             .data(axisData, function (d) { return d.id; });
@@ -283,7 +365,31 @@ function lineGraph(){
 
         scaleText = scaleText.merge(scaleTextE);
 
-        // uncomment commented lines for dotted links
+
+
+
+        // build the timeline
+        svg2 = d3.select(selector2)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', timelineHeight);
+
+        times = svg2.selectAll('.circle')
+            .data(timeData, function (d) { return d.id; });
+
+        var timesE = times.enter().append('line')
+            .classed('timeStamp', true)
+            .attr('x1', 0)
+            .attr('x2', 0)
+            .attr('y1', 0)
+            .attr('y2', 40)
+            .attr('stroke', function (d) { return d3.rgb(fillColor(d.movie));})
+            .attr('stroke-width', 2)
+            .attr('opacity',0);
+
+        times = times.merge(timesE);
+
+        // uncomment commented linkData for dotted links
         var linksE = links.enter().append('line')
             .classed('link', true)
             .attr('x1', function (d) { return Number(d.source.x);})
@@ -295,7 +401,9 @@ function lineGraph(){
             //.attr('stroke-dasharray', '1, 30')
             .attr('stroke-width', 5);
 
+
         links = links.merge(linksE);
+
 
         // Create new circle elements each with class `bubble`.
         // There will be one circle.bubble for each object in the nodes array.
@@ -304,9 +412,9 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 10)
+            .attr('r', 2.5)
             .attr('cy', start.y)
-            .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
+            .attr('fill', function (d) { return d3.rgb(fillColor(d.movie)).darker();})
             .attr('cx', function (d) { return Number(d.x)})
             .on('mouseover', showDetail)
             .on('mouseout', hideDetail);
@@ -314,28 +422,84 @@ function lineGraph(){
         // @v4 Merge the original empty selection and the enter selection
         points = points.merge(pointsE);
 
+        var selectBars = svg.selectAll('rect')
+            .data(barData, function(d) {return d.id; });
+
+        var selectBarsE = selectBars.enter().append('rect')
+            .classed('selection', true)
+            .attr('x', function (d) { return d.x;})
+            .attr('y', function (d) { return d.y;})
+            .attr('width', function (d){ return d.width; })
+            .attr('height', function(d) { return d.height; })
+            .attr('fill', '#aaa')
+            .attr('opacity', 0.1);
+
+        selectBars = selectBars.merge(selectBarsE);
+
+        selectBars.on('click', function(d) {
+            activeStep = d.step;
+            refreshTimes(times);
+            refreshBars(selectBars);
+        });
+
+
+
 
 
         console.log(points);
         refreshPoints(points);
         refreshLinks(links);
+        refreshTimes(times);
+        refreshBars(selectBars);
+
 
     };
 
     function refreshLinks(links) {
         links.transition()
-            .duration(1000)
+            .duration(animationDuration)
             .attr('opacity', getOpacity)
             .attr('y1', function (d) { return getY(d.source); })
             .attr('y2', function (d) { return getY(d.target); });
     }
 
+
     function refreshPoints(points) {
         points.transition()
-            .duration(1000)
+            .duration(animationDuration)
             .attr('opacity', getOpacity)
             .attr('cy', function (d) { return getY(d); });
     }
+
+    function refreshTimes(times) {
+        function getX(d) {
+            if(activeGraphs[d.movie] && (d.step === activeStep)) {
+                return d.x;
+            }
+            return 0;
+        }
+        times.transition()
+            .duration(animationDuration)
+            .attr('x1', getX)
+            .attr('x2', getX)
+            .attr('opacity', function (d) {
+                if (activeGraphs[d.movie] && (d.step === activeStep)) {
+                    return 1;
+                }
+                return 0;
+            });
+
+    }
+
+    function refreshBars(bars) {
+        function barOpacity(d) {
+            if(d.step === activeStep) {
+                return 0.5;
+            } return 0.1;
+        }
+        bars.attr('opacity', barOpacity);
+    }
+
 
     function getOpacity(d) {
         if(activeGraphs[d.movie]) {
@@ -379,6 +543,7 @@ function lineGraph(){
         activeGraphs[movie] = !activeGraphs[movie];
         refreshPoints(points);
         refreshLinks(links);
+        refreshTimes(times)
     }
 
     /*
