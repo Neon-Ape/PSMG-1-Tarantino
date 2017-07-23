@@ -1,12 +1,64 @@
-.body {
-    background-color: #222222;
+
+@font-face{
+  font-family: 'Tarantino';
+  src: url('./fonts/WebFont.woff') format('woff');
+  src: url('./fonts/WebFont.woff2') format('woff');
+}
+
+h1 {
+  font-family: Tarantino, arial, sans-serif
+}
+
+header {
+  display: flex;
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
+#logo {
+	height: 30%;
+	width: 30%;
+	transform: rotate(-10deg);
+	float: left;
+	margin-right: 40px;
+}
+
+#title {
+	font-size: 35pt;
+	margin-top: 0px;
 }
 
 .container {
   max-width: 1200px;
   margin: auto;
+  margin-top: 0px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 13pt;
+}
+
+.tab{
+	clear: left;
+}
+
+.button {
+  display: inline-block;
+  width: 150px;
+  padding: 4px 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+  border: 1px solid #e0e0e0;
+  text-decoration: none;
+}
+
+.button.active {
+  background: #000;
+  color: #fff;
 }
 
 .footer {
   text-align: center;
 }
+
