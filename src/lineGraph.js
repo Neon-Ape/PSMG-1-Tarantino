@@ -404,11 +404,6 @@ function lineGraph(){
 
         links = links.merge(linksE);
 
-        links.on('click', function(d) {
-            activeStep = d.target.step;
-            refreshTimes(times);
-
-        });
 
         // Create new circle elements each with class `bubble`.
         // There will be one circle.bubble for each object in the nodes array.
@@ -422,11 +417,7 @@ function lineGraph(){
             .attr('fill', function (d) { return d3.rgb(fillColor(d.movie)).darker();})
             .attr('cx', function (d) { return Number(d.x)})
             .on('mouseover', showDetail)
-            .on('mouseout', hideDetail)
-            .on('click', function(d) {
-                activeStep = d.step;
-                refreshTimes(times);
-            });
+            .on('mouseout', hideDetail);
 
         // @v4 Merge the original empty selection and the enter selection
         points = points.merge(pointsE);
