@@ -237,7 +237,7 @@ function bubbleChart() {
    * center of the visualization.
    */
   function groupBubbles() {
-    hideYearTitles();
+    hideMovieTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
@@ -278,8 +278,8 @@ function bubbleChart() {
   /*
    * Hides Year title displays.
    */
-  function hideYearTitles() {
-    svg.selectAll('.year').remove();
+  function hideMovieTitles() {
+    svg.selectAll('.movietitle').remove();
   }
 
   /*
@@ -289,7 +289,7 @@ function bubbleChart() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
     var yearsData = d3.keys(movieTitleX);
-    var years = svg.selectAll('.year')
+    var years = svg.selectAll('.movietitle')
       .data(yearsData);
 
     years.enter().append('text')

@@ -15,34 +15,34 @@
 }
 
 .button#dogs.active {
-    background: #c28e5e;
-    color: #d40000;
+    background: var(--dogs-color);
+    color: var(--bill2-color);
 }
 
 .button#pulp.active {
-    color: #ffda05;
-    background: #3c4e94;
+    background: var(--pulp-color);
+    color: var(--bill1-color);
 }
 
 .button#jackie.active {
-    color: #ffda05;
-    background: #070707;
+    background: var(--jackie-color);
+    color: var(--bill1-color);
 }
 
 .button#bill1.active {
-    color: #000;
-    background: #ffda05;
+    background: var(--bill1-color);
+    color: var(--jackie-color);
 }
 
 .button#bill2.active {
-    background: #ea1f18;
-    color: #ffda05;
+    background: var(--bill2-color);
+    color: var(--bill1-color);
 }
 
 .button#basterds.active {
-    background: #417d00;
+    background: var(--basterds-color);
 }
 
 .button#django.active {
-    background: #730000;
+    background: var(--django-color);
 }
