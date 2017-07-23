@@ -347,7 +347,7 @@ function lineGraph(){
             .attr('y1', function (d) { return d.y1;})
             .attr('x2', function (d) { return d.x2;})
             .attr('y2', function (d) { return d.y2;})
-            .attr('stroke', '#aaa')
+            .attr('stroke', '#fdfdfd')
             .attr('stroke-width', 1);
 
         scale = scale.merge(scaleE);
@@ -360,7 +360,7 @@ function lineGraph(){
             .attr("y", function (d) { return d.y1+5;})
             .attr("x", function(d){ return d.x2+10;})
             .attr('text-anchor', 'middle')
-            .attr('fill', '#aaa')
+            .attr('fill', '#fdfdfd')
             .text(function (d) { return d.text;});
 
         scaleText = scaleText.merge(scaleTextE);
@@ -396,7 +396,7 @@ function lineGraph(){
             .attr('y1', start.y)
             .attr('x2', function (d) { return Number(d.target.x);})
             .attr('y2', start.y)
-            .attr('stroke', function(d) { return linkColor(d.movie)})
+            .attr('stroke', function(d) { return fillColor(d.movie)})
             //.attr('stroke-linecap', 'round')
             //.attr('stroke-dasharray', '1, 30')
             .attr('stroke-width', 5);
@@ -414,10 +414,8 @@ function lineGraph(){
             .classed('bubble', true)
             .attr('r', 2.5)
             .attr('cy', start.y)
-            .attr('fill', function (d) { return d3.rgb(fillColor(d.movie)).darker();})
-            .attr('cx', function (d) { return Number(d.x)})
-            .on('mouseover', showDetail)
-            .on('mouseout', hideDetail);
+            .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
+            .attr('cx', function (d) { return Number(d.x)});
 
         // @v4 Merge the original empty selection and the enter selection
         points = points.merge(pointsE);
@@ -431,8 +429,8 @@ function lineGraph(){
             .attr('y', function (d) { return d.y;})
             .attr('width', function (d){ return d.width; })
             .attr('height', function(d) { return d.height; })
-            .attr('fill', '#aaa')
-            .attr('opacity', 0.1);
+            .attr('fill', '#fdfdfd')
+            .attr('opacity', 0);
 
         selectBars = selectBars.merge(selectBarsE);
 
@@ -494,8 +492,8 @@ function lineGraph(){
     function refreshBars(bars) {
         function barOpacity(d) {
             if(d.step === activeStep) {
-                return 0.5;
-            } return 0.1;
+                return 0.3;
+            } return 0;
         }
         bars.attr('opacity', barOpacity);
     }
