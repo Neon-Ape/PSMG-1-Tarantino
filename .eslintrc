@@ -154,7 +154,7 @@
     'computed-property-spacing': [2, 'never'],
     // enforces consistent naming when capturing the current execution context
     'consistent-this': 0,
-    // enforce newline at the end of file, with no multiple empty lines
+    // enforce newline at the end of file, with no multiple empty linkData
     'eol-last': 2,
     // require function expressions to have a name
     // 'func-names': 1,
@@ -181,7 +181,7 @@
         'case': { 'after': true }
       }
     }],
-    // enforces empty lines around comments
+    // enforces empty linkData around comments
     'lines-around-comment': 0,
     // disallow mixed 'LF' and 'CRLF' as linebreaks
     'linebreak-style': 0,
@@ -215,7 +215,7 @@
     'no-lonely-if': 0,
     // disallow mixed spaces and tabs for indentation
     'no-mixed-spaces-and-tabs': 2,
-    // disallow multiple empty lines and only one newline at the end
+    // disallow multiple empty linkData and only one newline at the end
     'no-multiple-empty-lines': [2, { 'max': 2, 'maxEOF': 1 }],
     // disallow nested ternary expressions
     'no-nested-ternary': 2,
@@ -225,7 +225,7 @@
     'no-spaced-func': 2,
     // disallow the use of ternary operators
     'no-ternary': 0,
-    // disallow trailing whitespace at the end of lines
+    // disallow trailing whitespace at the end of linkData
     'no-trailing-spaces': 2,
     // disallow dangling underscores in identifiers
     'no-underscore-dangle': 0,
