@@ -40,7 +40,11 @@ function lineGraph(){
     // @v4 scales now have a flattened naming scheme
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
-        .range(['#c28e5e', '#3c4e94', '#000', '#fff11b','#ea1f18','#BDC8E7','#417d00','#730000', '#AAAAAA']);
+        .range(['#c28e5e', '#3c4e94', '#070707', '#fff11b','#ea1f18','#BDC8E7','#417d00','#730000', '#AAAAAA']);
+
+    var linkColor = d3.scaleOrdinal()
+        .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Death Proof', 'Inglorious Basterds', 'Django Unchained', 'Hateful Eight'])
+        .range(['#d0a87b', '#446fd3', '#232323', '#fff894','#ea1f18','#BDC8E7','#417d00','#730000', '#AAAAAA']);
 
     /*
      * This data manipulation function takes the raw data from
@@ -208,7 +212,7 @@ function lineGraph(){
             .attr('y1', start.y)
             .attr('x2', function (d) { return Number(d.target.x);})
             .attr('y2', start.y)
-            .attr('stroke', function(d) { return fillColor(d.movie);})
+            .attr('stroke', function(d) { return linkColor(d.movie)})
             //.attr('stroke-linecap', 'round')
             //.attr('stroke-dasharray', '1, 30')
             .attr('stroke-width', 5);
