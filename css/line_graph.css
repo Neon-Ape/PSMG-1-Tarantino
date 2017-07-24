@@ -72,37 +72,37 @@
     fill: var(--white-color);
 }
 
-#lineGraph .dogs {
+.dogs {
     stroke: var(--dogs-color);
     fill: var(--dogs-color);
 }
 
-#lineGraph .pulp {
+.pulp {
     stroke: var(--pulp-color);
     fill: var(--pulp-color);
 }
 
-#lineGraph .jackie {
+.jackie {
     stroke: var(--jackie-color);
     fill: var(--jackie-color);
 }
 
-#lineGraph .bill1 {
+.bill1 {
     stroke: var(--bill1-color);
     fill: var(--bill1-color);
 }
 
-#lineGraph .bill2 {
+.bill2 {
     stroke: var(--bill2-color);
     fill: var(--bill2-color);
 }
 
-#lineGraph .basterds {
+.basterds {
     stroke: var(--basterds-color);
     fill: var(--basterds-color);
 }
 
-#lineGraph .django {
+.django {
     stroke: var(--django-color);
     fill: var(--django-color);
 }
