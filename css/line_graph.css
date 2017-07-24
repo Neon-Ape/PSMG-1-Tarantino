@@ -47,3 +47,65 @@
     background: var(--django-color);
     color: var(--bill2-color);
 }
+
+/* SVG STYLES */
+
+#lineGraph .scale {
+    stroke: var(--white-color);
+    stroke-width: 1;
+}
+
+
+#lineGraph .scaleText {
+    fill: var(--white-color);
+}
+
+#lineGraph .bubble {
+
+}
+
+#lineGraph .link {
+    stroke-width: 5;
+}
+
+#lineGraph .selection {
+    fill: var(--white-color);
+}
+
+#lineGraph .dogs {
+    stroke: var(--dogs-color);
+    fill: var(--dogs-color);
+}
+
+#lineGraph .pulp {
+    stroke: var(--pulp-color);
+    fill: var(--pulp-color);
+}
+
+#lineGraph .jackie {
+    stroke: var(--jackie-color);
+    fill: var(--jackie-color);
+}
+
+#lineGraph .bill1 {
+    stroke: var(--bill1-color);
+    fill: var(--bill1-color);
+}
+
+#lineGraph .bill2 {
+    stroke: var(--bill2-color);
+    fill: var(--bill2-color);
+}
+
+#lineGraph .basterds {
+    stroke: var(--basterds-color);
+    fill: var(--basterds-color);
+}
+
+#lineGraph .django {
+    stroke: var(--django-color);
+    fill: var(--django-color);
+}
+
+
+

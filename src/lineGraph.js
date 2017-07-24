@@ -24,24 +24,31 @@ function lineGraph(){
         "Django Unchained" : false
     };
 
+    var classes = {
+        "Reservoir Dogs" : 'dogs',
+        "Pulp Fiction" : 'pulp',
+        "Jackie Brown" : 'jackie',
+        "Kill Bill: Vol. 1" : 'bill1',
+        "Kill Bill: Vol. 2" : 'bill2',
+        "Inglorious Basterds" : 'basterds',
+        "Django Unchained" : 'django'
+    };
+
+    function getClass(d) {
+        return classes[d];
+    }
+
     var activeStep = 0;
 
-    var axisData = [
+
+    var scaleData = [
         {
             x1: 0,
             y1: height-yOffset,
-            x2: xCutOff,
-            y2: height-yOffset
+            x2:xCutOff,
+            y2:height-yOffset,
+            text: '0'
         },
-        /*{
-            x1: xOffset,
-            y1: height-yOffset+50,
-            x2: xOffset,
-            y2: 10
-        }*/
-    ];
-
-    var scaleData = [
         {
             x1: 0,
             y1: height-yOffset-40,
@@ -320,20 +327,6 @@ function lineGraph(){
         points = svg.selectAll('.bubble')
             .data(nodeData, function (d) { return d.id; });
 
-        var axis = svg.selectAll('.axis')
-            .data(axisData, function (d) { return d.id; });
-
-        var axisE = axis.enter().append('line')
-            .classed('axis', true)
-            .attr('x1', function (d) { return d.x1;})
-            .attr('y1', function (d) { return d.y1;})
-            .attr('x2', function (d) { return d.x2;})
-            .attr('y2', function (d) { return d.y2;})
-            .attr('stroke', '#000')
-            .attr('stroke-width', 2);
-
-        axis = axis.merge(axisE);
-
         var scale = svg.selectAll('.scale')
             .data(scaleData, function (d) { return d.id; });
 
@@ -342,9 +335,7 @@ function lineGraph(){
             .attr('x1', function (d) { return d.x1;})
             .attr('y1', function (d) { return d.y1;})
             .attr('x2', function (d) { return d.x2;})
-            .attr('y2', function (d) { return d.y2;})
-            .attr('stroke', '#fdfdfd')
-            .attr('stroke-width', 1);
+            .attr('y2', function (d) { return d.y2;});
 
         scale = scale.merge(scaleE);
 
@@ -356,7 +347,6 @@ function lineGraph(){
             .attr("y", function (d) { return d.y1+5;})
             .attr("x", function(d){ return d.x2+10;})
             .attr('text-anchor', 'middle')
-            .attr('fill', '#fdfdfd')
             .text(function (d) { return d.text;});
 
         scaleText = scaleText.merge(scaleTextE);
@@ -388,15 +378,12 @@ function lineGraph(){
         // uncomment commented linkData for dotted links
         var linksE = links.enter().append('line')
             .classed('link', true)
+            .each(function(d) {
+                d3.select(this).classed(getClass(d.movie),true);})
             .attr('x1', function (d) { return Number(d.source.x);})
             .attr('y1', start.y)
             .attr('x2', function (d) { return Number(d.target.x);})
-            .attr('y2', start.y)
-            .attr('stroke', function(d) { return fillColor(d.movie)})
-            //.attr('stroke-linecap', 'round')
-            //.attr('stroke-dasharray', '1, 30')
-            .attr('stroke-width', 5);
-
+            .attr('y2', start.y);
 
         links = links.merge(linksE);
 
@@ -408,9 +395,11 @@ function lineGraph(){
         //  enter selection to apply our transtition to below.
         var pointsE = points.enter().append('circle')
             .classed('bubble', true)
-            .attr('r', 2.5)
+            .each(function(d) {
+                d3.select(this).classed(getClass(d.movie),true);})
+            .classed(function (d) { return classes[d.movie];}, true)
+            .attr('r', 2)
             .attr('cy', start.y)
-            .attr('fill', function (d) { return d3.rgb(fillColor(d.movie));})
             .attr('cx', function (d) { return Number(d.x)});
 
         // @v4 Merge the original empty selection and the enter selection
@@ -425,7 +414,6 @@ function lineGraph(){
             .attr('y', function (d) { return d.y;})
             .attr('width', function (d){ return d.width; })
             .attr('height', function(d) { return d.height; })
-            .attr('fill', '#fdfdfd')
             .attr('opacity', 0);
 
         selectBars = selectBars.merge(selectBarsE);
