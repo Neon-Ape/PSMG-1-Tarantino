@@ -8,8 +8,18 @@ audio:not([controls]) { display: none; }
 [hidden] { display: none; }
 
 html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-body { margin: 0; font-size: 13px; line-height: 1.231; background: var(--darksand-color);}
-body, button, input, select, textarea { font-family: sans-serif; color: var(--darkgrey-color); }
+body {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.231;
+    background: var(--darksand-color);
+    background: #600322;
+    background: -moz-linear-gradient(-45deg, #600322 0%, #ae6c32 35%);
+    background: -webkit-linear-gradient(-45deg, #600322 0%,#ae6c32 35%);
+    background: linear-gradient(135deg, #600322 0%,#ae6c32 35%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#600322', endColorstr='#ae6c32',GradientType=1 );
+}
+body, button, input, select, textarea { font-family: sans-serif; color: var(--darkgrey-color);  }
 
 ::-moz-selection { background: #444; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
