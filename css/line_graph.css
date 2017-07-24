@@ -16,7 +16,7 @@
 
 .button#dogs.active {
     background: var(--dogs-color);
-    color: var(--bill2-color);
+    color: var(--darkgrey-color);
 }
 
 .button#pulp.active {
@@ -36,7 +36,7 @@
 
 .button#bill2.active {
     background: var(--bill2-color);
-    color: var(--bill1-color);
+    color: var(--jackie-color);
 }
 
 .button#basterds.active {
@@ -45,4 +45,5 @@
 
 .button#django.active {
     background: var(--django-color);
+    color: var(--bill2-color);
 }
