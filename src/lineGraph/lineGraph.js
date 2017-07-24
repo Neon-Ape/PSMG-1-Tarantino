@@ -13,7 +13,7 @@ function lineGraph(){
         "Django Unchained" : false
     };
     var activeStep = 0;
-
+    var hoveredStep = -1;
 
     function Step(step,scaleStep) {
             this.x1 = 0;
@@ -96,6 +96,17 @@ function lineGraph(){
             refreshBars(bars);
         });
 
+        bars.on('mouseover', function (d) {
+                var o = Number(d3.select(this).attr('opacity'));
+                d3.select(this).attr('opacity',o+0.08);
+                hoveredStep = d.step;
+            })
+            .on('mouseout', function (d) {
+                var o = Number(d3.select(this).attr('opacity'));
+                d3.select(this).attr('opacity',o-0.08);
+                hoveredStep = -1;
+            });
+
 
 
 
@@ -148,6 +159,9 @@ function lineGraph(){
     function refreshBars(bars) {
         function barOpacity(d) {
             if(d.step === activeStep) {
+                if(d.step === hoveredStep) {
+                    return VAR_LG_BARS_OPACITY + VAR_LG_BARS_HOVER_OPACITY;
+                }
                 return VAR_LG_BARS_OPACITY;
             } return 0;
         }
