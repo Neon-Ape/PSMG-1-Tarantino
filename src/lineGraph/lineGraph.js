@@ -3,15 +3,35 @@ function lineGraph(){
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 100);
     
-    var activeGraphs = {
-        "Reservoir Dogs" : true,
-        "Pulp Fiction" : false,
-        "Jackie Brown" : false,
-        "Kill Bill: Vol. 1" : false,
-        "Kill Bill: Vol. 2" : false,
-        "Inglorious Basterds" : false,
-        "Django Unchained" : false
+    var graphs = {
+        _height : VAR_LC_TIMELINE_HEIGHT,
+        _active : ["Reservoir Dogs"],
+        isActive : function (movie) {
+            return this._active.indexOf(movie) !== -1;
+        },
+        toggle : function (movie) {
+            if(this.isActive(movie)) {
+                this._active.splice(this._active.indexOf(movie),1);
+            } else {
+                this._active.push(movie);
+            }
+        },
+        size : function() {
+            return (this._active.length + 1) * this._height;
+        },
+        getY1 : function (movie) {
+            if(this.isActive(movie)) {
+                return this._active.indexOf(movie) * this._height;
+            } return this._active.length * this._height;
+        },
+        getY2 : function (movie) {
+            if(this.isActive(movie)) {
+                return (this._active.indexOf(movie)+1) * this._height;
+            } return (this._active.length + 1) * this._height;
+        }
+
     };
+    
     var activeStep = 0;
     var hoveredStep = -1;
 
@@ -22,11 +42,13 @@ function lineGraph(){
             this.y2 = VAR_LG_GRAPH_HEIGHT-step*scaleStep;
             this.text = step;
     }
-    var scaleStep = 40;
+    var scaleStep = VAR_LG_AXIS_STEP_HEIGHT;
     var scaleData = [];
     for (var i=0; i<8; i++) {
           scaleData.push(new Step(i,scaleStep))
     }
+
+    var svg2 = null;
 
     var points = null;
     var links = null;
@@ -52,13 +74,13 @@ function lineGraph(){
         }
 
         // convert raw data into nodes data
-        nodeData = createNodes(rawData, separator);
-        linkData = createLinks(nodeData);
-        timeData = createTimes(nodeData);
-        barData = createBars(nodeData);
+        var nodeData = createNodes(rawData, separator);
+        var linkData = createLinks(nodeData);
+        var timeData = createTimes(nodeData);
+        var barData = createBars(nodeData);
         // Create a SVG element inside the provided selector
         // with desired size.
-        svg = d3.select(selector)
+        var svg = d3.select(selector)
             .append('svg')
             .attr('width', VAR_LG_SVG_WIDTH)
             .attr('height', VAR_LG_SVG_HEIGHT);
@@ -70,8 +92,8 @@ function lineGraph(){
 
         var scale = makeScaleSVG(scaleData, svg);
         var scaleText = makeScaleTextSVG(scaleData, svg);
-        links = makeLinksSVG(linkData, svg);
         points = makePointsSVG(nodeData, svg);
+        links = makeLinksSVG(linkData, svg);
         times = makeTimelineSVG(timeData, svg2);
         var bars = makeBarsSVG(barData, svg);
 
@@ -138,22 +160,24 @@ function lineGraph(){
 
     function refreshTimes(times) {
         function getX(d) {
-            if(activeGraphs[d.movie] && (d.step === activeStep)) {
+            if(graphs.isActive(d.movie) && (d.step === activeStep)) {
                 return d.x;
             }
             return 0;
         }
+
         times.transition()
             .duration(VAR_LG_ANIMATION_DURATION)
             .attr('x1', getX)
             .attr('x2', getX)
+            .attr('y1', function (d) { return graphs.getY1(d.movie); })
+            .attr('y2', function (d) { return graphs.getY2(d.movie); })
             .attr('opacity', function (d) {
-                if (activeGraphs[d.movie] && (d.step === activeStep)) {
+                if (graphs.isActive(d.movie) && (d.step === activeStep)) {
                     return 1;
                 }
                 return 0;
             });
-
     }
 
     function refreshBars(bars) {
@@ -170,19 +194,19 @@ function lineGraph(){
 
 
     function getOpacity(d) {
-        if(activeGraphs[d.movie]) {
+        if(graphs.isActive(d.movie)) {
             return 1;
         }
         return 0;
     }
 
     function getY(d) {
-        if(activeGraphs[d.movie]) {
+        if(graphs.isActive(d.movie)) {
             return d.y
         }
         return VAR_LG_NODES_DEFAULT_Y;
     }
-
+    
     /*
      * Function called on mouseover to display the
      * details of a bubble in the tooltip.
@@ -203,7 +227,7 @@ function lineGraph(){
     }
 
     function toggleGraph(movie) {
-        activeGraphs[movie] = !activeGraphs[movie];
+        graphs.toggle(movie);
         refreshPoints(points);
         refreshLinks(links);
         refreshTimes(times)

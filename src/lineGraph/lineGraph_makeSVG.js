@@ -38,7 +38,8 @@ function makeLinksSVG(linkData, svg) {
         .attr('x1', function (d) { return Number(d.source.x);})
         .attr('y1', VAR_LG_NODES_DEFAULT_Y)
         .attr('x2', function (d) { return Number(d.target.x);})
-        .attr('y2', VAR_LG_NODES_DEFAULT_Y);
+        .attr('y2', VAR_LG_NODES_DEFAULT_Y)
+        .attr('stroke-width', VAR_LG_LINKS_STROKE_WIDTH);
 
     return links.merge(linksE);
 }
