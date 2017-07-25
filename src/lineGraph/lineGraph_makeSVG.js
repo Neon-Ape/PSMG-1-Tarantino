@@ -186,14 +186,14 @@ function makeBarsSVG(barData, svg, separator) {
     selectBars.append('line')
         .classed('selection', true)
         .attr('x1', function (d) {
-            return d.x + d.width;
+            return d.x;
         })
         .attr('x2', function (d) {
-            return d.x + d.width;
+            return d.x;
         })
         .attr('y1', VAR_LG_GRAPH_HEIGHT)
         .attr('y2', function (d) {
-            var step = Math.round((d.step + 1) * 100 / Number(separator));
+            var step = Math.round((d.step) * 100 / Number(separator));
             if (step % 10 === 0) {
                 return VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT_BIG;
             }
@@ -207,13 +207,13 @@ function makeBarsSVG(barData, svg, separator) {
             return d.y + VAR_LG_BARS_TEXT_OFFSET_Y;
         })
         .attr("x", function (d) {
-            return (d.x + d.width)
+            return d.x + VAR_LG_BARS_TEXT_OFFSET_X;
         })
         .attr('text-anchor', 'middle')
         .text(function (d, i) {
-            var text = Math.round((d.step + 1) * 100 / Number(separator));
+            var text = Math.round((d.step) * 100 / Number(separator));
             if (text % 10 === 0) {
-                return text;
+                return text + "%";
             }
             return "";
         });

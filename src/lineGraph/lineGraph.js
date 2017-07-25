@@ -45,11 +45,11 @@ function lineGraph() {
 
     // Initiate jankiest of hacks to get a 0 on the x-Axis, i am not proud of this
     var zero = {
-        x1: VAR_LG_GRAPH_OFFSET_X,
-        x2: VAR_LG_GRAPH_OFFSET_X,
+        x1: VAR_LG_GRAPH_OFFSET_X + VAR_LG_GRAPH_WIDTH,
+        x2: VAR_LG_GRAPH_OFFSET_X + VAR_LG_GRAPH_WIDTH,
         y1: VAR_LG_GRAPH_HEIGHT,
         y2: VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT_BIG,
-        text: 0
+        text: ''
     };
 
     var svg2 = null;
@@ -84,7 +84,7 @@ function lineGraph() {
         // convert raw data into nodes data
         var nodeData = createNodes(rawData, separator);
         var linkData = createLinks(nodeData);
-        var barData = createBars(nodeData);
+        var barData = createBars(separator);
 
         var scaleMax = Math.ceil(d3.max(nodeData, function (d) {
                 return d.count;

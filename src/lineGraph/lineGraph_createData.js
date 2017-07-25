@@ -12,83 +12,41 @@
  */
 
 function createNodes(data, separator) {
-    function Node(movie, count, x, timeline, step) {
-        this.movie = movie;
-        this.count = count;
-        this.x = Math.round(x);
-        this.y = count;
-        this.step = step;
-        this.timeline = timeline;
-    }
 
     var width = VAR_LG_GRAPH_WIDTH;
     var offset = VAR_LG_GRAPH_OFFSET_X;
-    var pixelPerSeparator = width/separator;
 
-
-    var myNodes = [];
+    var myNodes = new NodeFactory(width, offset, separator);
 
     for (var movie in data){
         if(data.hasOwnProperty(movie)) {
             var runtime = data[movie].runtime;
-            var minsPerSeparator = runtime / separator;
-            //console.log(movie + " --- width: " + width + ", runtime: " + runtime + ", pixelPerSeparator: " + pixelPerSeparator + ", minsPerSeparator: " + minsPerSeparator);
-            var currentTimeSlot = minsPerSeparator;
-            var currentXPos = offset;
-            var timeline = null;
-            var step = 0;
+            myNodes.movie(movie, runtime);
 
-            var collectorNode = {
-                count: 0,
-                words: {}
-            };
-
-
+            // push zero Node
+            myNodes.push();
 
             for (var time in data[movie].children) {
                 if(data[movie].children.hasOwnProperty(time)) {
-                    while (time > currentTimeSlot) {
-                        timeline = new Timeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, movie);
-                        myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
-                        collectorNode.words = {};
-                        collectorNode.count = 0;
-                        currentTimeSlot += minsPerSeparator;
-                        currentXPos += pixelPerSeparator;
-                        step++;
+                    while (time > myNodes.timeSlot()) {
+                        myNodes.push();
                     }
-
-                    collectorNode.words[time] = data[movie].children[time];
-                    collectorNode.count++;
+                    myNodes.word(time, data[movie].children[time]);
                 }
             }
             // add last Node
-            if (collectorNode.count !== 0) {
-                timeline = new Timeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, movie);
-                myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
-                collectorNode.words = {};
-                collectorNode.count = 0;
-                currentTimeSlot += minsPerSeparator;
-                currentXPos += pixelPerSeparator;
-                step++;
+            if (myNodes.collectorCount() !== 0) {
+                myNodes.push();
             }
 
-            while (currentTimeSlot <= runtime) {
-                timeline = new Timeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, movie);
-                myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
-                collectorNode.words = {};
-                collectorNode.count = 0;
-                currentTimeSlot += minsPerSeparator;
-                currentXPos += pixelPerSeparator;
-                step++;
+            while (myNodes.timeSlot() <= runtime) {
+                myNodes.push();
             }
-
-            myNodes.push(new Node(movie, 0, currentXPos, timeline, step));
         }
-
     }
 
-    console.log(myNodes);
-    return myNodes;
+    console.log(myNodes.getNodes());
+    return myNodes.getNodes();
 }
 
 function createLinks(nodes) {
@@ -109,7 +67,7 @@ function createLinks(nodes) {
 
 }
 
-function createBars(nodes) {
+function createBars(separator) {
     function Bar(x,y,width,height,step) {
         this.x = x;
         this.y = y;
@@ -117,41 +75,16 @@ function createBars(nodes) {
         this.height = height;
         this.step = step;
     }
-
+    var barWidth = VAR_LG_GRAPH_WIDTH/separator;
     var myBars = [];
-    for (var i = 0; i < nodes.length - 1; i++) {
-        if (nodes[i+1].movie === 'Reservoir Dogs') {
-            myBars.push(new Bar(nodes[i].x,VAR_LG_BARS_Y,nodes[i+1].x-nodes[i].x, VAR_LG_BARS_HEIGHT, nodes[i].step));
-        }
+    for (var i = 0; i <= separator; i++) {
+        myBars.push(new Bar(i*barWidth+VAR_LG_GRAPH_OFFSET_X,VAR_LG_BARS_Y,barWidth, VAR_LG_BARS_HEIGHT, i));
+
     }
 
     console.log(myBars);
     return myBars;
 }
 
-function Timeline(data, start, end, rawWidth, offset, movie) {
-    this.times = [];
-    this.movie = movie;
-    this.start = Math.round(start*10)/10;
-    this.end = Math.round(end*10)/10;
 
-    function Time(time, xPos, word) {
-        this.time = Number(time);
-        this.x = xPos;
-        this.word = word;
-    }
-
-    var duration = end - start;
-    var visWidth = rawWidth - offset*2;
-
-    for(var time in data) {
-        if (data.hasOwnProperty(time)) {
-            var relativeTime = time - start;
-            var scalingFactor = relativeTime / duration;
-            var xPos = Math.round(scalingFactor * visWidth + offset);
-
-            this.times.push(new Time(time, xPos, data[time]));
-        }
-    }
-}
 
