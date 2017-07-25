@@ -11,12 +11,12 @@
  * array for each element in the rawData input.
  */
 
-function createNodes(data, separator) {
+function createNodes(data, separator, scale) {
     function Node(movie, count, x, timeline, step) {
         this.movie = movie;
         this.count = count;
         this.x = x;
-        this.y = VAR_LG_GRAPH_HEIGHT - count * 4;
+        this.y = count;
         this.step = step;
         this.timeline = timeline;
     }
@@ -74,7 +74,7 @@ function createNodes(data, separator) {
 
             while (currentTimeSlot <= runtime) {
                 timeline = createTimeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, step);
-                myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline));
+                myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
                 collectorNode.words = {};
                 collectorNode.count = 0;
                 currentTimeSlot += minsPerSeparator;

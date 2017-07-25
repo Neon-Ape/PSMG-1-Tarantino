@@ -1,31 +1,36 @@
+/*
+    Scale creation
+ */
+
 function makeScaleSVG(scaleData, svg) {
 
     var scale = svg.selectAll('.scale')
         .data(scaleData, function (d) {return d.id;});
 
-    var scaleE = scale.enter().append('line')
-        .classed('scale', true)
+    var scaleE = scale.enter().append('g')
+        .classed('scale', true);
+
+    scale = scale.merge(scaleE);
+
+    scale.append('line')
         .attr('x1', function (d) {return d.x1;})
         .attr('y1', function (d) {return d.y1;})
         .attr('x2', function (d) {return d.x2;})
         .attr('y2', function (d) {return d.y2;});
 
-    return scale.merge(scaleE);
-}
-
-function makeScaleTextSVG(scaleData, svg) {
-    var scaleText = svg.selectAll('.scaleText')
-        .data(scaleData, function (d) { return d.id; });
-
-    scaleTextE = scaleText.enter().append("text")
+    scale.append("text")
         .classed('scaleText', true)
         .attr("y", function (d) { return d.y1+VAR_LG_AXIS_TEXT_OFFSET_Y;})
         .attr("x", function(d){ return d.x2+VAR_LG_AXIS_TEXT_OFFSET_X;})
         .attr('text-anchor', 'middle')
         .text(function (d) { return d.text;});
 
-    return scaleText.merge(scaleTextE);
+    return scale;
 }
+
+/*
+    Graph creation
+ */
 
 function makeLinksSVG(linkData, svg) {
     var links = svg.selectAll('.link')
@@ -59,6 +64,10 @@ function makePointsSVG(nodeData, svg) {
     return points.merge(pointsE);
 }
 
+/*
+    Timeline creation
+ */
+
 function makeTimelineSVG(timeData, svg) {
     times = svg.selectAll('.circle')
         .data(timeData, function (d) { return d.id; });
@@ -77,11 +86,19 @@ function makeTimelineSVG(timeData, svg) {
     return times.merge(timesE);
 }
 
-function makeBarsSVG(barData, svg) {
-    var selectBars = svg.selectAll('rect')
+/*
+    Selection bars creation
+ */
+
+function makeBarsSVG(barData, svg, separator) {
+    var selectBars = svg.selectAll('g')
         .data(barData, function(d) {return d.id; });
 
-    var selectBarsE = selectBars.enter().append('rect')
+    var selectBarsE = selectBars.enter().append('g');
+
+    selectBars =  selectBars.merge(selectBarsE);
+
+    selectBars.append('rect')
         .classed('selection', true)
         .attr('x', function (d) { return d.x;})
         .attr('y', function (d) { return d.y;})
@@ -89,5 +106,20 @@ function makeBarsSVG(barData, svg) {
         .attr('height', function(d) { return d.height; })
         .attr('opacity', 0);
 
-    return selectBars.merge(selectBarsE);
+    selectBars.append('line')
+        .classed('selection', true)
+        .attr('x1', function (d) { return d.x + d.width/2; })
+        .attr('x2', function (d) { return d.x + d.width/2; })
+        .attr('y1', VAR_LG_GRAPH_HEIGHT)
+        .attr('y2', VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT)
+        .attr('stroke-width', VAR_LG_BARS_LINE_WIDTH);
+
+    selectBars.append('text')
+        .classed('selection', true)
+        .attr("y", function (d) { return d.y + VAR_LG_BARS_TEXT_OFFSET_Y;})
+        .attr("x", function(d){ return (d.x + d.width/2)})
+        .attr('text-anchor', 'middle')
+        .text(function (d) {return Math.round((d.step + 1)*100/Number(separator));});
+
+    return selectBars;
 }

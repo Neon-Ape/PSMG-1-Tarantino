@@ -40,12 +40,7 @@ function lineGraph(){
             this.y1 = VAR_LG_GRAPH_HEIGHT-step*scaleStep;
             this.x2 = VAR_LG_GRAPH_CUTOFF_X;
             this.y2 = VAR_LG_GRAPH_HEIGHT-step*scaleStep;
-            this.text = step;
-    }
-    var scaleStep = VAR_LG_AXIS_STEP_HEIGHT;
-    var scaleData = [];
-    for (var i=0; i<8; i++) {
-          scaleData.push(new Step(i,scaleStep))
+            this.text = step*10;
     }
 
     var svg2 = null;
@@ -53,6 +48,8 @@ function lineGraph(){
     var points = null;
     var links = null;
     var times = null;
+
+    var scaleStep = null;
 
     /*
      * Main entry point to the bubble chart. This function is returned
@@ -78,6 +75,16 @@ function lineGraph(){
         var linkData = createLinks(nodeData);
         var timeData = createTimes(nodeData);
         var barData = createBars(nodeData);
+
+        var scaleMax = Math.ceil(d3.max(nodeData, function (d) { return d.count; })/10);
+        console.log(scaleMax);
+        var scaleData = [];
+        scaleStep = VAR_LG_AXIS_HEIGHT / scaleMax;
+        for (var i=0; i<=scaleMax; i++) {
+            scaleData.push(new Step(i,scaleStep))
+        }
+
+
         // Create a SVG element inside the provided selector
         // with desired size.
         var svg = d3.select(selector)
@@ -91,11 +98,10 @@ function lineGraph(){
             .attr('height', VAR_LG_SVG2_HEIGHT);
 
         var scale = makeScaleSVG(scaleData, svg);
-        var scaleText = makeScaleTextSVG(scaleData, svg);
         points = makePointsSVG(nodeData, svg);
         links = makeLinksSVG(linkData, svg);
         times = makeTimelineSVG(timeData, svg2);
-        var bars = makeBarsSVG(barData, svg);
+        var bars = makeBarsSVG(barData, svg, separator);
 
         times.on('mouseover', function (d) {
                 var t = d3.select(this);
@@ -118,7 +124,7 @@ function lineGraph(){
             refreshBars(bars);
         });
 
-        bars.on('mouseover', function (d) {
+        bars.select('rect').on('mouseover', function (d) {
                 var o = Number(d3.select(this).attr('opacity'));
                 d3.select(this).attr('opacity',o+0.08);
                 hoveredStep = d.step;
@@ -189,7 +195,7 @@ function lineGraph(){
                 return VAR_LG_BARS_OPACITY;
             } return 0;
         }
-        bars.attr('opacity', barOpacity);
+        bars.select('rect').attr('opacity', barOpacity);
     }
 
 
@@ -202,7 +208,7 @@ function lineGraph(){
 
     function getY(d) {
         if(graphs.isActive(d.movie)) {
-            return d.y
+            return VAR_LG_GRAPH_HEIGHT - d.y * (scaleStep/10)
         }
         return VAR_LG_NODES_DEFAULT_Y;
     }
@@ -267,6 +273,12 @@ function lineGraph(){
         }
         toggleGraph(movie);
         //console.log(activeGraphs);
+    };
+
+    chart.remove = function () {
+
+        d3.select('#lineGraph').selectAll('svg').remove();
+        d3.select('#timeline').selectAll('svg').remove();
     };
 
 

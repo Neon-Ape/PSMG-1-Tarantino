@@ -7,6 +7,7 @@
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
 var mySankeyFlow = sankeyFlow();
+var wordTiming = null;
 
 function runtimeLookup(data) {
     var runtimes = {};
@@ -232,7 +233,7 @@ function addExtraInfo(error, data) {
             console.log(error2);
         }
         var movieDates = getExtraData(extraData);
-        var wordTiming = makeTiming(data, extraData);
+        wordTiming = makeTiming(data, extraData);
         var curseWords = makeCurseWords(data, movieDates);
         var sankeyFlow = makeSankey(curseWords);
 
@@ -289,6 +290,27 @@ function setupButtons() {
             // the currently clicked button.
             myLineGraph.toggleDisplay(buttonId);
         });
+
+    d3.select('#separatorSelect')
+        .selectAll('.button')
+        .on('click', function () {
+            // Remove active class from all buttons
+            d3.select('#separatorSelect').selectAll('.button').classed('active', false);
+            // Find the button just clicked
+            var button = d3.select(this);
+
+            // Set it as the active button
+            button.classed('active', true);
+
+            // Get the id of the button
+            var buttonId = button.attr('id');
+
+            myLineGraph.remove();
+
+            myLineGraph('#lineGraph','#timeline', wordTiming, buttonId);
+
+        });
+
 }
 
 // Load the data.
