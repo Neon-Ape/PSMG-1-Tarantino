@@ -15,7 +15,7 @@ function createNodes(data, separator) {
     function Node(movie, count, x, timeline, step) {
         this.movie = movie;
         this.count = count;
-        this.x = x;
+        this.x = Math.round(x);
         this.y = count;
         this.step = step;
         this.timeline = timeline;
@@ -48,7 +48,7 @@ function createNodes(data, separator) {
             for (var time in data[movie].children) {
                 if(data[movie].children.hasOwnProperty(time)) {
                     while (time > currentTimeSlot) {
-                        timeline = createTimeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset);
+                        timeline = new Timeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, movie);
                         myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
                         collectorNode.words = {};
                         collectorNode.count = 0;
@@ -63,7 +63,7 @@ function createNodes(data, separator) {
             }
             // add last Node
             if (collectorNode.count !== 0) {
-                timeline = createTimeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset);
+                timeline = new Timeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, movie);
                 myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
                 collectorNode.words = {};
                 collectorNode.count = 0;
@@ -73,7 +73,7 @@ function createNodes(data, separator) {
             }
 
             while (currentTimeSlot <= runtime) {
-                timeline = createTimeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, step);
+                timeline = new Timeline(collectorNode.words, currentTimeSlot - minsPerSeparator, currentTimeSlot, width, offset, movie);
                 myNodes.push(new Node(movie, collectorNode.count, currentXPos, timeline, step));
                 collectorNode.words = {};
                 collectorNode.count = 0;
@@ -129,51 +129,29 @@ function createBars(nodes) {
     return myBars;
 }
 
-function createTimeline(data, start, end, rawWidth, offset) {
-    //console.log('start: ' + start + ', end: ' + end + ', rawWidth: ' + rawWidth + ", offset:" + offset);
-    var timeline = {};
+function Timeline(data, start, end, rawWidth, offset, movie) {
+    this.times = [];
+    this.movie = movie;
+    this.start = Math.round(start*10)/10;
+    this.end = Math.round(end*10)/10;
+
+    function Time(time, xPos, word) {
+        this.time = Number(time);
+        this.x = xPos;
+        this.word = word;
+    }
+
     var duration = end - start;
     var visWidth = rawWidth - offset*2;
 
     for(var time in data) {
         if (data.hasOwnProperty(time)) {
-            timeline[time] = {};
             var relativeTime = time - start;
             var scalingFactor = relativeTime / duration;
-            var xPos = scalingFactor * visWidth + offset;
+            var xPos = Math.round(scalingFactor * visWidth + offset);
 
-            timeline[time]["word"] = data[time];
-            timeline[time]["xPos"] = xPos;
-            timeline[time]["start"] = start;
-            timeline[time]["end"] = end;
+            this.times.push(new Time(time, xPos, data[time]));
         }
     }
-    console.log(timeline);
-    return timeline;
 }
 
-function createTimes(nodes) {
-    function Time(time, xPos, word, movie, step, start, end) {
-        this.movie = movie;
-        this.time = time;
-        this.x = xPos;
-        this.word = word;
-        this.step = step;
-        this.start = start;
-        this.end = end;
-    }
-
-    var times = [];
-
-    for (var i = 0; i < nodes.length - 1; i++) {
-        var currentTimeline = nodes[i].timeline;
-        for (time in currentTimeline) {
-            if (currentTimeline.hasOwnProperty(time)) {
-                times.push(new Time(time, currentTimeline[time]["xPos"], currentTimeline[time]["word"], nodes[i].movie, nodes[i].step), currentTimeline[time]["start"], currentTimeline[time]["end"]);
-            }
-        }
-    }
-
-    console.log(times);
-    return times;
-}

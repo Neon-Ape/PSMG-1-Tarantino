@@ -81,39 +81,70 @@
     stroke: var(--white-color);
 }
 
+.timeline text {
+    font-size: 14pt;
+}
 
-.dogs {
+line.dogs {
     stroke: var(--dogs-color);
+}
+
+circle.dogs,
+text.dogs{
     fill: var(--dogs-color);
 }
 
-.pulp {
+line.pulp {
     stroke: var(--pulp-color);
+}
+
+circle.pulp,
+text.pulp {
     fill: var(--pulp-color);
 }
 
-.jackie {
+line.jackie {
     stroke: var(--jackie-color);
+}
+
+circle.jackie,
+text.jackie {
     fill: var(--jackie-color);
 }
 
-.bill1 {
+line.bill1 {
     stroke: var(--bill1-color);
+}
+
+circle.bill1,
+text.bill1 {
     fill: var(--bill1-color);
 }
 
-.bill2 {
+line.bill2 {
     stroke: var(--bill2-color);
+}
+
+circle.bill2,
+text.bill2 {
     fill: var(--bill2-color);
 }
 
-.basterds {
+line.basterds {
     stroke: var(--basterds-color);
+}
+
+circle.basterds,
+text.basterds {
     fill: var(--basterds-color);
 }
 
-.django {
+line.django {
     stroke: var(--django-color);
+}
+
+circle.django,
+text.django {
     fill: var(--django-color);
 }
 
