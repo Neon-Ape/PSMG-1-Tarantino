@@ -43,6 +43,15 @@ function lineGraph(){
             this.text = step*10;
     }
 
+    // Initiate jankiest of hacks to get a 0 on the x-Axis, i am not proud of this
+    var zero = {
+        x1: VAR_LG_GRAPH_OFFSET_X,
+        x2: VAR_LG_GRAPH_OFFSET_X,
+        y1: VAR_LG_GRAPH_HEIGHT,
+        y2: VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT_BIG,
+        text: 0
+    };
+
     var svg2 = null;
 
     var points = null;
@@ -78,7 +87,7 @@ function lineGraph(){
 
         var scaleMax = Math.ceil(d3.max(nodeData, function (d) { return d.count; })/10);
         console.log(scaleMax);
-        var scaleData = [];
+        var scaleData = [zero];
         scaleStep = VAR_LG_AXIS_HEIGHT / scaleMax;
         for (var i=0; i<=scaleMax; i++) {
             scaleData.push(new Step(i,scaleStep))

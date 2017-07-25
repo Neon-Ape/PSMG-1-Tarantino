@@ -72,8 +72,13 @@
 #lineGraph .link {
 }
 
-#lineGraph .selection {
+#lineGraph rect.selection,
+#lineGraph text.selection{
     fill: var(--white-color);
+}
+
+#lineGraph line.selection {
+    stroke: var(--white-color);
 }
 
 

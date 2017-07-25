@@ -20,8 +20,12 @@ function makeScaleSVG(scaleData, svg) {
 
     scale.append("text")
         .classed('scaleText', true)
-        .attr("y", function (d) { return d.y1+VAR_LG_AXIS_TEXT_OFFSET_Y;})
-        .attr("x", function(d){ return d.x2+VAR_LG_AXIS_TEXT_OFFSET_X;})
+        .attr("y", function (d, i) {
+            if(i === 0) return d.y1 + 30;
+            return d.y1+VAR_LG_AXIS_TEXT_OFFSET_Y;})
+        .attr("x", function(d, i){
+            if(i === 0) return d.x2;
+            return d.x2+VAR_LG_AXIS_TEXT_OFFSET_X;})
         .attr('text-anchor', 'middle')
         .text(function (d) { return d.text;});
 
@@ -69,7 +73,7 @@ function makePointsSVG(nodeData, svg) {
  */
 
 function makeTimelineSVG(timeData, svg) {
-    times = svg.selectAll('.circle')
+    times = svg.selectAll('.timeStamp')
         .data(timeData, function (d) { return d.id; });
 
     var timesE = times.enter().append('line')
@@ -83,7 +87,9 @@ function makeTimelineSVG(timeData, svg) {
         .attr('stroke-width', Number(VAR_LG_TIMELINE_VALUES['stroke-width']))
         .attr('opacity',0);
 
-    return times.merge(timesE);
+    times = times.merge(timesE);
+
+    return times;
 }
 
 /*
@@ -91,7 +97,7 @@ function makeTimelineSVG(timeData, svg) {
  */
 
 function makeBarsSVG(barData, svg, separator) {
-    var selectBars = svg.selectAll('g')
+    var selectBars = svg.selectAll('g .selection')
         .data(barData, function(d) {return d.id; });
 
     var selectBarsE = selectBars.enter().append('g');
@@ -108,18 +114,28 @@ function makeBarsSVG(barData, svg, separator) {
 
     selectBars.append('line')
         .classed('selection', true)
-        .attr('x1', function (d) { return d.x + d.width/2; })
-        .attr('x2', function (d) { return d.x + d.width/2; })
+        .attr('x1', function (d) { return d.x + d.width; })
+        .attr('x2', function (d) { return d.x + d.width; })
         .attr('y1', VAR_LG_GRAPH_HEIGHT)
-        .attr('y2', VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT)
+        .attr('y2', function (d) {
+            var step = Math.round((d.step + 1) * 100 / Number(separator));
+            if (step%10 ===0) {
+                return VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT_BIG;
+            } return VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT;
+        })
         .attr('stroke-width', VAR_LG_BARS_LINE_WIDTH);
 
     selectBars.append('text')
         .classed('selection', true)
         .attr("y", function (d) { return d.y + VAR_LG_BARS_TEXT_OFFSET_Y;})
-        .attr("x", function(d){ return (d.x + d.width/2)})
+        .attr("x", function(d){ return (d.x + d.width)})
         .attr('text-anchor', 'middle')
-        .text(function (d) {return Math.round((d.step + 1)*100/Number(separator));});
+        .text(function (d, i) {
+            var text = Math.round((d.step + 1) * 100 / Number(separator));
+            if(text%10 === 0) {
+                return text;
+            } return "";
+        });
 
     return selectBars;
 }

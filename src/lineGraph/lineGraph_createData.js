@@ -11,7 +11,7 @@
  * array for each element in the rawData input.
  */
 
-function createNodes(data, separator, scale) {
+function createNodes(data, separator) {
     function Node(movie, count, x, timeline, step) {
         this.movie = movie;
         this.count = count;
@@ -130,7 +130,7 @@ function createBars(nodes) {
 }
 
 function createTimeline(data, start, end, rawWidth, offset) {
-    console.log('start: ' + start + ', end: ' + end + ', rawWidth: ' + rawWidth + ", offset:" + offset);
+    //console.log('start: ' + start + ', end: ' + end + ', rawWidth: ' + rawWidth + ", offset:" + offset);
     var timeline = {};
     var duration = end - start;
     var visWidth = rawWidth - offset*2;
@@ -144,6 +144,8 @@ function createTimeline(data, start, end, rawWidth, offset) {
 
             timeline[time]["word"] = data[time];
             timeline[time]["xPos"] = xPos;
+            timeline[time]["start"] = start;
+            timeline[time]["end"] = end;
         }
     }
     console.log(timeline);
@@ -151,12 +153,14 @@ function createTimeline(data, start, end, rawWidth, offset) {
 }
 
 function createTimes(nodes) {
-    function Time(time, xPos, word, movie, step) {
+    function Time(time, xPos, word, movie, step, start, end) {
         this.movie = movie;
         this.time = time;
         this.x = xPos;
         this.word = word;
         this.step = step;
+        this.start = start;
+        this.end = end;
     }
 
     var times = [];
@@ -165,7 +169,7 @@ function createTimes(nodes) {
         var currentTimeline = nodes[i].timeline;
         for (time in currentTimeline) {
             if (currentTimeline.hasOwnProperty(time)) {
-                times.push(new Time(time, currentTimeline[time]["xPos"], currentTimeline[time]["word"], nodes[i].movie, nodes[i].step));
+                times.push(new Time(time, currentTimeline[time]["xPos"], currentTimeline[time]["word"], nodes[i].movie, nodes[i].step), currentTimeline[time]["start"], currentTimeline[time]["end"]);
             }
         }
     }
