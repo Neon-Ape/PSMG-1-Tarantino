@@ -33,10 +33,10 @@ function sankeyFlow(){
 
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Inglorious Basterds', 'Django Unchained', 'other'])
-        .range(['#c28e5e', '#3c4e94', '#000', '#ffda05','#ea1f18','#417d00','#730000', 'grey']);
+        .range(['#ff3f8c', '#3c4e94', '#000', '#ffda05','#ea1f18','#417d00','#730000', '#222']);
 
     // load the data
-    var chart = function chart(selector, graph) {
+    var chart = function(selector, graph) {
         console.log("we are in sankey function");
         console.log(graph);
 
@@ -152,4 +152,4 @@ function sankeyFlow(){
         }
     };
     return chart;
-};
+}

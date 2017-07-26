@@ -46,7 +46,7 @@ function createNodes(data, separator) {
             }
 
             // push a Node for every empty time slot at the end of the movie
-            while (myNodes.timeSlot() <= runtime) {
+            while (myNodes._step.get() < separator) {
                 myNodes.push();
             }
         }
@@ -84,7 +84,7 @@ function createBars(separator) {
     }
     var barWidth = VAR_LG_GRAPH_WIDTH/separator;
     var myBars = [];
-    for (var i = 0; i <= separator; i++) {
+    for (var i = 0; i < separator; i++) {
         myBars.push(new Bar((i)*barWidth+VAR_LG_GRAPH_OFFSET_X,VAR_LG_BARS_Y,barWidth, VAR_LG_BARS_HEIGHT, i));
 
     }
