@@ -1,36 +1,64 @@
-function lineGraph(){
+function lineGraph() {
 
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 100);
-    
-    var activeGraphs = {
-        "Reservoir Dogs" : true,
-        "Pulp Fiction" : false,
-        "Jackie Brown" : false,
-        "Kill Bill: Vol. 1" : false,
-        "Kill Bill: Vol. 2" : false,
-        "Inglorious Basterds" : false,
-        "Django Unchained" : false
-    };
-    var activeStep = 0;
-    var hoveredStep = -1;
 
-    function Step(step,scaleStep) {
-            this.x1 = 0;
-            this.y1 = VAR_LG_GRAPH_HEIGHT-step*scaleStep;
-            this.x2 = VAR_LG_GRAPH_CUTOFF_X;
-            this.y2 = VAR_LG_GRAPH_HEIGHT-step*scaleStep;
-            this.text = step;
+    var currentSeparator = null;
+
+    var graphs = {
+        _height: VAR_LC_TIMELINE_HEIGHT,
+        _active: ["Reservoir Dogs"],
+        activeStep: 0,
+        hoveredStep: -1,
+        isActive: function (movie) {
+            return this._active.indexOf(movie) !== -1;
+        },
+        toggle: function (movie) {
+            if (this.isActive(movie)) {
+                this._active.splice(this._active.indexOf(movie), 1);
+            } else {
+                this._active.push(movie);
+            }
+        },
+        size: function () {
+            return (this._active.length + 1) * this._height;
+        },
+        getY1: function (movie) {
+            if (this.isActive(movie)) {
+                return this._active.indexOf(movie) * this._height;
+            }
+            return this._active.length * this._height;
+        },
+        getY2: function (movie) {
+            return this.getY1(movie) + this._height;
+        }
+    };
+
+
+    function Step(step, scaleStep) {
+        this.x1 = 0;
+        this.y1 = VAR_LG_GRAPH_HEIGHT - step * scaleStep;
+        this.x2 = VAR_LG_GRAPH_CUTOFF_X;
+        this.y2 = VAR_LG_GRAPH_HEIGHT - step * scaleStep;
+        this.text = step * 10;
     }
-    var scaleStep = 40;
-    var scaleData = [];
-    for (var i=0; i<8; i++) {
-          scaleData.push(new Step(i,scaleStep))
-    }
+
+    // Initiate jankiest of hacks to get a 0 on the x-Axis, i am not proud of this
+    var zero = {
+        x1: VAR_LG_GRAPH_OFFSET_X + VAR_LG_GRAPH_WIDTH,
+        x2: VAR_LG_GRAPH_OFFSET_X + VAR_LG_GRAPH_WIDTH,
+        y1: VAR_LG_GRAPH_HEIGHT,
+        y2: VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT_BIG,
+        text: ''
+    };
+
+    var svg2 = null;
 
     var points = null;
     var links = null;
     var times = null;
+
+    var scaleStep = null;
 
     /*
      * Main entry point to the bubble chart. This function is returned
@@ -46,19 +74,32 @@ function lineGraph(){
      * a d3 loading function like d3.csv.
      */
     var chart = function chart(selector, selector2, rawData, separator) {
-
-        if(typeof(separator)==='undefined') {
+        if (typeof(separator) === 'undefined') {
             separator = VAR_LG_DEFAULT_SEPARATOR;
         }
 
+        calculateActiveStep(currentSeparator, separator);
+        currentSeparator = separator;
+
         // convert raw data into nodes data
-        nodeData = createNodes(rawData, separator);
-        linkData = createLinks(nodeData);
-        timeData = createTimes(nodeData);
-        barData = createBars(nodeData);
+        var nodeData = createNodes(rawData, separator);
+        var linkData = createLinks(nodeData);
+        var barData = createBars(separator);
+
+        var scaleMax = Math.ceil(d3.max(nodeData, function (d) {
+                return d.count;
+            }) / 10);
+        console.log(scaleMax);
+        var scaleData = [zero];
+        scaleStep = VAR_LG_AXIS_HEIGHT / scaleMax;
+        for (var i = 0; i <= scaleMax; i++) {
+            scaleData.push(new Step(i, scaleStep))
+        }
+
+
         // Create a SVG element inside the provided selector
         // with desired size.
-        svg = d3.select(selector)
+        var svg = d3.select(selector)
             .append('svg')
             .attr('width', VAR_LG_SVG_WIDTH)
             .attr('height', VAR_LG_SVG_HEIGHT);
@@ -68,47 +109,48 @@ function lineGraph(){
             .attr('width', VAR_LG_SVG2_WIDTH)
             .attr('height', VAR_LG_SVG2_HEIGHT);
 
-        var scale = makeScaleSVG(scaleData, svg);
-        var scaleText = makeScaleTextSVG(scaleData, svg);
-        links = makeLinksSVG(linkData, svg);
+        makeScaleSVG(scaleData, svg);
         points = makePointsSVG(nodeData, svg);
-        times = makeTimelineSVG(timeData, svg2);
-        var bars = makeBarsSVG(barData, svg);
+        links = makeLinksSVG(linkData, svg);
+        times = makeTimelineSVG(nodeData, svg2);
+        var bars = makeBarsSVG(barData, svg, separator);
 
-        times.on('mouseover', function (d) {
-                var t = d3.select(this);
-                t.attr('y1', t.attr('y1')-VAR_LG_TIMELINE_HOVER_OFFSET);
-                t.attr('y2', Number(t.attr('y2'))+VAR_LG_TIMELINE_HOVER_OFFSET);
-                t.attr('stroke-width', VAR_LG_TIMELINE_HOVER_WIDTH);
-                showDetail(d);
-            })
-            .on('mouseout', function () {
-            var t = d3.select(this);
-            t.attr('y1', Number(t.attr('y1'))+VAR_LG_TIMELINE_HOVER_OFFSET);
-            t.attr('y2', t.attr('y2')-VAR_LG_TIMELINE_HOVER_OFFSET);
-            t.attr('stroke-width', VAR_LG_TIMELINE_VALUES['stroke-width']);
-            hideDetail();
-            });
+        times.each(function (parentData) {
+            d3.select(this).selectAll('line')
+                .on('mouseover', function (d,i) {
+                    var t = d3.select(this);
+                    t.attr('y1', t.attr('y1') - VAR_LG_TIMELINE_HOVER_OFFSET);
+                    t.attr('y2', Number(t.attr('y2')) + VAR_LG_TIMELINE_HOVER_OFFSET);
+                    t.attr('stroke-width', VAR_LG_TIMELINE_HOVER_WIDTH);
+                    showDetail(parentData.timeline.times[i]);
+                })
+                .on('mouseout', function () {
+                    var t = d3.select(this);
+                    t.attr('y1', Number(t.attr('y1')) + VAR_LG_TIMELINE_HOVER_OFFSET);
+                    t.attr('y2', t.attr('y2') - VAR_LG_TIMELINE_HOVER_OFFSET);
+                    t.attr('stroke-width', VAR_LG_TIMELINE_VALUES['stroke-width']);
+                    hideDetail();
+                });
 
-        bars.on('click', function(d) {
-            activeStep = d.step;
+        });
+
+
+        bars.on('click', function (d) {
+            graphs.activeStep = d.step;
             refreshTimes(times);
             refreshBars(bars);
         });
 
-        bars.on('mouseover', function (d) {
+        bars.select('rect').on('mouseover', function (d) {
+            var o = Number(d3.select(this).attr('opacity'));
+            d3.select(this).attr('opacity', o + 0.08);
+            graphs.hoveredStep = d.step;
+        })
+            .on('mouseout', function () {
                 var o = Number(d3.select(this).attr('opacity'));
-                d3.select(this).attr('opacity',o+0.08);
-                hoveredStep = d.step;
-            })
-            .on('mouseout', function (d) {
-                var o = Number(d3.select(this).attr('opacity'));
-                d3.select(this).attr('opacity',o-0.08);
-                hoveredStep = -1;
+                d3.select(this).attr('opacity', o - 0.08);
+                graphs.hoveredStep = -1;
             });
-
-
-
 
 
         console.log(points);
@@ -124,8 +166,12 @@ function lineGraph(){
         links.transition()
             .duration(VAR_LG_ANIMATION_DURATION)
             .attr('opacity', getOpacity)
-            .attr('y1', function (d) { return getY(d.source); })
-            .attr('y2', function (d) { return getY(d.target); });
+            .attr('y1', function (d) {
+                return getY(d.source);
+            })
+            .attr('y2', function (d) {
+                return getY(d.target);
+            });
     }
 
 
@@ -133,52 +179,79 @@ function lineGraph(){
         points.transition()
             .duration(VAR_LG_ANIMATION_DURATION)
             .attr('opacity', getOpacity)
-            .attr('cy', function (d) { return getY(d); });
+            .attr('cy', function (d) {
+                return getY(d);
+            });
     }
 
     function refreshTimes(times) {
-        function getX(d) {
-            if(activeGraphs[d.movie] && (d.step === activeStep)) {
+        function getX(parentData, d) {
+            if (graphs.isActive(parentData.movie) && (parentData.step === graphs.activeStep)) {
                 return d.x;
             }
             return 0;
         }
+
         times.transition()
             .duration(VAR_LG_ANIMATION_DURATION)
-            .attr('x1', getX)
-            .attr('x2', getX)
             .attr('opacity', function (d) {
-                if (activeGraphs[d.movie] && (d.step === activeStep)) {
+                if (graphs.isActive(d.movie) && (d.step === graphs.activeStep)) {
                     return 1;
                 }
                 return 0;
             });
 
+        times.each(function (parentData) {
+            d3.select(this).selectAll('line')
+                .transition()
+                .duration(VAR_LG_ANIMATION_DURATION)
+                .attr('x1', function (d, i) {
+                    return getX(parentData, parentData.timeline.times[i])
+                })
+                .attr('x2', function (d, i) {
+                    return getX(parentData, parentData.timeline.times[i])
+                })
+                .attr('y1', graphs.getY1(parentData.movie))
+                .attr('y2', graphs.getY2(parentData.movie))
+                .attr('opacity', function () {
+                    if (graphs.isActive(parentData.movie) && (parentData.step === graphs.activeStep)) {
+                        return 1;
+                    }
+                    return 0;
+                });
+            d3.select(this).selectAll('text')
+                .transition()
+                .duration(VAR_LG_ANIMATION_DURATION)
+                .attr('y', graphs.getY1(parentData.movie)+VAR_LC_TIMELINE_HEIGHT/2);
+        });
+
     }
 
     function refreshBars(bars) {
         function barOpacity(d) {
-            if(d.step === activeStep) {
-                if(d.step === hoveredStep) {
+            if (d.step === graphs.activeStep) {
+                if (d.step === graphs.activeStep) {
                     return VAR_LG_BARS_OPACITY + VAR_LG_BARS_HOVER_OPACITY;
                 }
                 return VAR_LG_BARS_OPACITY;
-            } return 0;
+            }
+            return 0;
         }
-        bars.attr('opacity', barOpacity);
+
+        bars.select('rect').attr('opacity', barOpacity);
     }
 
 
     function getOpacity(d) {
-        if(activeGraphs[d.movie]) {
+        if (graphs.isActive(d.movie)) {
             return 1;
         }
         return 0;
     }
 
     function getY(d) {
-        if(activeGraphs[d.movie]) {
-            return d.y
+        if (graphs.isActive(d.movie)) {
+            return VAR_LG_GRAPH_HEIGHT - d.y * (scaleStep / 10)
         }
         return VAR_LG_NODES_DEFAULT_Y;
     }
@@ -188,26 +261,36 @@ function lineGraph(){
      * details of a bubble in the tooltip.
      */
     function showDetail(d) {
-
         var content = '<span class="name">' + d.time + '</span>: <span class="value">' + d.word + '</span><br/>';
-
         tooltip.showTooltip(content, d3.event);
     }
 
     /*
      * Hides tooltip
      */
-    function hideDetail(d) {
+    function hideDetail() {
 
         tooltip.hideTooltip();
     }
 
+    function calculateActiveStep(oldSeparator, newSeparator) {
+        var oldStep = graphs.activeStep;
+
+        var newStep = Math.floor((newSeparator / oldSeparator) * oldStep);
+        if (oldStep >= oldSeparator - 1) {
+            newStep = newSeparator - 1;
+        }
+        console.log("(" + oldSeparator + ", " + oldStep + ") changed to (" + newSeparator + ", " + newStep + ")");
+        graphs.activeStep = newStep;
+    }
+
     function toggleGraph(movie) {
-        activeGraphs[movie] = !activeGraphs[movie];
+        graphs.toggle(movie);
         refreshPoints(points);
         refreshLinks(links);
         refreshTimes(times)
     }
+
 
     /*
      * Externally accessible function (this is attached to the
@@ -218,7 +301,7 @@ function lineGraph(){
      */
     chart.toggleDisplay = function (displayName) {
         var movie = "";
-        switch(displayName) {
+        switch (displayName) {
             case "dogs":
                 movie = "Reservoir Dogs";
                 break;
@@ -243,6 +326,12 @@ function lineGraph(){
         }
         toggleGraph(movie);
         //console.log(activeGraphs);
+    };
+
+
+    chart.remove = function () {
+        d3.select('#lineGraph').selectAll('svg').remove();
+        d3.select('#timeline').selectAll('svg').remove();
     };
 
 

@@ -7,6 +7,7 @@
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
 var mySankeyFlow = sankeyFlow();
+var wordTiming = null;
 
 function runtimeLookup(data) {
     var runtimes = {};
@@ -25,12 +26,11 @@ function makeTiming(data, extraData) {
         this.children = {};
     }
 
-    var timeLine = {
-    };
+    var timeLine = {};
 
     movieBlockActive = "";
 
-    for(var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
         var currentType = data[i]["type"];
         var currentWord = data[i]["word"];
         var currentTime = data[i]["minutes_in"];
@@ -53,16 +53,16 @@ function makeTiming(data, extraData) {
 function makeCurseWords(data, movieDates) {
 
     var curseWords = {
-        children : []
+        children: []
     };
 
     var wordCheck = [];
 
-    for (var i = 0; i <  data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
         var currentWord = data[i]["word"];
         var currentMovie = data[i]["movie"];
 
-        if (currentWord === ""){
+        if (currentWord === "") {
             // do nothing
         } else {
             curseWords = checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, currentMovie);
@@ -78,7 +78,7 @@ function curseGroups(word) {
         "fuck": "fuck",
         "ass": "ass",
         "shit": "shit",
-        "merde" : "shit",
+        "merde": "shit",
         // racial slurs
         "n-word": "racial",
         "negro": "racial",
@@ -97,8 +97,8 @@ function curseGroups(word) {
     };
 
     var group;
-    for(group in curseCategories) {
-        if(word.includes(group)) {
+    for (group in curseCategories) {
+        if (word.includes(group)) {
             return curseCategories[group];
         }
     }
@@ -117,13 +117,12 @@ function checkForDuplicates(curseWords, movieDates, wordCheck, currentWord, curr
     }
 
 
-
     var start = 0;
-    while(true) {
+    while (true) {
         var index = wordCheck.indexOf(currentWord, start);
 
-        if(index !== -1) {
-            if(curseWords.children[index].movie !== currentMovie) {
+        if (index !== -1) {
+            if (curseWords.children[index].movie !== currentMovie) {
                 start = index + 1;
             } else {
                 curseWords.children[index].value++;
@@ -154,6 +153,7 @@ function makeSankey(curseWords) {
         this.target = target;
         this.value = value;
     }
+
     //var categories = ["fuck", "ass", "shit", "racial", "genital", "blashemy", "other"];
 
     var sankey420 = {
@@ -181,27 +181,27 @@ function makeSankey(curseWords) {
         }
     };
 
-    for(var word in curseWords.children) {
+    for (var word in curseWords.children) {
 
         word = curseWords.children[word];
 //        if (word.movie != "Pulp Fiction" && word.movie != "Jackie Brown" && word.movie != "Reservoir Dogs" && word.movie != "Django Unchained") {
 
-            if (-1 === movieLookup.value.indexOf(word.movie)) {
-                movieLookup.value.push(word.movie);
-                movieLookup.index.push(i);
-                sankey420.nodes.push(new SankeyNode(i, word.movie, word.movie));
-                i++;
-            }
-            if (-1 === wordLookup.value.indexOf(word.name)) {
-                wordLookup.value.push(word.name);
-                wordLookup.index.push(i);
-                sankey420.nodes.push(new SankeyNode(i, word.name, "other"));
-                i++;
-            }
+        if (-1 === movieLookup.value.indexOf(word.movie)) {
+            movieLookup.value.push(word.movie);
+            movieLookup.index.push(i);
+            sankey420.nodes.push(new SankeyNode(i, word.movie, word.movie));
+            i++;
+        }
+        if (-1 === wordLookup.value.indexOf(word.name)) {
+            wordLookup.value.push(word.name);
+            wordLookup.index.push(i);
+            sankey420.nodes.push(new SankeyNode(i, word.name, "other"));
+            i++;
+        }
 
-            var source = movieLookup.getIndex(word.movie);
-            var target = wordLookup.getIndex(word.name);
-            sankey420.links.push(new SankeyLink(source, target, word.value));
+        var source = movieLookup.getIndex(word.movie);
+        var target = wordLookup.getIndex(word.name);
+        sankey420.links.push(new SankeyLink(source, target, word.value));
 
     }
     console.log("sankey:");
@@ -213,7 +213,7 @@ function makeSankey(curseWords) {
 function getExtraData(data) {
     var movieDates = [];
 
-    for (var i = 0; i <  data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
         movieDates[data[i]["movie"]] = data[i]["year"];
     }
     return movieDates;
@@ -227,17 +227,17 @@ function addExtraInfo(error, data) {
         console.log(error);
     }
     var extrasUrl = "https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/data/tarantino_extra.csv";
-    d3.csv(extrasUrl,function (error2, extraData) {
+    d3.csv(extrasUrl, function (error2, extraData) {
         if (error2) {
             console.log(error2);
         }
         var movieDates = getExtraData(extraData);
-        var wordTiming = makeTiming(data, extraData);
+        wordTiming = makeTiming(data, extraData);
         var curseWords = makeCurseWords(data, movieDates);
         var sankeyFlow = makeSankey(curseWords);
 
         myBubbleChart('#bubbleChart', curseWords);
-        myLineGraph('#lineGraph','#timeline', wordTiming, 20);
+        myLineGraph('#lineGraph', '#timeline', wordTiming, 20);
         mySankeyFlow('#sankeyFlow', sankeyFlow);
 
 
@@ -289,6 +289,28 @@ function setupButtons() {
             // the currently clicked button.
             myLineGraph.toggleDisplay(buttonId);
         });
+
+    d3.select('#separatorSelect')
+        .selectAll('.button')
+        .on('click', function () {
+            if (!d3.select(this).classed('active')) {
+                // Remove active class from all buttons
+                d3.select('#separatorSelect').selectAll('.button').classed('active', false);
+                // Find the button just clicked
+                var button = d3.select(this);
+
+                // Set it as the active button
+                button.classed('active', true);
+
+                // Get the id of the button
+                var buttonId = button.attr('id');
+
+                myLineGraph.remove();
+
+                myLineGraph('#lineGraph', '#timeline', wordTiming, buttonId);
+            }
+        });
+
 }
 
 // Load the data.
