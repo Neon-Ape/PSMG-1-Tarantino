@@ -23,9 +23,15 @@ function createNodes(data, separator) {
             var runtime = data[movie].runtime;
             myNodes.movie(movie, runtime);
 
-            // push zero Node
+            // push zero Node for structural reasons
+            myNodes._step.set(-1);
             myNodes.push();
 
+            /*
+            collect words in each time slot
+            if you exceed a time slot, push the collected words into a Node
+            if there were no words, push anyway
+             */
             for (var time in data[movie].children) {
                 if(data[movie].children.hasOwnProperty(time)) {
                     while (time > myNodes.timeSlot()) {
@@ -34,11 +40,12 @@ function createNodes(data, separator) {
                     myNodes.word(time, data[movie].children[time]);
                 }
             }
-            // add last Node
+            // if there are words left over in the collector push a Node.
             if (myNodes.collectorCount() !== 0) {
                 myNodes.push();
             }
 
+            // push a Node for every empty time slot at the end of the movie
             while (myNodes.timeSlot() <= runtime) {
                 myNodes.push();
             }
@@ -78,7 +85,7 @@ function createBars(separator) {
     var barWidth = VAR_LG_GRAPH_WIDTH/separator;
     var myBars = [];
     for (var i = 0; i <= separator; i++) {
-        myBars.push(new Bar(i*barWidth+VAR_LG_GRAPH_OFFSET_X,VAR_LG_BARS_Y,barWidth, VAR_LG_BARS_HEIGHT, i));
+        myBars.push(new Bar((i)*barWidth+VAR_LG_GRAPH_OFFSET_X,VAR_LG_BARS_Y,barWidth, VAR_LG_BARS_HEIGHT, i));
 
     }
 

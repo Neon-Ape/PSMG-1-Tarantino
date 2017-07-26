@@ -11,7 +11,7 @@ function NodeFactory(width, offset, separator) {
     this.movie = function(movie, runtime){
         this._step.reset();
         this._time.reset();
-        this._xPos.reset();
+        this._xPos.reset(this._offset);
         this._collector._reset();
         this._collector._setMovie(movie);
         this._time.setStep(runtime/this._separator);
@@ -88,8 +88,8 @@ function Stepper() {
     this.step = function () {
         this._value += this._step;
     };
-    this.reset = function () {
-        this._value = 0;
+    this.reset = function (value = 0) {
+        this._value = value;
     }
 }
 
@@ -103,6 +103,7 @@ function Node(movie, count, x, timeline, step) {
 }
 
 function Timeline(data, start, end, rawWidth, offset, movie) {
+    if(start<0) { start = 0}
     this.times = [];
     this.movie = movie;
     this.start = Math.round(start * 10) / 10;
