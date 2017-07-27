@@ -8,7 +8,7 @@ function lineGraph() {
     var graphs = {
         _height: VAR_LC_TIMELINE_HEIGHT,
         _active: ["Reservoir Dogs"],
-        activeStep: 0,
+        activeStep: 1,
         hoveredStep: -1,
         isActive: function (movie) {
             return this._active.indexOf(movie) !== -1;
@@ -230,7 +230,7 @@ function lineGraph() {
     function refreshBars(bars) {
         function barOpacity(d) {
             if (d.step === graphs.activeStep) {
-                if (d.step === graphs.activeStep) {
+                if (d.step === graphs.hoveredStep) {
                     return VAR_LG_BARS_OPACITY + VAR_LG_BARS_HOVER_OPACITY;
                 }
                 return VAR_LG_BARS_OPACITY;
