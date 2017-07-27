@@ -15,7 +15,7 @@ function sankeyFlow(){
     var tooltip = floatingTooltip('gates_tooltip', 240);
 
 // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 100, bottom: 10, left: 135},
+    var margin = {top: 10, right: 80, bottom: 10, left: 100},
         height = 2000 - margin.top - margin.bottom,
         width = (height+margin.top+margin.bottom)/aspect - margin.left - margin.right;
 // format variables
@@ -33,7 +33,7 @@ function sankeyFlow(){
 
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Inglorious Basterds', 'Django Unchained', 'other'])
-        .range(['#c28e5e', '#3c4e94', '#000', '#ffda05','#ea1f18','#417d00','#730000', 'grey']);
+        .range(['#d85e90', '#3c4e94', '#070707', '#ffda05','#ea1f18','#4a674a','#730000', 'grey']);
 
     // load the data
     var chart = function chart(selector, graph) {

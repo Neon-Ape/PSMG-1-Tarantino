@@ -15,6 +15,10 @@ header {
   margin-bottom: 35px;
 }
 
+.tabcontent {
+  background-color: var(--tabcontent-color);
+}
+
 #logo {
 	height: 30%;
 	width: 30%;
