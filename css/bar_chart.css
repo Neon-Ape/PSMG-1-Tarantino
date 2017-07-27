@@ -1,6 +1,6 @@
 .xaxis path, .xaxis line, .yaxis path, .yaxis line {
   fill: none;
-  stroke: #000;
+  stroke: var(--darkgrey-color);
   shape-rendering: crispEdges;
 }
 
@@ -9,19 +9,23 @@
 }
 
 label {
-	color: #999;
+	color: var(--white-color);
   min-width: 130px;
   padding: 4px 5px;
   cursor: pointer;
   text-align: center;
   font-size: 13px;
-  border: 1px solid #e0e0e0;
+  /*border: 1px solid #e0e0e0;*/
   text-decoration: none;
 }
 
+label:hover {
+  color: var(--darkred-color);
+}
+
 input[type="radio"]:checked+label{
-  background: black;
-  color: white;
+  background: var(--darkgrey-color);
+  color: var(--white-color);
 }
 
 .legend{

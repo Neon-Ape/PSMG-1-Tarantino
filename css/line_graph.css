@@ -5,45 +5,149 @@
     margin-right: 6px;
 }
 
+#separatorSelect {
+    margin-top: 0;
+    padding-top: 0;
+}
+
 .cover{
     display: inline-block;
     width: 160px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 
 .cover img:last-child {
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .button#dogs.active {
-    background: #c28e5e;
-    color: #d40000;
+    background: var(--dogs-color);
+    color: var(--darkgrey-color);
 }
 
 .button#pulp.active {
-    color: #fff11b;
-    background: #3c4e94;
+    background: var(--pulp-color);
+    color: var(--bill1-color);
 }
 
 .button#jackie.active {
-    color: #fff11b;
-    background: #000;
+    background: var(--jackie-color);
+    color: var(--bill1-color);
 }
 
 .button#bill1.active {
-    color: #000;
-    background: #fff11b;
+    background: var(--bill1-color);
+    color: var(--jackie-color);
 }
 
 .button#bill2.active {
-    background: #ea1f18;
-    color: #fff11b;
+    background: var(--bill2-color);
+    color: var(--jackie-color);
 }
 
 .button#basterds.active {
-    background: #417d00;
+    background: var(--basterds-color);
 }
 
 .button#django.active {
-    background: #730000;
+    background: var(--django-color);
+    color: var(--bill2-color);
 }
+
+/* SVG STYLES */
+
+#lineGraph .scale line{
+    stroke: var(--white-color);
+    stroke-width: 1;
+}
+
+
+#lineGraph .scaleText {
+    fill: var(--white-color);
+}
+
+#lineGraph .bubble {
+
+}
+
+#lineGraph .link {
+}
+
+#lineGraph rect.selection,
+#lineGraph text.selection{
+    fill: var(--white-color);
+}
+
+#lineGraph line.selection {
+    stroke: var(--white-color);
+}
+
+.timeline text {
+    font-size: 14pt;
+}
+
+line.dogs {
+    stroke: var(--dogs-color);
+}
+
+circle.dogs,
+text.dogs{
+    fill: var(--dogs-color);
+}
+
+line.pulp {
+    stroke: var(--pulp-color);
+}
+
+circle.pulp,
+text.pulp {
+    fill: var(--pulp-color);
+}
+
+line.jackie {
+    stroke: var(--jackie-color);
+}
+
+circle.jackie,
+text.jackie {
+    fill: var(--jackie-color);
+}
+
+line.bill1 {
+    stroke: var(--bill1-color);
+}
+
+circle.bill1,
+text.bill1 {
+    fill: var(--bill1-color);
+}
+
+line.bill2 {
+    stroke: var(--bill2-color);
+}
+
+circle.bill2,
+text.bill2 {
+    fill: var(--bill2-color);
+}
+
+line.basterds {
+    stroke: var(--basterds-color);
+}
+
+circle.basterds,
+text.basterds {
+    fill: var(--basterds-color);
+}
+
+line.django {
+    stroke: var(--django-color);
+}
+
+circle.django,
+text.django {
+    fill: var(--django-color);
+}
+
+
+

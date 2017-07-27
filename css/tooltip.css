@@ -2,8 +2,8 @@
 	position: absolute;
 	top: 100px;
 	left: 100px;
-  	border: 2px solid #555;
-  	background: #888;
+  	border: 2px solid var(--darkgrey-color);
+  	background: var(--sand-color);
 	opacity: .9;
 	transition: .7s;
   	color: white;
