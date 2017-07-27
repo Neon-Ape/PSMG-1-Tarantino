@@ -26,6 +26,6 @@ path {
     stroke-opacity: .6;
 }
 
-.link:hover {
+#SankeyFlow .link:hover {
     stroke-opacity: .9;
 }
