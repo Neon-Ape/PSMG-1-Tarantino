@@ -37,7 +37,7 @@
   <article>   
 
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Bubblechart')" id="defaultOpen"><h2>Bubblechart</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'Bubblechart')" id="defaultOpen"><h2>Bubble Chart</h2></button>
         <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
         <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
         <button class="tablinks" onclick="openTab(event, 'BarChart')"><h2>Bar Chart</h2></button>
@@ -69,16 +69,17 @@
             <div id="box6" class="cover"><a href="javascript:void(0)" id="basterds" class="button box6">Inglorious Basterds</a></div>
             <div id="box7" class="cover"><a href="javascript:void(0)" id="django" class="button box7">Django Unchained</a></div>
         </div>
+        <div id="lineGraph"></div>
         <div id="separatorSelect">
           <a href="javascript:void(0)" id="5" class="button ">20% steps</a>
           <a href="javascript:void(0)" id="10" class="button ">10% steps</a>
-          <a href="javascript:void(0)" id="15" class="button ">15</a>
+          <a href="javascript:void(0)" id="15" class="button ">15% steps</a>
           <a href="javascript:void(0)" id="20" class="button active">5% steps</a>
             <a href="javascript:void(0)" id="25" class="button ">4% steps</a>
             <a href="javascript:void(0)" id="50" class="button ">2% steps</a>
             <a href="javascript:void(0)" id="100" class="button ">1% steps</a>
         </div>
-        <div id="lineGraph"></div>
+       
         <div id="timeline"></div>
       </div>
 
@@ -95,6 +96,7 @@
           <input id="rs" type="radio" name="mode" value="stacked" class="radio"><label for= "rs" class="button">Stacked</label>
         </div>
         <div id="barChart"></div>
+        <a id="bcCovers"></a>
       </div>
 
       <div id="IMDbChart" class="tabcontent">
