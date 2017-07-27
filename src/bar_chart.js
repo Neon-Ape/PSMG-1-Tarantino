@@ -24,8 +24,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   var xkey = "type";
   var gkey = "movie"; // what we group by
 
-  var axisposition = 40;
-
   var tooltip = floatingTooltip('gates_tooltip', 240);
   var tooltipData = [];
 
@@ -81,18 +79,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         return d[1];
       });
     });
-  var margin = {top: 40, right: 10, bottom: 50, left: 10},
-      width = 1100 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
 
   var x = d3.scaleBand()
       .domain(movies)
-      .rangeRound([0, width])
+      .rangeRound([0, WIDTH_BC])
       .padding(0.5);
 
   var y = d3.scaleLinear()
       .domain([0, yStackMax])
-      .range([height, 0]);
+      .range([HEIGHT_BC, 0]);
   var z = d3.scaleBand().domain(wordOrDeath).rangeRound([0, x.bandwidth()]);
 
   var color = d3.scaleOrdinal()
@@ -100,10 +95,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     .range(['#c09551', '#5f1020']);
 
   var svg = d3.select("#barChart").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("width", WIDTH_BC + MARGIN_BC.left + MARGIN_BC.right)
+      .attr("height", HEIGHT_BC + MARGIN_BC.top + MARGIN_BC.bottom)
     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + MARGIN_BC.left + "," + MARGIN_BC.top + ")");
 
   var layer = svg.selectAll(".layer")
       .data(layers)
@@ -116,8 +111,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     .enter().append("rect")
       .attr("x", function(d) {
 
-        return x(d.movie)+axisposition; })
-      .attr("y", height)
+        return x(d.movie)+ AXIS_POSITION_BARCHART; })
+      .attr("y", HEIGHT_BC)
       .attr("width", x.bandwidth())
       .attr("height", 0)
       .on('mouseover', showDetail)
@@ -134,12 +129,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   svg.append("g")
       .attr("class", "xaxis")
-      .attr("transform", "translate("+axisposition+"," + height + ")")
+      .attr("transform", "translate("+ AXIS_POSITION_BARCHART+"," + HEIGHT_BC + ")")
       .call(d3.axisBottom(x).tickSizeOuter(0));
 
   svg.append("g")
       .attr("class", "yaxis")
-      .attr("transform", "translate("+axisposition+",0)")
+      .attr("transform", "translate("+AXIS_POSITION_BARCHART+",0)")
       .call(d3.axisLeft(y).tickSizeOuter(0));
 
   var legend = svg.selectAll(".legend")
@@ -149,14 +144,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       .attr("transform", function(d, i) { return "translate(0," + i * 35 + ")"; });
 
   legend.append("rect")
-      .attr("x", width - 18)
+      .attr("x", WIDTH_BC - 18)
       .attr("width", 25)
       .attr("height", 25)
       .style("fill", function(d,i) { return color(i) });
 
 
   legend.append("text")
-      .attr("x", width - 24)
+      .attr("x", WIDTH_BC - 24)
       .attr("y", 13)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
@@ -181,7 +176,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         .duration(500)
         .delay(function(d, i) { return i * 10; })
         .attr("x", function(d) {
-                    return x(d.movie)+axisposition+ z(d.type);
+                    return x(d.movie)+AXIS_POSITION_BARCHART+ z(d.type);
                 })
                 .attr("width", (x.bandwidth()) / 2)
                 .transition()
@@ -189,7 +184,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                     return y(d.data[d.type]);
                 })
                 .attr("height", function(d) {
-                    return height - y(d.data[d.type]);
+                    return HEIGHT_BC - y(d.data[d.type]);
                 });
   }
 
@@ -206,7 +201,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             return y(d[0]) - y(d[1]);
         })
       .transition()
-        .attr("x", function(d) { return x(d.movie)+axisposition; })
+        .attr("x", function(d) { return x(d.movie)+AXIS_POSITION_BARCHART; })
         .attr("width", x.bandwidth());
   }
 
