@@ -10,14 +10,15 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 function sankeyFlow(){
 
     var units = "Words";
-    var aspect = 1.75;
+    var aspect = VAR_SF_ASPECT;
 
     var tooltip = floatingTooltip('gates_tooltip', 240);
 
 // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 80, bottom: 10, left: 100},
-        height = 2000 - margin.top - margin.bottom,
-        width = (height+margin.top+margin.bottom)/aspect - margin.left - margin.right;
+    var margin = {top: VAR_SF_MARGIN_TOP, right: VAR_SF_MARGIN_RIGHT, bottom: VAR_SF_MARGIN_BOTTOM, left: VAR_SF_MARGIN_LEFT},
+        height = VAR_SF_GRAPH_HEIGHT - margin.top - margin.bottom,
+        width = (height + margin.top + margin.bottom) / aspect - margin.left - margin.right;
+
 // format variables
     var formatNumber = d3.format(",.0f"),    // zero decimal places
         format = function(d) { return formatNumber(d) + " " + units; },
@@ -25,8 +26,8 @@ function sankeyFlow(){
 
 // Set the sankey diagram properties
     var sankey = d3.sankey()
-        .nodeWidth(30) // sets the size of the rect
-        .nodePadding(17) // distance from the rects underneath each other (before value 17)
+        .nodeWidth(VAR_SF_NODE_WIDTH) // sets the size of the rect
+        .nodePadding(VAR_SF_NODE_PADDING) // distance from the rects underneath each other (before value 17)
         .size([width, height]);
 
     var path = sankey.link();
@@ -37,13 +38,11 @@ function sankeyFlow(){
 
     // load the data
     var chart = function chart(selector, graph) {
-        console.log("we are in sankey function");
-        console.log(graph);
 
         // append the svg object to the body of the page
         var svg = d3.select(selector).append("svg")
             .attr("width", width + margin.left + margin.right)
-            .attr("height", height/2 + margin.top + margin.bottom)
+            .attr("height", height / 2 + margin.top + margin.bottom)
             .append("g")
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
@@ -58,7 +57,6 @@ function sankeyFlow(){
             .links(graph.links)
             .layout(32);
 
-        console.log(graph.links);
 // add in the links
         var link = svg.append("g").selectAll(".link")
             .data(graph.links)
@@ -88,7 +86,7 @@ function sankeyFlow(){
             .enter().append("g")
             .attr("class", "node")
             .attr("transform", function(d) {
-                return "translate(" + d.x + "," + d.y  / 2+ ")"; });
+                return "translate(" + d.x + "," + d.y  / 2 + ")"; });
 
 // add the rectangles for the nodes
         var rect = node.append("rect")
