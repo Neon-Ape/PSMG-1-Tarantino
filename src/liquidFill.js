@@ -5,7 +5,7 @@
             maxValue: 10, // The gauge maximum value.
             circleThickness: 0.05, // The outer circle thickness as a percentage of it's radius.
             circleFillGap: 0.05, // The size of the gap between the outer circle and wave circle as a percentage of the outer circles radius.
-            circleColor: "#178BCA", // The color of the outer circle.
+            circleColor: "#8F4E64", // The color of the outer circle.
             waveHeight: 0.05, // The wave height as a percentage of the radius of the wave circle.
             waveCount: 1, // The number of full waves per width of the wave circle.
             waveRiseTime: 1000, // The amount of time in milliseconds for the wave to rise from 0 to it's final height.
@@ -26,14 +26,15 @@
 
     var config = liquidFillGaugeDefaultSettings();
     config.circleThickness = 0.1;
-    config.circleColor = "#6DA398";
-    config.textColor = "#0E5144";
-    config.waveTextColor = "#6DA398";
-    config.waveColor = "#246D5F";
+    config.circleColor = "#8F4E64";
+    config.textColor = "#600322";
+    config.waveTextColor = "#a57183";
+    config.waveColor = "#600322";
     config.textVertPosition = 0.52;
     config.waveAnimateTime = 5000;
     config.waveHeight = 0;
-    config.waveAnimate = false;
+    config.waveAnimate = true;
+    config.waveCount = 2;
     config.waveOffset = 0.25;
     config.textSize = 1.2;
     config.minValue = 0;
