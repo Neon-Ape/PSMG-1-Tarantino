@@ -36,7 +36,9 @@ header {
 #abstract{
   color: var(--darkgrey-color);
   font-weight: 300;
+  font-size: 16pt;
   text-align: justify;
+  letter-spacing: 0.2px;
 }
 
 .container {
