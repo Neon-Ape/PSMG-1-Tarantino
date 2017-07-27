@@ -25,7 +25,7 @@ var VAR_GET_CLASS = function (movie) {
 
 // LINEGRAPH Variables
 
-var VAR_LG_SVG_WIDTH = 1100;
+var VAR_LG_SVG_WIDTH = 1250;
 var VAR_LG_SVG_HEIGHT = 350;
 var VAR_LG_SVG_OFFSET_Y = 50;
 
@@ -76,9 +76,7 @@ var VAR_LG_TIMELINE_HOVER_WIDTH = 4;
 
 var VAR_LG_TIMELINE_TEXT_OFFSET_X = 1000;
 
-
 // SANKEY FLOW Variables
-
 var VAR_SF_ASPECT = 1.75;
 var VAR_SF_MARGIN_TOP = 10;
 var VAR_SF_MARGIN_RIGHT = 100;
@@ -87,3 +85,10 @@ var VAR_SF_MARGIN_LEFT = 135;
 var VAR_SF_GRAPH_HEIGHT = 2000;
 var VAR_SF_NODE_WIDTH = 30;
 var VAR_SF_NODE_PADDING = 17;
+
+// BARCHART Variables
+var AXIS_POSITION_BARCHART = 40;
+var MARGIN_BC = {top: 40, right: 10, bottom: 25, left: 10};
+var WIDTH_BC = 1100 - MARGIN_BC.left - MARGIN_BC.right;
+var HEIGHT_BC = 500 - MARGIN_BC.top - MARGIN_BC.bottom;
+

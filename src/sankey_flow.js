@@ -18,6 +18,7 @@ function sankeyFlow(){
     var margin = {top: VAR_SF_MARGIN_TOP, right: VAR_SF_MARGIN_RIGHT, bottom: VAR_SF_MARGIN_BOTTOM, left: VAR_SF_MARGIN_LEFT},
         height = VAR_SF_GRAPH_HEIGHT - margin.top - margin.bottom,
         width = (height + margin.top + margin.bottom) / aspect - margin.left - margin.right;
+
 // format variables
     var formatNumber = d3.format(",.0f"),    // zero decimal places
         format = function(d) { return formatNumber(d) + " " + units; },
