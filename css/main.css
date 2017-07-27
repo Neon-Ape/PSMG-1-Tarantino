@@ -33,6 +33,12 @@ header {
 	margin-top: 0px;
 }
 
+#abstract{
+  color: var(--darkgrey-color);
+  font-weight: 300;
+  text-align: justify;
+}
+
 .container {
   max-width: 1200px;
   margin: auto;
