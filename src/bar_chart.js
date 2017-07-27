@@ -15,16 +15,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   var wordOrDeath = ["word","death"];
   var movies = ["Reservoir Dogs", "Pulp Fiction", "Jackie Brown", "Kill Bill: Vol. 1", "Kill Bill: Vol. 2", "Inglorious Basterds", "Django Unchained"];
-  
+
   //"pivot" the data into deaths and words by movie
-  var groups = {}
-  var categories = {}; 
+  var groups = {};
+  var categories = {};
+  var saveResult = {};
 
-  var xkey = "type"
-  var gkey = "movie" // what we group by
+  var xkey = "type";
+  var gkey = "movie"; // what we group by
 
-  var axisposition =40;
- 
+  var tooltip = floatingTooltip('gates_tooltip', 240);
+  var tooltipData = [];
+
   // group all the events by type
   data.forEach(function(d) {
     if(!groups[d[gkey]]) {
@@ -32,7 +34,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     } else {
       groups[d[gkey]].push(d)
     }
-  })
+  });
   var processed = [];
   //count how many incidents happended for each movie
   movies.forEach(function(movie,i) {
@@ -43,15 +45,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       } else {
         xdata[event[xkey]]++;
       }
-    })
+    });
+
 
     // "result" is an ordered array with a count for each movie
-     var result = {};
+     var result = [];
     wordOrDeath.forEach(function(g) {
         result[g]= xdata[g]||0;
-    })
+        saveResult[g] = result[g];
+    });
     processed.push(result)
-  })
+  });
+
   var n = wordOrDeath.length, // number of layers
       m = processed.length, // number of samples per layer
       stack = d3.stack().keys(wordOrDeath);
@@ -63,42 +68,38 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             dd.movie = movies[j];
             dd.type = wordOrDeath[i];
         })
-    });  
-
-var yGroupMax = d3.max(layers, function(layer) {
+    });
+  var yGroupMax = d3.max(layers, function(layer) {
       return d3.max(layer, function(d) {
         return d[1] - d[0];
       });
     }),
-    yStackMax = d3.max(layers, function(layer) {
+      yStackMax = d3.max(layers, function(layer) {
       return d3.max(layer, function(d) {
         return d[1];
       });
     });
-  var margin = {top: 40, right: 10, bottom: 50, left: 10},
-      width = 1100 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
 
   var x = d3.scaleBand()
       .domain(movies)
-      .rangeRound([0, width])
+      .rangeRound([0, WIDTH_BC])
       .padding(0.5);
 
   var y = d3.scaleLinear()
       .domain([0, yStackMax])
-      .range([height, 0]);
+      .range([HEIGHT_BC, 0]);
   var z = d3.scaleBand().domain(wordOrDeath).rangeRound([0, x.bandwidth()]);
-  
+
   var color = d3.scaleOrdinal()
     .domain(['word', 'death'])
     .range(['#c09551', '#5f1020']);
 
   var svg = d3.select("#barChart").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("width", WIDTH_BC + MARGIN_BC.left + MARGIN_BC.right)
+      .attr("height", HEIGHT_BC + MARGIN_BC.top + MARGIN_BC.bottom)
     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  
+      .attr("transform", "translate(" + MARGIN_BC.left + "," + MARGIN_BC.top + ")");
+
   var layer = svg.selectAll(".layer")
       .data(layers)
     .enter().append("g")
@@ -108,12 +109,14 @@ var yGroupMax = d3.max(layers, function(layer) {
   var rect = layer.selectAll("rect")
       .data(function(d) { return d; })
     .enter().append("rect")
-      .attr("x", function(d) { 
-        
-        return x(d.movie)+axisposition; })
-      .attr("y", height)
+      .attr("x", function(d) {
+
+        return x(d.movie)+ AXIS_POSITION_BARCHART; })
+      .attr("y", HEIGHT_BC)
       .attr("width", x.bandwidth())
-      .attr("height", 0);
+      .attr("height", 0)
+      .on('mouseover', showDetail)
+      .on('mouseout', hideDetail);
 
   rect.transition()
       .delay(function(d, i) { return i * 10; })
@@ -126,12 +129,12 @@ var yGroupMax = d3.max(layers, function(layer) {
 
   svg.append("g")
       .attr("class", "xaxis")
-      .attr("transform", "translate("+axisposition+"," + height + ")")
+      .attr("transform", "translate("+ AXIS_POSITION_BARCHART+"," + HEIGHT_BC + ")")
       .call(d3.axisBottom(x).tickSizeOuter(0));
 
   svg.append("g")
       .attr("class", "yaxis")
-      .attr("transform", "translate("+axisposition+",0)")
+      .attr("transform", "translate("+AXIS_POSITION_BARCHART+",0)")
       .call(d3.axisLeft(y).tickSizeOuter(0));
 
   var legend = svg.selectAll(".legend")
@@ -141,13 +144,14 @@ var yGroupMax = d3.max(layers, function(layer) {
       .attr("transform", function(d, i) { return "translate(0," + i * 35 + ")"; });
 
   legend.append("rect")
-      .attr("x", width - 18)
+      .attr("x", WIDTH_BC - 18)
       .attr("width", 25)
       .attr("height", 25)
       .style("fill", function(d,i) { return color(i) });
 
+
   legend.append("text")
-      .attr("x", width - 24)
+      .attr("x", WIDTH_BC - 24)
       .attr("y", 13)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
@@ -168,12 +172,11 @@ var yGroupMax = d3.max(layers, function(layer) {
 
   function transitionGrouped() {
     y.domain([0, yGroupMax]);
-
     rect.transition()
         .duration(500)
         .delay(function(d, i) { return i * 10; })
         .attr("x", function(d) {
-                    return x(d.movie)+axisposition+ z(d.type);
+                    return x(d.movie)+AXIS_POSITION_BARCHART+ z(d.type);
                 })
                 .attr("width", (x.bandwidth()) / 2)
                 .transition()
@@ -181,7 +184,7 @@ var yGroupMax = d3.max(layers, function(layer) {
                     return y(d.data[d.type]);
                 })
                 .attr("height", function(d) {
-                    return height - y(d.data[d.type]);
+                    return HEIGHT_BC - y(d.data[d.type]);
                 });
   }
 
@@ -198,9 +201,21 @@ var yGroupMax = d3.max(layers, function(layer) {
             return y(d[0]) - y(d[1]);
         })
       .transition()
-        .attr("x", function(d) { return x(d.movie)+axisposition; })
+        .attr("x", function(d) { return x(d.movie)+AXIS_POSITION_BARCHART; })
         .attr("width", x.bandwidth());
   }
+
+  // Function called on mouseover to display tooltip
+  function showDetail(d) {
+      var content = '<span class="name">Ocurrences: </span><span class="value">' + d.data[d.type];
+      tooltip.showTooltip(content, d3.event);
+  }
+
+  /* hides tooltip */
+  function hideDetail() {
+      tooltip.hideTooltip();
+  }
+
 });
 
 

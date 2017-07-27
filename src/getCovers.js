@@ -16,8 +16,6 @@ for(movie in coverLookup) {
     var img = "<img src='" + imageRoot + coverLookup[movie] + "'>";
     var elem = document.getElementById("box"+i);
     elem.insertAdjacentHTML('afterbegin', img);
+    document.getElementById("bcCovers").innerHTML += img;
     i++;
 }
-
-
-

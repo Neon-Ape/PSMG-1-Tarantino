@@ -28,14 +28,16 @@
     <img id="logo" src="./data/images/sh!t2.png" alt="logo"/>
     <div id="textbox">
       <h1 id="title">Cursewords and Deaths <br> in Tarantino Movies</h1>
-      <p>detailed description of this project. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      <p id="abstract">Welcome to the colourful world of profanity and death in Tarantino movies! Filmmaker Quentin Tarantino is notorious for the amount of cursing and killing of characters in his works, so on this site, you can explore seven selected Tarantino films and find out how, when, how often and in which movies people have cursed.
+        In addition, you can find a comparison of the "deaths to curses"-ratio in his films and how high they were rated on the Internet Movie Database.
+        Enjoy!</p>
     </div>
   </header>
     
   <article>   
 
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Bubblechart')" id="defaultOpen"><h2>Bubblechart</h2></button>
+        <button class="tablinks" onclick="openTab(event, 'Bubblechart')" id="defaultOpen"><h2>Bubble Chart</h2></button>
         <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
         <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
         <button class="tablinks" onclick="openTab(event, 'BarChart')"><h2>Bar Chart</h2></button>
@@ -43,7 +45,7 @@
       </div>
 
       <div id="Bubblechart" class="tabcontent">
-        <p class="tool-description">...</p>
+        <p class="tool-description" txt="data/text/bubblechart.txt">This nice round bubble chart shows you each and every one of the cursewords uttered, shouted, spat out or mumbled between gritted teeth. The different colors indicate different curse types, while the bubble size is in proportion to the amount of times a particular word occurs. Alter the display by selecting Curses by Movie which groups the word occurrences to their respective movies or by selecting Curses by Type which divides the words into curse type categories inside each movie. Hover for more details.</p>
         <div id="toolbar">
             <a href="javascript:void(0)" id="all" class="button active">All Curses</a>
             <a href="javascript:void(0)" id="year" class="button">Curses By Movie</a>
@@ -67,6 +69,7 @@
             <div id="box6" class="cover"><a href="javascript:void(0)" id="basterds" class="button box6">Inglorious Basterds</a></div>
             <div id="box7" class="cover"><a href="javascript:void(0)" id="django" class="button box7">Django Unchained</a></div>
         </div>
+        <div id="lineGraph"></div>
         <div id="separatorSelect">
           <a href="javascript:void(0)" id="5" class="button ">20% steps</a>
           <a href="javascript:void(0)" id="10" class="button ">10% steps</a>
@@ -76,23 +79,24 @@
             <a href="javascript:void(0)" id="50" class="button ">2% steps</a>
             <a href="javascript:void(0)" id="100" class="button ">1% steps</a>
         </div>
-        <div id="lineGraph"></div>
+       
         <div id="timeline"></div>
       </div>
 
       <div id="SankeyFlow" class="tabcontent">
-        <p class="tool-description">...</p>
+        <p class="tool-description">Just like the "f*ck"s and "motherf*ckers" flow from Samuel L. Jackson's mouth in his role as Jules in Pulp Fiction, in this vizualisation the curses flow from each movie like the rant of the century. Click on either a movie title to see all the glorious profanity that made it into the final cut or the word itself to see in which movies it made an appearance. Hovering over the lines that connect word to movie will show its exact number of occurrences in this film.</p>
         <div id="sankeyFlow"></div>
 
       </div>
 
       <div id="BarChart" class="tabcontent">
-        <p class="tool-description">...</p>
+        <p class="tool-description">Ever wondered how many people die for each curseword in a particular film? This neat vizualisation gives you an overview of the count of cursewords vs. the death count in Tarantino's iconic movies. For a side-by-side comparison of curses and deaths in an individual film, hit Grouped. Hit Stacked if you want to compare film to film to see which one is the nastiest and bloodiest. Hover for an exact count.</p>
         <div id = "barchartSelect">
           <input id="rg" type="radio" name="mode" value="grouped" class="radio"><label for="rg" class="button">Grouped</label>
           <input id="rs" type="radio" name="mode" value="stacked" class="radio"><label for= "rs" class="button">Stacked</label>
         </div>
         <div id="barChart"></div>
+        <a id="bcCovers"></a>
       </div>
 
       <div id="IMDbChart" class="tabcontent">
