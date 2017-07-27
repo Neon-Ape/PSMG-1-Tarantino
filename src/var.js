@@ -79,6 +79,6 @@ var VAR_LG_TIMELINE_TEXT_OFFSET_X = 1000;
 
 // BARCHART Variables
 var AXIS_POSITION_BARCHART = 40;
-var MARGIN_BC = {top: 40, right: 10, bottom: 50, left: 10};
+var MARGIN_BC = {top: 40, right: 10, bottom: 25, left: 10};
 var WIDTH_BC = 1100 - MARGIN_BC.left - MARGIN_BC.right;
 var HEIGHT_BC = 500 - MARGIN_BC.top - MARGIN_BC.bottom;
