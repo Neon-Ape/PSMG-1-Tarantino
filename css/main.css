@@ -17,6 +17,7 @@ header {
 
 .tabcontent {
   background-color: var(--tabcontent-color);
+  color: var(--white-color);
 }
 
 #logo {
