@@ -22,6 +22,7 @@ var VAR_GET_CLASS = function (movie) {
     return VAR_MOVIE_CLASSES[movie];
 };
 
+var VAR_TOOLTIP_GATES = 240;
 
 // LINEGRAPH Variables
 
