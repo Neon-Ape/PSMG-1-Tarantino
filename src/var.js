@@ -87,6 +87,12 @@ var VAR_SF_GRAPH_HEIGHT = 2000;
 var VAR_SF_NODE_WIDTH = 30;
 var VAR_SF_NODE_PADDING = 17;
 
+// set the dimensions and margins of the graph
+var VAR_SF_MARGIN= {top: VAR_SF_MARGIN_TOP, right: VAR_SF_MARGIN_RIGHT, bottom: VAR_SF_MARGIN_BOTTOM, left: VAR_SF_MARGIN_LEFT};
+var VAR_SF_HEIGHT = VAR_SF_GRAPH_HEIGHT - VAR_SF_MARGIN.top - VAR_SF_MARGIN.bottom;
+var VAR_SF_WIDTH = (VAR_SF_HEIGHT + VAR_SF_MARGIN.top + VAR_SF_MARGIN.bottom) / VAR_SF_ASPECT - VAR_SF_MARGIN.left - VAR_SF_MARGIN.right;
+
+
 // BARCHART Variables
 var AXIS_POSITION_BARCHART = 40;
 var MARGIN_BC = {top: 40, right: 10, bottom: 25, left: 10};

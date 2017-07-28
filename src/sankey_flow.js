@@ -10,15 +10,9 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 function sankeyFlow(){
 
     var units = "Words";
-    var aspect = VAR_SF_ASPECT;
 
     var tooltip = floatingTooltip('gates_tooltip', 240);
-
-// set the dimensions and margins of the graph
-    var margin = {top: VAR_SF_MARGIN_TOP, right: VAR_SF_MARGIN_RIGHT, bottom: VAR_SF_MARGIN_BOTTOM, left: VAR_SF_MARGIN_LEFT},
-        height = VAR_SF_GRAPH_HEIGHT - margin.top - margin.bottom,
-        width = (height + margin.top + margin.bottom) / aspect - margin.left - margin.right;
-
+ 
 // format variables
     var formatNumber = d3.format(",.0f"),    // zero decimal places
         format = function(d) { return formatNumber(d) + " " + units; },
@@ -28,7 +22,7 @@ function sankeyFlow(){
     var sankey = d3.sankey()
         .nodeWidth(VAR_SF_NODE_WIDTH) // sets the size of the rect
         .nodePadding(VAR_SF_NODE_PADDING) // distance from the rects underneath each other (before value 17)
-        .size([width, height]);
+        .size([VAR_SF_WIDTH, VAR_SF_HEIGHT]);
 
     var path = sankey.link();
 
@@ -42,11 +36,11 @@ function sankeyFlow(){
 
         // append the svg object to the body of the page
         var svg = d3.select(selector).append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height / 2 + margin.top + margin.bottom)
+            .attr("width", VAR_SF_WIDTH + VAR_SF_MARGIN.left + VAR_SF_MARGIN.right)
+            .attr("height", VAR_SF_HEIGHT / 2 + VAR_SF_MARGIN.top + VAR_SF_MARGIN.bottom)
             .append("g")
             .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
+                "translate(" + VAR_SF_MARGIN.left + "," + VAR_SF_MARGIN.top + ")");
 
         var div = d3.select(selector).append("div")
             .attr("class", "tooltip")
@@ -103,7 +97,7 @@ function sankeyFlow(){
             .attr("text-anchor", "start")
             .attr("transform", null)
             .text(function(d) { return d.name; })
-            .filter(function(d) { return d.x < width / 2; })
+            .filter(function(d) { return d.x < VAR_SF_WIDTH / 2; })
             .attr("x", -55 + sankey.nodeWidth())
             .attr("text-anchor", "end");
 
