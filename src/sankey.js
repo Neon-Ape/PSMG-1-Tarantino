@@ -8,6 +8,8 @@
  * The code of Clau Dermont uses d3 v3. In this code were updates made to v4 used from the following code example: https://bl.ocks.org/d3noob/013054e8d7807dff76247b81b0e29030
  */
 
+/* Used as a blackbox for the Sankey Flow */
+
 d3.sankey = function() {
     var sankey = {},
         nodeWidth = 24,
