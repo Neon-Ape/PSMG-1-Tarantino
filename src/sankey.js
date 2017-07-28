@@ -1,4 +1,13 @@
-/* */
+/**
+ * Code from Clau Dermont: https://bl.ocks.org/cdermont/846051eb548e846eac60
+ *
+ * Where not otherwise covered by separate copyright or license:
+ * [![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+ * This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+ *
+ * The code of Clau Dermont uses d3 v3. In this code were updates made to v4 used from the following code example: https://bl.ocks.org/d3noob/013054e8d7807dff76247b81b0e29030
+ */
+
 d3.sankey = function() {
     var sankey = {},
         nodeWidth = 24,
@@ -301,6 +310,5 @@ d3.sankey = function() {
     function value(link) {
         return link.value;
     }
-
     return sankey;
 };

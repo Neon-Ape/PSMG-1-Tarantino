@@ -12,7 +12,7 @@ function sankeyFlow(){
     var units = "Words";
     var aspect = VAR_SF_ASPECT;
 
-    var tooltip = floatingTooltip('gates_tooltip', 240);
+    var tooltip = floatingTooltip('gates_tooltip', VAR_TOOLTIP_GATES);
 
 // set the dimensions and margins of the graph
     var margin = {top: VAR_SF_MARGIN_TOP, right: VAR_SF_MARGIN_RIGHT, bottom: VAR_SF_MARGIN_BOTTOM, left: VAR_SF_MARGIN_LEFT},
