@@ -142,7 +142,7 @@ function makeTimelineSVG(nodeData, svg) {
         });
     times.selectAll('text').append('tspan')
         .attr('x', VAR_LG_TIMELINE_TEXT_OFFSET_X)
-        .attr('dy', '1.2em')
+        .attr('dy', '1.0em')
         .text(function (d) {
             return d.timeline.start + " - " + d.timeline.end + " min";
         });
