@@ -7,7 +7,9 @@
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
 var mySankeyFlow = sankeyFlow();
+var myRanking = liquidGauge();
 var wordTiming = null;
+var movieRanking = null;
 
 function runtimeLookup(data) {
     var runtimes = {};
@@ -247,11 +249,12 @@ function addExtraInfo(error, data) {
         wordTiming = makeTiming(data, extraData);
         var curseWords = makeCurseWords(data, movieDates);
         var sankeyFlow = makeSankey(curseWords);
-        var movieRanking = getMovieRankings(extraData);
+        movieRanking = getMovieRankings(extraData);
 
         myBubbleChart('#bubbleChart', curseWords);
         myLineGraph('#lineGraph', '#timeline', wordTiming, 20);
         mySankeyFlow('#sankeyFlow', sankeyFlow);
+
 
 
     });
@@ -322,6 +325,11 @@ function setupButtons() {
 
                 myLineGraph('#lineGraph', '#timeline', wordTiming, buttonId);
             }
+        });
+
+    d3.select('#imdb')
+        .on('click', function() {
+            myRanking(movieRanking);
         });
 
 }

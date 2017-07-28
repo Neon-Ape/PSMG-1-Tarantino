@@ -42,7 +42,7 @@
         <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
         <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
         <button class="tablinks" onclick="openTab(event, 'BarChart')"><h2>Bar Chart</h2></button>
-        <button class="tablinks" onclick="openTab(event, 'IMDbChart')"><h2>IMDb Rating</h2></button>        
+        <button class="tablinks" id="imdb" onclick="openTab(event, 'IMDbChart')"><h2>IMDb Rating</h2></button>
 
       </div>
 
@@ -101,13 +101,13 @@
 
       <div id="IMDbChart" class="tabcontent">
           <div id="liquidfill">
-              <div id="img1" class="cover"><svg id="fillgauge2" class="liquidfill" width="130" height="250"></svg></div>
-              <div id="img2" class="cover"><svg id="fillgauge3" class="liquidfill" width="130" height="250"></svg></div>
-              <div id="img3" class="cover"><svg id="fillgauge4" class="liquidfill" width="130" height="250"></svg></div>
-              <div id="img4" class="cover"><svg id="fillgauge5" class="liquidfill" width="130" height="250"></svg></div>
-              <div id="img5" class="cover"><svg id="fillgauge6" class="liquidfill" width="130" height="250"></svg></div>
-              <div id="img6" class="cover"><svg id="fillgauge7" class="liquidfill" width="130" height="250"></svg></div>
-              <div id="img7" class="cover"><svg id="fillgauge8" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img1" class="cover"><svg id="fillgauge1" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img2" class="cover"><svg id="fillgauge2" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img3" class="cover"><svg id="fillgauge3" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img4" class="cover"><svg id="fillgauge4" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img5" class="cover"><svg id="fillgauge5" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img6" class="cover"><svg id="fillgauge6" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img7" class="cover"><svg id="fillgauge7" class="liquidfill" width="130" height="250"></svg></div>
           </div>
       </div>
   </article>
@@ -130,7 +130,6 @@
   <script src="src/sankey_flow.js"></script>
   <script src="src/getCovers.js"></script>
   <script src="src/liquidFillGauge.js"></script>
-  <script src="src/liquidFill.js"></script>
   <script src="src/generateData.js"></script>
 
 
