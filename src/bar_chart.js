@@ -82,12 +82,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   var x = d3.scaleBand()
       .domain(movies)
-      .rangeRound([0, WIDTH_BC])
+      .rangeRound([0, VAR_WIDTH_BC])
       .padding(0.5);
 
   var y = d3.scaleLinear()
       .domain([0, yStackMax])
-      .range([HEIGHT_BC, 0]);
+      .range([VAR_HEIGHT_BC, 0]);
   var z = d3.scaleBand().domain(wordOrDeath).rangeRound([0, x.bandwidth()]);
 
   var color = d3.scaleOrdinal()
@@ -95,10 +95,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     .range(['#c09551', '#5f1020']);
 
   var svg = d3.select("#barChart").append("svg")
-      .attr("width", WIDTH_BC + MARGIN_BC.left + MARGIN_BC.right)
-      .attr("height", HEIGHT_BC + MARGIN_BC.top + MARGIN_BC.bottom)
+      .attr("width", VAR_WIDTH_BC + VAR_MARGIN_BC.left + VAR_MARGIN_BC.right)
+      .attr("height", VAR_HEIGHT_BC + VAR_MARGIN_BC.top + VAR_MARGIN_BC.bottom)
     .append("g")
-      .attr("transform", "translate(" + MARGIN_BC.left + "," + MARGIN_BC.top + ")");
+      .attr("transform", "translate(" + VAR_MARGIN_BC.left + "," + VAR_MARGIN_BC.top + ")");
 
   var layer = svg.selectAll(".layer")
       .data(layers)
@@ -111,8 +111,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     .enter().append("rect")
       .attr("x", function(d) {
 
-        return x(d.movie)+ AXIS_POSITION_BARCHART; })
-      .attr("y", HEIGHT_BC)
+        return x(d.movie)+ VAR_AXIS_POSITION_BARCHART; })
+      .attr("y", VAR_HEIGHT_BC)
       .attr("width", x.bandwidth())
       .attr("height", 0)
       .on('mouseover', showDetail)
@@ -129,12 +129,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   svg.append("g")
       .attr("class", "xaxis")
-      .attr("transform", "translate("+ AXIS_POSITION_BARCHART+"," + HEIGHT_BC + ")")
+      .attr("transform", "translate("+ VAR_AXIS_POSITION_BARCHART+"," + VAR_HEIGHT_BC + ")")
       .call(d3.axisBottom(x).tickSizeOuter(0));
 
   svg.append("g")
       .attr("class", "yaxis")
-      .attr("transform", "translate("+AXIS_POSITION_BARCHART+",0)")
+      .attr("transform", "translate("+ VAR_AXIS_POSITION_BARCHART+",0)")
       .call(d3.axisLeft(y).tickSizeOuter(0));
 
   var legend = svg.selectAll(".legend")
@@ -144,14 +144,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       .attr("transform", function(d, i) { return "translate(0," + i * 35 + ")"; });
 
   legend.append("rect")
-      .attr("x", WIDTH_BC - 18)
+      .attr("x", VAR_WIDTH_BC - 18)
       .attr("width", 25)
       .attr("height", 25)
       .style("fill", function(d,i) { return color(i) });
 
 
   legend.append("text")
-      .attr("x", WIDTH_BC - 24)
+      .attr("x", VAR_WIDTH_BC - 24)
       .attr("y", 13)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
@@ -176,7 +176,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         .duration(500)
         .delay(function(d, i) { return i * 10; })
         .attr("x", function(d) {
-                    return x(d.movie)+AXIS_POSITION_BARCHART+ z(d.type);
+                    return x(d.movie)+ VAR_AXIS_POSITION_BARCHART+ z(d.type);
                 })
                 .attr("width", (x.bandwidth()) / 2)
                 .transition()
@@ -184,7 +184,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                     return y(d.data[d.type]);
                 })
                 .attr("height", function(d) {
-                    return HEIGHT_BC - y(d.data[d.type]);
+                    return VAR_HEIGHT_BC - y(d.data[d.type]);
                 });
   }
 
@@ -201,7 +201,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             return y(d[0]) - y(d[1]);
         })
       .transition()
-        .attr("x", function(d) { return x(d.movie)+AXIS_POSITION_BARCHART; })
+        .attr("x", function(d) { return x(d.movie)+ VAR_AXIS_POSITION_BARCHART; })
         .attr("width", x.bandwidth());
   }
 

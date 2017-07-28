@@ -84,11 +84,11 @@ var VAR_SF_MARGIN_BOTTOM = 10;
 var VAR_SF_MARGIN_LEFT = 135;
 var VAR_SF_GRAPH_HEIGHT = 2000;
 var VAR_SF_NODE_WIDTH = 30;
-var VAR_SF_NODE_PADDING = 17;
+var VAR_SF_NODE_PADDING = 18;
 
 // BARCHART Variables
-var AXIS_POSITION_BARCHART = 40;
-var MARGIN_BC = {top: 40, right: 10, bottom: 25, left: 10};
-var WIDTH_BC = 1100 - MARGIN_BC.left - MARGIN_BC.right;
-var HEIGHT_BC = 500 - MARGIN_BC.top - MARGIN_BC.bottom;
+var VAR_AXIS_POSITION_BARCHART = 40;
+var VAR_MARGIN_BC = {top: 40, right: 10, bottom: 25, left: 10};
+var VAR_WIDTH_BC = 1100 - VAR_MARGIN_BC.left - VAR_MARGIN_BC.right;
+var VAR_HEIGHT_BC = 500 - VAR_MARGIN_BC.top - VAR_MARGIN_BC.bottom;
 
