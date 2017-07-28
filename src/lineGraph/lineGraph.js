@@ -8,7 +8,7 @@ function lineGraph() {
     var graphs = {
         _height: VAR_LC_TIMELINE_HEIGHT,
         _active: ["Reservoir Dogs"],
-        activeStep: 0,
+        activeStep: 1,
         hoveredStep: -1,
         isActive: function (movie) {
             return this._active.indexOf(movie) !== -1;
@@ -49,7 +49,7 @@ function lineGraph() {
         x2: VAR_LG_GRAPH_OFFSET_X + VAR_LG_GRAPH_WIDTH,
         y1: VAR_LG_GRAPH_HEIGHT,
         y2: VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT_BIG,
-        text: ''
+        text: '100%'
     };
 
     var svg2 = null;
@@ -230,7 +230,7 @@ function lineGraph() {
     function refreshBars(bars) {
         function barOpacity(d) {
             if (d.step === graphs.activeStep) {
-                if (d.step === graphs.activeStep) {
+                if (d.step === graphs.hoveredStep) {
                     return VAR_LG_BARS_OPACITY + VAR_LG_BARS_HOVER_OPACITY;
                 }
                 return VAR_LG_BARS_OPACITY;

@@ -17,9 +17,6 @@ for(movie in coverLookup) {
     var elem = document.getElementById("box"+i);
     var elems = document.getElementById("img"+i);
     elem.insertAdjacentHTML('afterbegin', img);
-    elems.insertAdjacentHTML('afterbegin', img);
+    document.getElementById("bcCovers").innerHTML += img;
     i++;
 }
-
-
-

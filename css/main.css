@@ -15,6 +15,11 @@ header {
   margin-bottom: 35px;
 }
 
+.tabcontent {
+  background-color: var(--tabcontent-color);
+  color: var(--white-color);
+}
+
 #logo {
 	height: 30%;
 	width: 30%;
@@ -26,6 +31,14 @@ header {
 #title {
 	font-size: 35pt;
 	margin-top: 0px;
+}
+
+#abstract{
+  color: var(--darkgrey-color);
+  font-weight: 300;
+  font-size: 16pt;
+  text-align: justify;
+  letter-spacing: 0.2px;
 }
 
 .container {

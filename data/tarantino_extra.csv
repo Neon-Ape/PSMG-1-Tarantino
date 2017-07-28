@@ -1,10 +1,8 @@
-movie,year,imdb_rating,top_250,runtime
-Reservoir Dogs,1992,8.3,74,99
-Pulp Fiction,1994,8.9,7,154
-Jackie Brown,1997,7.5,-1,154
-Kill Bill: Vol. 1,2003,8.1,176,111
-Kill Bill: Vol. 2,2004,8.0,-1,137
-Death Proof,2007,7.1,-1,113
-Inglorious Basterds,2009,8.3,97,153
-Django Unchained,2012,8.4,59,165
-Hateful Eight,2015,7.8,-1,187
+movie,year,imdb,rotten_tomatoes,metacritic,top_250,runtime
+Reservoir Dogs,1992,8.3,8.8,78,74,99
+Pulp Fiction,1994,8.9,9.1,94,7,154
+Jackie Brown,1997,7.5,7.4,64,-1,154
+Kill Bill: Vol. 1,2003,8.1,7.7,69,176,111
+Kill Bill: Vol. 2,2004,8.0,7.7,83,-1,137
+Inglorious Basterds,2009,8.3,7.8,69,97,153
+Django Unchained,2012,8.4,8.0,59,81,165

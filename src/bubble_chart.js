@@ -16,26 +16,26 @@ function bubbleChart() {
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
-  var center = { x: width / 2, y: height *0.8/ 2 };
+  var center = { x: width * 0.5, y: height *0.8/ 2 };
 
   var movieTitleX = {
-    "Reservoir Dogs" : width*1.3/9,
-    "Pulp Fiction" : width*2.8/9,
-    "Jackie Brown" : width*4.2/9,
-    "Kill Bill: Vol. 1" : width*5/9,
-    "Kill Bill: Vol. 2" : width*6/9,
-    "Inglorious Basterds" : width*7/9,
-    "Django Unchained" : width*8/9
+    "Reservoir Dogs" : width*0.15,
+    "Pulp Fiction" : width*0.3,
+    "Jackie Brown" : width*0.45,
+    "Kill Bill: Vol. 1" : width*0.56,
+    "Kill Bill: Vol. 2" : width*0.66,
+    "Inglorious Basterds" : width*0.75,
+    "Django Unchained" : width*0.85
   };
 
   var movieCenters = {
-    "Reservoir Dogs" : { x: width*2/9, y: height/2},
-    "Pulp Fiction" : { x: width*3/9, y: height/2},
-    "Jackie Brown" : { x: width*4/9, y: height/2},
-    "Kill Bill: Vol. 1" : { x: width*5/9, y: height/2},
-    "Kill Bill: Vol. 2" : { x: width*6/9, y: height/2},
-    "Inglorious Basterds" : { x: width*7/9, y: height/2},
-    "Django Unchained" : { x: width*8/9, y: height/2}
+    "Reservoir Dogs" : { x: width*0.2, y: height/2},
+    "Pulp Fiction" : { x: width*0.31, y: height/2},
+    "Jackie Brown" : { x: width*0.42, y: height/2},
+    "Kill Bill: Vol. 1" : { x: width*0.52, y: height/2},
+    "Kill Bill: Vol. 2" : { x: width*0.62, y: height/2},
+    "Inglorious Basterds" : { x: width*0.72, y: height/2},
+    "Django Unchained" : { x: width*0.80, y: height/2}
   };
 
   var groupCenters = {
