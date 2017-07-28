@@ -47,10 +47,11 @@ function liquidGauge() {
     config.displayPercent = false;
     config.valueCountUp = true;
 
-    var chart = function (data) {
+    var chart = function (ratingType, data) {
         console.log(data);
-        for (var i = 1; i <= data.length; i++) {
-           loadLiquidFillGauge("fillgauge" + i, data[i].rating, VAR_GET_CLASS(data[i].movie),config);
+        for (var i = 0; i < data.length; i++) {
+           loadLiquidFillGauge(ratingType + "fillgauge" + (i+1), data[i].rating, VAR_GET_CLASS(data[i].movie),config);
+           console.log(ratingType + "fillgauge" + (i+1));
 
         }
 
@@ -165,7 +166,7 @@ function liquidGauge() {
             .innerRadius(gaugeCircleY(radius - circleThickness));
         gaugeGroup.append("path")
             .attr("d", gaugeCircleArc)
-            .style("fill", config.circleColor)
+            .classed("liquidFillOuterCircle", true)
             .attr('transform', 'translate(' + radius + ',' + radius + ')');
 
         // Text where the wave does not overlap.
