@@ -11,8 +11,8 @@ function sankeyFlow(){
 
     var units = "Words";
 
-    var tooltip = floatingTooltip('gates_tooltip', 240);
- 
+    var tooltip = floatingTooltip('gates_tooltip', VAR_TOOLTIP_GATES);
+    
 // format variables
     var formatNumber = d3.format(",.0f"),    // zero decimal places
         format = function(d) { return formatNumber(d) + " " + units; },
