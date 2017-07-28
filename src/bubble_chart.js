@@ -93,8 +93,8 @@ function bubbleChart() {
   // Nice looking colors - no reason to buck the trend
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
-    .domain(['fuck', 'shit', 'ass', 'racial', 'genital', 'blasphemy', 'other'])
-    .range(['#d19b25', '#5f1020', '#e7d9c0', '#c09551','#261D22','#72613c','#140602']);
+    .domain(['ass', 'shit', 'fuck', 'racial', 'genital', 'blasphemy', 'other'])
+    .range(['#fdfdfd', '#d4d4d4', '#aaaaaa', '#7f7f7f','#555555','#2a2a2a','#070707']);
 
 
   /*
