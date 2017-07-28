@@ -219,12 +219,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   // Function called on mouseover to display tooltip
   function showDetail(d) {
+      d3.select(this).attr('stroke', 'black');
       var content = '<span class="name">Ocurrences: </span><span class="value">' + d.data[d.type];
       tooltip.showTooltip(content, d3.event);
   }
 
   // hides tooltip
   function hideDetail() {
+      d3.select(this).attr('stroke', 'none');
       tooltip.hideTooltip();
   }
 });
