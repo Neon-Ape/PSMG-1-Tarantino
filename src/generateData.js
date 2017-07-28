@@ -223,13 +223,25 @@ function getExtraData(data) {
 }
 
 function getMovieRankings(data){
-    var movieRanking = [];
+    var ratings = {
+        imdb: [],
+        tomatoes: [],
+        metacritic: []
+    };
+
+    var Movie = function (movie, rating) {
+        this.movie = movie;
+        this.rating = rating;
+    };
 
     for (var i = 0; i <  data.length; i++) {
-        movieRanking[data[i]["movie"]] = data[i]["imdb_rating"];
+        ratings.imdb[i] = new Movie(data[i]["movie"],data[i]["imdb"]);
+        ratings.tomatoes[i] = data[i]["tomatoes_rating"];
+        ratings.metacritic[i] = data[i]["metacritic_rating"];
+
     }
     console.log("movieRanking: " + movieRanking);
-    return movieRanking;
+    return ratings;
 }
 
 /*
@@ -329,7 +341,9 @@ function setupButtons() {
 
     d3.select('#imdb')
         .on('click', function() {
-            myRanking(movieRanking);
+            myRanking(movieRanking.imdb);
+            myRanking(movieRanking.tomatoes);
+            myRanking(movieRanking.metacritic);
         });
 
 }

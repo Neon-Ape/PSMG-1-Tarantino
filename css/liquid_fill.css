@@ -4,3 +4,11 @@ div#liquidfill {
 svg.liquidfill{
     margin: 18px;
 }
+
+.liquidFillGaugeText {
+    fill: var(--white-color);
+}
+
+.liquidFillOuterCircle {
+    fill: var(--darkgrey-color);
+}
