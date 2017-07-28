@@ -16,7 +16,7 @@ function bubbleChart() {
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
-  var center = { x: width * 0.4, y: height *0.8/ 2 };
+  var center = { x: width * 0.5, y: height *0.8/ 2 };
 
   var movieTitleX = {
     "Reservoir Dogs" : width*0.15,
