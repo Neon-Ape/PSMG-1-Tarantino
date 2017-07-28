@@ -34,10 +34,11 @@ function sankeyFlow(){
 
     var fillColor = d3.scaleOrdinal()
         .domain(['Reservoir Dogs', 'Pulp Fiction', 'Jackie Brown', 'Kill Bill: Vol. 1', 'Kill Bill: Vol. 2', 'Inglorious Basterds', 'Django Unchained', 'other'])
-        .range(['#d85e90', '#3c4e94', '#070707', '#ffda05','#ea1f18','#4a674a','#730000', 'grey']);
+        .range(['#ff3f8c', '#3c4e94', '#070707', '#ffda05','#ea1f18','#4a674a','#730000', 'grey']);
 
     // load the data
     var chart = function chart(selector, graph) {
+
 
         // append the svg object to the body of the page
         var svg = d3.select(selector).append("svg")
@@ -150,4 +151,4 @@ function sankeyFlow(){
         }
     };
     return chart;
-};
+}

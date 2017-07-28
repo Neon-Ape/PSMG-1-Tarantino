@@ -49,7 +49,7 @@ function lineGraph() {
         x2: VAR_LG_GRAPH_OFFSET_X + VAR_LG_GRAPH_WIDTH,
         y1: VAR_LG_GRAPH_HEIGHT,
         y2: VAR_LG_GRAPH_HEIGHT + VAR_LG_BARS_LINE_HEIGHT_BIG,
-        text: ''
+        text: '100%'
     };
 
     var svg2 = null;
