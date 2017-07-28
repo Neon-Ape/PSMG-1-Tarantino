@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/line_graph.css">
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/tab_layout.css">
+    <link rel="stylesheet" href="css/liquid_fill.css">
   <link rel="stylesheet" href="css/bar_chart.css">
   <link rel="stylesheet" href="css/sankey_v4.css">
 
@@ -28,6 +29,7 @@
     <img id="logo" src="./data/images/sh!t2.png" alt="logo"/>
     <div id="textbox">
       <h1 id="title">Cursewords and Deaths <br> in Tarantino Movies</h1>
+
       <p id="abstract">Welcome to the colourful world of profanity and death in Tarantino movies! Filmmaker Quentin Tarantino is notorious for the amount of cursing and killing of characters in his works, so on this site, you can explore seven selected Tarantino films and find out how, when, how often and in which movies people have cursed.
         In addition, you can find a comparison of the "deaths to curses"-ratio in his films and how high they were rated on the Internet Movie Database.
         Enjoy!</p>
@@ -41,7 +43,8 @@
         <button class="tablinks" onclick="openTab(event, 'LineGraph')"><h2>Line Graph</h2></button>
         <button class="tablinks" onclick="openTab(event, 'SankeyFlow')"><h2>Sankey Flow</h2></button>
         <button class="tablinks" onclick="openTab(event, 'BarChart')"><h2>Bar Chart</h2></button>
-        <button class="tablinks" onclick="openTab(event, 'IMDbChart')"><h2>IMDb Rating</h2></button>        
+        <button class="tablinks" id="imdb" onclick="openTab(event, 'IMDbChart')"><h2>IMDb Rating</h2></button>
+
       </div>
 
       <div id="Bubblechart" class="tabcontent">
@@ -100,11 +103,17 @@
       </div>
 
       <div id="IMDbChart" class="tabcontent">
-        <p class="tool-description">...</p>
-        <div id="imdbChart"></div>
+          <div id="liquidfill">
+              <div id="img1" class="cover"><svg id="imdbfillgauge1" class="liquidfill" width="130" height="250"></svg><svg id="tomatoesfillgauge1" class="liquidfill" width="130" height="250"></svg><svg id="metacriticfillgauge1" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img2" class="cover"><svg id="imdbfillgauge2" class="liquidfill" width="130" height="250"></svg><svg id="tomatoesfillgauge2" class="liquidfill" width="130" height="250"></svg><svg id="metacriticfillgauge2" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img3" class="cover"><svg id="imdbfillgauge3" class="liquidfill" width="130" height="250"></svg><svg id="tomatoesfillgauge3" class="liquidfill" width="130" height="250"></svg><svg id="metacriticfillgauge3" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img4" class="cover"><svg id="imdbfillgauge4" class="liquidfill" width="130" height="250"></svg><svg id="tomatoesfillgauge4" class="liquidfill" width="130" height="250"></svg><svg id="metacriticfillgauge4" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img5" class="cover"><svg id="imdbfillgauge5" class="liquidfill" width="130" height="250"></svg><svg id="tomatoesfillgauge5" class="liquidfill" width="130" height="250"></svg><svg id="metacriticfillgauge5" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img6" class="cover"><svg id="imdbfillgauge6" class="liquidfill" width="130" height="250"></svg><svg id="tomatoesfillgauge6" class="liquidfill" width="130" height="250"></svg><svg id="metacriticfillgauge6" class="liquidfill" width="130" height="250"></svg></div>
+              <div id="img7" class="cover"><svg id="imdbfillgauge7" class="liquidfill" width="130" height="250"></svg><svg id="tomatoesfillgauge7" class="liquidfill" width="130" height="250"></svg><svg id="metacriticfillgauge7" class="liquidfill" width="130" height="250"></svg></div>
+          </div>
       </div>
   </article>
-
   <div class="footer"></div>
   </div>
 
@@ -115,7 +124,6 @@
   <script src="src/tooltip.js"></script>
   <script src="src/bubble_chart.js"></script>
   <script type="text/javascript">document.getElementById("defaultOpen").click();</script>
-
   <script src="src/lineGraph/lineGraph_Classes.js"></script>
   <script src="src/lineGraph/lineGraph_createData.js"></script>
   <script src="src/lineGraph/lineGraph_makeSVG.js"></script>
@@ -124,8 +132,9 @@
   <script src="src/sankey.js"></script>
   <script src="src/sankey_flow.js"></script>
   <script src="src/getCovers.js"></script>
-
+  <script src="src/liquidFillGauge.js"></script>
   <script src="src/generateData.js"></script>
+
 
 </body>
 </html>

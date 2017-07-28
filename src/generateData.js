@@ -7,7 +7,9 @@
 var myBubbleChart = bubbleChart();
 var myLineGraph = lineGraph();
 var mySankeyFlow = sankeyFlow();
+var myRanking = liquidGauge();
 var wordTiming = null;
+var movieRanking = null;
 
 function runtimeLookup(data) {
     var runtimes = {};
@@ -216,8 +218,32 @@ function getExtraData(data) {
     for (var i = 0; i < data.length; i++) {
         movieDates[data[i]["movie"]] = data[i]["year"];
     }
+
     return movieDates;
 }
+
+function getMovieRankings(data){
+    var ratings = {
+        imdb: [],
+        tomatoes: [],
+        metacritic: []
+    };
+
+    var Movie = function (movie, rating) {
+        this.movie = movie;
+        this.rating = rating;
+    };
+
+    for (var i = 0; i <  data.length; i++) {
+        ratings.imdb[i] = new Movie(data[i]["movie"],data[i]["imdb"]);
+        ratings.tomatoes[i] = new Movie(data[i]["movie"],data[i]["rotten_tomatoes"]);
+        ratings.metacritic[i] = new Movie(data[i]["movie"], data[i]["metacritic"]);
+
+    }
+    console.log("movieRanking: " + movieRanking);
+    return ratings;
+}
+
 /*
  * Function called once data is loaded from CSV.
  * Calls bubble chart function to display inside #vis div.
@@ -235,10 +261,12 @@ function addExtraInfo(error, data) {
         wordTiming = makeTiming(data, extraData);
         var curseWords = makeCurseWords(data, movieDates);
         var sankeyFlow = makeSankey(curseWords);
+        movieRanking = getMovieRankings(extraData);
 
         myBubbleChart('#bubbleChart', curseWords);
         myLineGraph('#lineGraph', '#timeline', wordTiming, 20);
         mySankeyFlow('#sankeyFlow', sankeyFlow);
+
 
 
     });
@@ -309,6 +337,13 @@ function setupButtons() {
 
                 myLineGraph('#lineGraph', '#timeline', wordTiming, buttonId);
             }
+        });
+
+    d3.select('#imdb')
+        .on('click', function() {
+            myRanking("imdb",movieRanking.imdb);
+            myRanking("tomatoes",movieRanking.tomatoes);
+            myRanking("metacritic",movieRanking.metacritic);
         });
 
 }

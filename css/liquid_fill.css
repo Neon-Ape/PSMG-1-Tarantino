@@ -1,0 +1,14 @@
+div#liquidfill {
+    display: inline;
+}
+svg.liquidfill{
+    margin: 18px;
+}
+
+.liquidFillGaugeText {
+    fill: var(--white-color);
+}
+
+.liquidFillOuterCircle {
+    fill: var(--darkgrey-color);
+}

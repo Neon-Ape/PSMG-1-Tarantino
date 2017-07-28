@@ -1,4 +1,5 @@
-#graphSelect img {
+#graphSelect img,
+#liquidfill img{
     width: 150px;
     padding: 4px 5px;
     margin-right: 6px;
