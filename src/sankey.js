@@ -1,3 +1,15 @@
+/**
+ * Code from Clau Dermont: https://bl.ocks.org/cdermont/846051eb548e846eac60
+ *
+ * Where not otherwise covered by separate copyright or license:
+ * [![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+ * This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+ *
+ * The code of Clau Dermont uses d3 v3. In this code were updates made to v4 used from the following code example: https://bl.ocks.org/d3noob/013054e8d7807dff76247b81b0e29030
+ */
+
+/* Used as a blackbox for the Sankey Flow */
+
 d3.sankey = function() {
     var sankey = {},
         nodeWidth = VAR_SF_NODE_WIDTH,
@@ -7,31 +19,41 @@ d3.sankey = function() {
         links = [];
 
     sankey.nodeWidth = function(_) {
-        if (!arguments.length) return nodeWidth;
+        if (!arguments.length) {
+            return nodeWidth;
+        }
         nodeWidth = +_;
         return sankey;
     };
 
     sankey.nodePadding = function(_) {
-        if (!arguments.length) return nodePadding;
+        if (!arguments.length) {
+            return nodePadding;
+        }
         nodePadding = +_;
         return sankey;
     };
 
     sankey.nodes = function(_) {
-        if (!arguments.length) return nodes;
+        if (!arguments.length) {
+            return nodes;
+        }
         nodes = _;
         return sankey;
     };
 
     sankey.links = function(_) {
-        if (!arguments.length) return links;
+        if (!arguments.length) {
+            return links;
+        }
         links = _;
         return sankey;
     };
 
     sankey.size = function(_) {
-        if (!arguments.length) return size;
+        if (!arguments.length) {
+            return size;
+        }
         size = _;
         return sankey;
     };
@@ -68,11 +90,12 @@ d3.sankey = function() {
         }
 
         link.curvature = function(_) {
-            if (!arguments.length) return curvature;
+            if (!arguments.length) {
+                return curvature;
+            }
             curvature = +_;
             return link;
         };
-
         return link;
     };
 
@@ -86,8 +109,12 @@ d3.sankey = function() {
         links.forEach(function(link) {
             var source = link.source,
                 target = link.target;
-            if (typeof source === "number") source = link.source = nodes[link.source];
-            if (typeof target === "number") target = link.target = nodes[link.target];
+            if (typeof source === "number") {
+                source = link.source = nodes[link.source];
+            }
+            if (typeof target === "number") {
+                target = link.target = nodes[link.target];
+            }
             source.sourceLinks.push(link);
             target.targetLinks.push(link);
         });
@@ -130,14 +157,6 @@ d3.sankey = function() {
         //
         moveSinksRight(x);
         scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
-    }
-
-    function moveSourcesRight() {
-        nodes.forEach(function(node) {
-            if (!node.targetLinks.length) {
-                node.x = d3.min(node.sourceLinks, function(d) { return d.target.x; }) - 1;
-            }
-        });
     }
 
     function moveSinksRight(x) {
@@ -189,7 +208,7 @@ d3.sankey = function() {
         }
 
         function relaxLeftToRight(alpha) {
-            nodesByBreadth.forEach(function(nodes, breadth) {
+            nodesByBreadth.forEach(function(nodes) {
                 nodes.forEach(function(node) {
                     if (node.targetLinks.length) {
                         var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
@@ -231,7 +250,9 @@ d3.sankey = function() {
                 for (i = 0; i < n; ++i) {
                     node = nodes[i];
                     dy = y0 - node.y;
-                    if (dy > 0) node.y += dy;
+                    if (dy > 0) {
+                        node.y += dy;
+                    }
                     y0 = node.y + node.dy + nodePadding;
                 }
 
@@ -244,7 +265,9 @@ d3.sankey = function() {
                     for (i = n - 2; i >= 0; --i) {
                         node = nodes[i];
                         dy = node.y + node.dy + nodePadding - y0;
-                        if (dy > 0) node.y -= dy;
+                        if (dy > 0) {
+                            node.y -= dy;
+                        }
                         y0 = node.y;
                     }
                 }
@@ -289,6 +312,5 @@ d3.sankey = function() {
     function value(link) {
         return link.value;
     }
-
     return sankey;
 };

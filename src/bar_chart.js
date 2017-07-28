@@ -4,49 +4,48 @@
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 (function barChart() {
-
-  d3.csv('https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/data/tarantino.csv', function(err, data) {
+  "use strict";
+  d3.csv("https://raw.githubusercontent.com/Neon-Ape/PSMG-1-Tarantino/master/data/tarantino.csv", function(err, data) {
 
   var wordOrDeath = ["word","death"];
   var movies = ["Reservoir Dogs", "Pulp Fiction", "Jackie Brown", "Kill Bill: Vol. 1", "Kill Bill: Vol. 2", "Inglorious Basterds", "Django Unchained"];
 
   //"pivot" the data into deaths and words by movie
   var groups = {};
-  var categories = {};
   var saveResult = {};
 
   var xkey = "type";
   var gkey = "movie"; // what we group by
 
-  var tooltip = floatingTooltip('gates_tooltip', 240);
-  var tooltipData = [];
+  var tooltip = floatingTooltip("gates_tooltip", VAR_TOOLTIP_GATES);
 
   // group all the events by type
   data.forEach(function(d) {
     if(!groups[d[gkey]]) {
       groups[d[gkey]] = [d];
     } else {
-      groups[d[gkey]].push(d)
+      groups[d[gkey]].push(d);
     }
   });
+
   var processed = [];
+
   //count how many incidents happended for each movie
-  movies.forEach(function(movie,i) {
+  movies.forEach(function(movie) {
     var xdata = {};
     groups[movie].forEach(function(event) {
       if(!xdata[event[xkey]]) {
-        xdata[event[xkey]] = 1
+        xdata[event[xkey]] = 1;
       } else {
         xdata[event[xkey]]++;
       }
     });
-
 
     // "result" is an ordered array with a count for each movie
      var result = [];
@@ -54,11 +53,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         result[g]= xdata[g]||0;
         saveResult[g] = result[g];
     });
-    processed.push(result)
+    processed.push(result);
   });
 
-  var n = wordOrDeath.length, // number of layers
-      m = processed.length, // number of samples per layer
+  var m = processed.length, // number of samples per layer
       stack = d3.stack().keys(wordOrDeath);
 
   var layers = stack(processed); // calculate the stack layout
@@ -67,8 +65,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         d.forEach(function(dd,j){
             dd.movie = movies[j];
             dd.type = wordOrDeath[i];
-        })
+        });
     });
+
   var yGroupMax = d3.max(layers, function(layer) {
       return d3.max(layer, function(d) {
         return d[1] - d[0];
@@ -90,9 +89,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       .range([VAR_HEIGHT_BC, 0]);
   var z = d3.scaleBand().domain(wordOrDeath).rangeRound([0, x.bandwidth()]);
 
+  // defines a color for each category
   var color = d3.scaleOrdinal()
-    .domain(['word', 'death'])
-    .range(['#c09551', '#5f1020']);
+    .domain(["word", "death"])
+    .range(["#c09551", "#5f1020"]);
 
   var svg = d3.select("#barChart").append("svg")
       .attr("width", VAR_WIDTH_BC + VAR_MARGIN_BC.left + VAR_MARGIN_BC.right)
@@ -106,6 +106,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       .attr("class", "layer")
       .style("fill", function(d, i) { return color(i); });
 
+  // appends the bars and adds a tooltip when hovering
   var rect = layer.selectAll("rect")
       .data(function(d) { return d; })
     .enter().append("rect")
@@ -115,9 +116,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       .attr("y", VAR_HEIGHT_BC)
       .attr("width", x.bandwidth())
       .attr("height", 0)
-      .on('mouseover', showDetail)
-      .on('mouseout', hideDetail);
+      .on("mouseover", showDetail)
+      .on("mouseout", hideDetail);
 
+  // movement of the bars
   rect.transition()
       .delay(function(d, i) { return i * 10; })
       .attr("y", function(d) {
@@ -127,6 +129,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
           return y(d[0]) - y(d[1]);
       });
 
+  // creates the coordinate system
   svg.append("g")
       .attr("class", "xaxis")
       .attr("transform", "translate("+ VAR_AXIS_POSITION_BARCHART+"," + VAR_HEIGHT_BC + ")")
@@ -137,6 +140,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       .attr("transform", "translate("+ VAR_AXIS_POSITION_BARCHART+",0)")
       .call(d3.axisLeft(y).tickSizeOuter(0));
 
+  // defines and creates legend of the bar chart
   var legend = svg.selectAll(".legend")
       .data(wordOrDeath)
     .enter().append("g")
@@ -147,8 +151,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       .attr("x", VAR_WIDTH_BC - 18)
       .attr("width", 25)
       .attr("height", 25)
-      .style("fill", function(d,i) { return color(i) });
-
+      .style("fill", function(d,i) {
+          return color(i);
+      });
 
   legend.append("text")
       .attr("x", VAR_WIDTH_BC - 24)
@@ -160,16 +165,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   d3.selectAll("input").on("change", change);
 
+  // handles button selection
   var timeout = setTimeout(function() {
     d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
   }, 2000);
 
+  // changes between stacked and grouped bar chart
   function change() {
     clearTimeout(timeout);
-    if (this.value === "grouped") transitionGrouped();
-    else transitionStacked();
+      if (this.value !== "grouped") {
+          transitionStacked();
+      } else {
+          transitionGrouped();
+      }
   }
 
+  // orders the bar chart to a grouped-layout
   function transitionGrouped() {
     y.domain([0, yGroupMax]);
     rect.transition()
@@ -188,6 +199,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 });
   }
 
+  // orders the bar chart to a stacked-layout
   function transitionStacked() {
     y.domain([0, yStackMax]);
 
@@ -211,12 +223,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       tooltip.showTooltip(content, d3.event);
   }
 
-  /* hides tooltip */
+  // hides tooltip
   function hideDetail() {
       tooltip.hideTooltip();
   }
-
 });
-
-
 }());
