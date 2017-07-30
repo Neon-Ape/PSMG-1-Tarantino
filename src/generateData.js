@@ -225,8 +225,8 @@ function getExtraData(data) {
 function getMovieRankings(data){
     var ratings = {
         imdb: [],
-        tomatoes: [],
-        metacritic: []
+        tomatoes: []
+        //metacritic: []
     };
 
     var Movie = function (movie, rating) {
@@ -237,7 +237,7 @@ function getMovieRankings(data){
     for (var i = 0; i <  data.length; i++) {
         ratings.imdb[i] = new Movie(data[i]["movie"],data[i]["imdb"]);
         ratings.tomatoes[i] = new Movie(data[i]["movie"],data[i]["rotten_tomatoes"]);
-        ratings.metacritic[i] = new Movie(data[i]["movie"], data[i]["metacritic"]);
+        //ratings.metacritic[i] = new Movie(data[i]["movie"], data[i]["metacritic"]);
 
     }
     console.log("movieRanking: " + movieRanking);
@@ -343,7 +343,7 @@ function setupButtons() {
         .on('click', function() {
             myRanking("imdb",movieRanking.imdb);
             myRanking("tomatoes",movieRanking.tomatoes);
-            myRanking("metacritic",movieRanking.metacritic);
+            //myRanking("metacritic",movieRanking.metacritic);
         });
 
 }
