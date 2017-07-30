@@ -47,18 +47,14 @@ function liquidGauge() {
     config.displayPercent = false;
     config.valueCountUp = true;
 
+    // Make the chart
     var chart = function (ratingType, data) {
-        console.log(data);
         for (var i = 0; i < data.length; i++) {
            loadLiquidFillGauge(ratingType + "fillgauge" + (i+1), data[i].rating, VAR_GET_CLASS(data[i].movie),config);
-           console.log(ratingType + "fillgauge" + (i+1));
-
         }
     };
 
     function loadLiquidFillGauge(elementId, value, circleClass, config) {
-        console.log("Liquidgauge( elementId: " + elementId + ", value: " + value + ")");
-        console.log(config);
         if (config === null) {
             config = liquidFillGaugeDefaultSettings();
         }
@@ -68,8 +64,6 @@ function liquidGauge() {
         var locationX = parseInt(gauge.style("width")) / 2 - radius;
         var locationY = parseInt(gauge.style("height")) / 2 - radius;
         var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value)) / config.maxValue;
-
-        console.log("some Variables set!");
 
         var waveHeightScale;
         if (config.waveHeightScaling) {
@@ -84,7 +78,6 @@ function liquidGauge() {
 
         var textPixels = (config.textSize * radius / 2);
         var textFinalValue = parseFloat(value).toFixed(2);
-        console.log(textFinalValue);
         var textStartValue = config.valueCountUp ? config.minValue : textFinalValue;
         var percentText = config.displayPercent ? "%" : "";
         var circleThickness = config.circleThickness * radius;
@@ -92,7 +85,6 @@ function liquidGauge() {
         var fillCircleMargin = circleThickness + circleFillGap;
         var fillCircleRadius = radius - fillCircleMargin;
         var waveHeight = fillCircleRadius * waveHeightScale(fillPercent * 100);
-
         var waveLength = fillCircleRadius * 2 / config.waveCount;
         var waveClipCount = 1 + config.waveCount;
         var waveClipWidth = waveLength * waveClipCount;
@@ -111,8 +103,6 @@ function liquidGauge() {
                 return parseFloat(value).toFixed(2);
             };
         }
-
-        console.log("all variables set!");
 
         // Data for building the clip wave area.
         var data = [];
@@ -213,9 +203,8 @@ function liquidGauge() {
                     const i = d3.interpolateNumber(text1InterpolatorValue, textFinalValue);
                     return function(t){
                         text1InterpolatorValue = textRounder(i(t));
-                        // Set the gauge's text with the new value and append the % sign
-                        // to the end
-                        text1.text(text1InterpolatorValue + percentText);
+                        // Set the gauge's text with the new value
+                        text1.text(text1InterpolatorValue);
                     }
                 });
             text2.transition()
@@ -224,9 +213,8 @@ function liquidGauge() {
                     const i = d3.interpolateNumber(text2InterpolatorValue, textFinalValue);
                     return function(t){
                         text2InterpolatorValue = textRounder(i(t));
-                        // Set the gauge's text with the new value and append the % sign
-                        // to the end
-                        text2.text(text2InterpolatorValue + percentText);
+                        // Set the gauge's text with the new value
+                        text2.text(text2InterpolatorValue);
                     }
                 });
         }
@@ -245,9 +233,6 @@ function liquidGauge() {
             waveGroup.attr('transform', 'translate(' + waveGroupXPosition + ',' + waveRiseScale(fillPercent) + ')');
         }
 
-        console.log("Stuff set");
-        console.log(config.waveAnimate);
-
         if (config.waveAnimate) {
             animateWave();
         }
@@ -256,22 +241,17 @@ function liquidGauge() {
             wave.attr('transform', 'translate(' + waveAnimateScale(wave.attr('T')) + ',0)');
             wave.transition()
                 .duration(config.waveAnimateTime * (1 - wave.attr('T')));
-            console.log("set duration");
             wave.transition()
                 .ease(d3.easeLinear);
-            console.log("set ease");
             wave.transition()
                 .attr('transform', 'translate(' + waveAnimateScale(1) + ',0)');
-            console.log("set attr(transform)");
             wave.transition()
                 .attr('T', 1);
-            console.log("set attr(T");
             wave.transition()
                 .on('end', function () {
                     wave.attr('T', 0);
                     //animateWave();
                 });
-            console.log("animateWave finished");
         }
     }
     return chart;
