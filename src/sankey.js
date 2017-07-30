@@ -249,7 +249,7 @@ d3.sankey = function() {
                 nodes.sort(ascendingDepth);
                 for (i = 0; i < n; ++i) {
                     node = nodes[i];
-                    dy = y0 - node.y;
+                    dy = (y0 - node.y) + 20;
                     if (dy > 0) {
                         node.y += dy;
                     }

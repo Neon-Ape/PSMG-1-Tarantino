@@ -23,7 +23,7 @@ function sankeyFlow() {
     // defines the color of the nodes and the links for each movie and the curse words
     var fillColor = d3.scaleOrdinal()
         .domain(["Reservoir Dogs", "Pulp Fiction", "Jackie Brown", "Kill Bill: Vol. 1", "Kill Bill: Vol. 2", "Inglorious Basterds", "Django Unchained", "other"])
-        .range(["#ff3f8c", "#3c4e94", "#070707", "#ffda05", "#ea1f18","#4a674a","#730000", "grey"]);
+        .range(["#ff3f8c", "#322d8e", "#050505", "#ffda05", "#ad0101", "#203020","#490000", "#a38f85"]);
 
     // load the data
     var chart = function chart(selector, graph) {
