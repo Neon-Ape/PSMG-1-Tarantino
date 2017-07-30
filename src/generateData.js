@@ -313,7 +313,7 @@ function setupButtons() {
             // Get the id of the button
             var buttonId = button.attr('id');
 
-            // Toggle the bubble chart based on
+            // Toggle the line graph based on
             // the currently clicked button.
             myLineGraph.toggleDisplay(buttonId);
         });
