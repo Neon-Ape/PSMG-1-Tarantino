@@ -86,7 +86,7 @@ function sankeyFlow() {
             });
 
         // add in the title for the nodes
-        node.append("text")
+        var text = node.append("text")
             .attr("x", 45)
             .attr("y", function(d) { return d.dy / 4; })
             .attr("dy", ".35em")
@@ -95,7 +95,10 @@ function sankeyFlow() {
             .text(function(d) { return d.name; })
             .filter(function(d) { return d.x < VAR_SF_WIDTH / 2; })
             .attr("x", -55 + sankey.nodeWidth())
-            .attr("text-anchor", "end");
+            .attr("text-anchor", "end")
+            .style("font-size", "13px");
+
+        node.selectAll("text").style("letter-spacing", "0.7px");
 
         // Fade-Effect on mouseover
         node.on("mouseover", function(d) {

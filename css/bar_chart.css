@@ -35,7 +35,6 @@ input[type="radio"]:checked+label{
 .tick {
   font-size: 18px;
   font-family: "Oswald", sans serif;
-  fill: var(--white-color) !important;
 }
 
 .radio {
