@@ -1,16 +1,5 @@
-/*
- * This data manipulation function takes the raw data from
- * the CSV file and converts it into an array of node objects.
- * Each node will store data and visualization values to visualize
- * a bubble.
- *
- * rawData is expected to be an array of data objects, read in from
- * one of d3's loading functions like d3.csv.
- *
- * This function returns the new node array, with a node in that
- * array for each element in the rawData input.
- */
-
+// created node data out of raw data, returns array of Nodes
+// the NodeFactory Class handles most of the heavy lifting
 function createNodes(data, separator) {
 
     var width = VAR_LG_GRAPH_WIDTH;
@@ -56,6 +45,7 @@ function createNodes(data, separator) {
     return myNodes.getNodes();
 }
 
+// connect all the nodes of every movie one by one
 function createLinks(nodes) {
     function Link(source, target, movie) {
         this.movie = movie;
@@ -68,12 +58,11 @@ function createLinks(nodes) {
             myLinks.push(new Link(nodes[i], nodes[i + 1], nodes[i].movie));
         }
     }
-
     console.log(myLinks);
     return myLinks;
-
 }
 
+// add a bar for every step of the graph
 function createBars(separator) {
     function Bar(x,y,width,height,step) {
         this.x = x;
@@ -85,12 +74,43 @@ function createBars(separator) {
     var barWidth = VAR_LG_GRAPH_WIDTH/separator;
     var myBars = [];
     for (var i = 0; i < separator; i++) {
-        myBars.push(new Bar((i)*barWidth+VAR_LG_GRAPH_OFFSET_X,VAR_LG_BARS_Y,barWidth, VAR_LG_BARS_HEIGHT, i));
-
+        myBars.push(new Bar(
+            i*barWidth+VAR_LG_GRAPH_OFFSET_X,
+            VAR_LG_BARS_Y,
+            barWidth,
+            VAR_LG_BARS_HEIGHT,
+            i
+        ));
     }
 
     console.log(myBars);
     return myBars;
+}
+
+// Calculates the maximum scale value
+function calculateScaleStep(nodeData) {
+    var maxValue = d3.max(nodeData, function (d) {
+        return d.count;
+    });
+    return Math.ceil(maxValue / 10);
+}
+
+// Create y-Axis Scale Data
+function createScale(scaleStep, scaleMax) {
+    // Object for lines and text
+    function Step(step, scaleStep) {
+        this.x1 = 0;
+        this.y1 = VAR_LG_GRAPH_HEIGHT - step * scaleStep;
+        this.x2 = VAR_LG_GRAPH_CUTOFF_X;
+        this.y2 = VAR_LG_GRAPH_HEIGHT - step * scaleStep;
+        this.text = step * 10;
+    }
+    // Generate axis data
+    var scaleData = [];
+    for (var i = 0; i <= scaleMax; i++) {
+        scaleData.push(new Step(i, scaleStep))
+    }
+    return scaleData;
 }
 
 
