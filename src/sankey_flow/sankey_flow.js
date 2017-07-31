@@ -96,9 +96,9 @@ function sankeyFlow() {
             .filter(function(d) { return d.x < VAR_SF_WIDTH / 2; })
             .attr("x", -55 + sankey.nodeWidth())
             .attr("text-anchor", "end")
-            .style("font-size", "13px");
+            .style("font-size", "14px");
 
-        node.selectAll("text").style("letter-spacing", "0.7px");
+        node.selectAll("text").style("letter-spacing", "0.8px");
 
         // Fade-Effect on mouseover
         node.on("mouseover", function(d) {
