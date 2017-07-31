@@ -2,6 +2,9 @@
  * instantiate a new bubble chart given a DOM element to display
  * it in and a dataset to visualize.
  *
+ * Basic Code Structure adapted from:
+ * http://vallandingham.me//bubble_charts_with_d3v4.html
+ *
  * Organization and style inspired by:
  * https://bost.ocks.org/mike/chart/
  *
