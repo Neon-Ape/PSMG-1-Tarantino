@@ -23,7 +23,7 @@ function sankeyFlow() {
     // defines the color of the nodes and the links for each movie and the curse words
     var fillColor = d3.scaleOrdinal()
         .domain(["Reservoir Dogs", "Pulp Fiction", "Jackie Brown", "Kill Bill: Vol. 1", "Kill Bill: Vol. 2", "Inglorious Basterds", "Django Unchained", "other"])
-        .range(["#ff3f8c", "#322d8e", "#050505", "#ffda05", "#ad0101", "#203020","#490000", "#a38f85"]);
+        .range(["#ff3f8c", "#322d8e", "#050505", "#ffda05", "#ad0101", "#203020","#490000", "#cea794"]);
 
     // load the data
     var chart = function chart(selector, graph) {
@@ -78,7 +78,7 @@ function sankeyFlow() {
         // add the rectangles for the nodes
         var rect = node.append("rect")
             .attr("height", function(d) {
-                return d.dy / 2 + 1;
+                return d.dy / 2 + 4;
             })
             .attr("width", sankey.nodeWidth())
             .style("fill", function(d){
@@ -103,19 +103,19 @@ function sankeyFlow() {
         // Fade-Effect on mouseover
         node.on("mouseover", function(d) {
             link.transition()
-                .duration(700)
+                .duration(VAR_SF_DURATION)
                 .style("opacity", 0.1);
 
             link.filter(function(s) { return d.name === s.source.name; }).transition()
-                .duration(700)
+                .duration(VAR_SF_DURATION)
                 .style("opacity", 1);
             link.filter(function(t) { return d.name === t.target.name; }).transition()
-                .duration(700)
+                .duration(VAR_SF_DURATION)
                 .style("opacity", 1);
             showNodeDetail(d);
         });
         node.on("mouseout", function() { svg.selectAll(".link").transition()
-                .duration(700)
+                .duration(VAR_SF_DURATION)
                 .style("opacity", 1);
                 hideDetail();
                 });
@@ -124,6 +124,8 @@ function sankeyFlow() {
         function showNodeDetail(d) {
             var content = '<span class="name">Word occurrences: </span><span class="value">' +
                 d.value +
+                '</span><br/>' + '<span class="name">Name: </span><span class="value">' +
+                d.name +
                 '</span><br/>';
             tooltip.showTooltip(content, d3.event);
         }

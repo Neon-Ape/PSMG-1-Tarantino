@@ -86,6 +86,7 @@ var VAR_SF_MARGIN_LEFT = 135;
 var VAR_SF_GRAPH_HEIGHT = 2000;
 var VAR_SF_NODE_WIDTH = 25;
 var VAR_SF_NODE_PADDING = 18;
+var VAR_SF_DURATION = 500;
 
 // set the dimensions and margins of the graph
 var VAR_SF_MARGIN= {top: VAR_SF_MARGIN_TOP, right: VAR_SF_MARGIN_RIGHT, bottom: VAR_SF_MARGIN_BOTTOM, left: VAR_SF_MARGIN_LEFT};
