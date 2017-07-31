@@ -53,3 +53,16 @@ a, a:visited, a:active {
   fill: var(--other-color);
   stroke: var(--jackie-color);
 }
+
+.ass:hover,
+.shit:hover,
+.fuck:hover{
+    stroke: var(--jackie-color);
+}
+
+.genital:hover,
+.blasphemy:hover,
+.other:hover,
+.racial:hover  {
+    stroke: var(--sand-color);
+}

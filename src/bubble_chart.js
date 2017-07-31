@@ -12,7 +12,7 @@ function bubbleChart() {
     var height = VAR_BC_SVG_HEIGHT;
 
     // tooltip for mouseover functionality
-    var tooltip = floatingTooltip('gates_tooltip', VAR_BC_TOOLTIP_WIDTH);
+    var tooltip = floatingTooltip(VAR_BC_TOOLTIP_TITLE, VAR_BC_TOOLTIP_WIDTH);
 
     // Locations to move bubbles towards, depending
     // on which view mode is selected.
@@ -24,9 +24,7 @@ function bubbleChart() {
 
     var groupCenters = VAR_BC_GROUP_CENTER_LOOKUP;
 
-    console.log(movieCenters);
-
-    // @v4 strength to apply to the position forces
+    // strength to apply to the position forces
     var forceStrength = VAR_BC_SIMU_FORCE_STRENGTH;
 
     // These will be set in create_nodes and create_vis
@@ -46,14 +44,14 @@ function bubbleChart() {
     // detection with nodes of different sizes.
     //
     // Charge is negative because we want nodes to repel.
-    // @v4 Before the charge was a stand-alone attribute
+    // Before the charge was a stand-alone attribute
     //  of the force layout. Now we can use it as a separate force!
     function charge(d) {
         return -Math.pow(d.radius, VAR_BC_SIMU_CHARGE_MULTIPLIER) * forceStrength;
     }
 
     // Here we create a force layout and
-    // @v4 We create a force simulation now and
+    // We create a force simulation now and
     //  add forces to it.
     var simulation = d3.forceSimulation()
         .velocityDecay(VAR_BC_SIMU_VELOCITY_DECAY)
@@ -62,12 +60,12 @@ function bubbleChart() {
         .force('charge', d3.forceManyBody().strength(charge))
         .on('tick', ticked);
 
-    // @v4 Force starts up automatically,
+    // Force starts up automatically,
     //  which we don't want as there aren't any nodes yet.
     simulation.stop();
 
     // Nice looking colors - no reason to buck the trend
-    // @v4 scales now have a flattened naming scheme
+    // scales now have a flattened naming scheme
     var fillColor = d3.scaleOrdinal()
         .domain(['ass', 'shit', 'fuck', 'racial', 'genital', 'blasphemy', 'other'])
         .range(['#fdfdfd', '#d4d4d4', '#aaaaaa', '#7f7f7f', '#555555', '#2a2a2a', '#070707']);
@@ -92,7 +90,6 @@ function bubbleChart() {
 
 
         // Sizes bubbles based on area.
-        // @v4: new flattened scale names.
         var radiusScale = d3.scalePow()
             .exponent(VAR_BC_SIMU_SCALE_POW['exponent'])
             .range([VAR_BC_SIMU_SCALE_POW['range']['low'], VAR_BC_SIMU_SCALE_POW['range']['high']])
@@ -122,6 +119,35 @@ function bubbleChart() {
     }
 
 
+
+    function makeBubbles(svg, nodes) {
+        // Bind nodes data to what will become DOM elements to represent them.
+        bubbles = svg.selectAll('.bubble')
+            .data(nodes, function (d) {
+                return d.id;
+            });
+
+        // Create new circle elements each with class `bubble`.
+        // There will be one circle.bubble for each object in the nodes array.
+        // Initially, their radius (r attribute) will be 0.
+        // Class the bubbles by group, so styling can be handled in CSS
+        var bubblesE = bubbles.enter().append('circle')
+            .classed('bubble', true)
+            .each(function (d) {
+                d3.select(this).classed(d.group, true);
+            })
+            .attr('r', 0)
+            .attr('stroke-width', VAR_BC_SVG_BUBBLE_STROKE_WIDTH)
+            .on('mouseover', showDetail)
+            .on('mouseout', hideDetail);
+
+        // Merge the original empty selection and the enter selection
+        bubbles = bubbles.merge(bubblesE);
+
+        return bubbles;
+    }
+
+
     /*
      * Main entry point to the bubble chart. This function is returned
      * by the parent closure. It prepares the rawData for visualization
@@ -146,29 +172,8 @@ function bubbleChart() {
             .attr('width', width)
             .attr('height', height);
 
-        // Bind nodes data to what will become DOM elements to represent them.
-        bubbles = svg.selectAll('.bubble')
-            .data(nodes, function (d) {
-                return d.id;
-            });
-
-        // Create new circle elements each with class `bubble`.
-        // There will be one circle.bubble for each object in the nodes array.
-        // Initially, their radius (r attribute) will be 0.
-        // @v4 Selections are immutable, so lets capture the
-        //  enter selection to apply our transtition to below.
-        var bubblesE = bubbles.enter().append('circle')
-            .classed('bubble', true)
-            .each(function (d) {
-                d3.select(this).classed(d.group, true);
-            })
-            .attr('r', 0)
-            .attr('stroke-width', VAR_BC_SVG_BUBBLE_STROKE_WIDTH)
-            .on('mouseover', showDetail)
-            .on('mouseout', hideDetail);
-
-        // @v4 Merge the original empty selection and the enter selection
-        bubbles = bubbles.merge(bubblesE);
+        // create bubbles in the selected SVG element with the selected Data
+        var bubbles = makeBubbles(svg, nodes);
 
         // Fancy transition to make bubbles appear, ending with the
         // correct radius
@@ -179,7 +184,7 @@ function bubbleChart() {
             });
 
         // Set the simulation's nodes to our newly created nodes array.
-        // @v4 Once we set the nodes, the simulation will start running automatically!
+        // Once we set the nodes, the simulation will start running automatically!
         simulation.nodes(nodes);
 
         // Set initial layout to single group.
@@ -204,83 +209,94 @@ function bubbleChart() {
     }
 
     /*
-     * Provides a x value for each node to be used with the split by year
-     * x force.
+     * Provides a x value for each node to be used with the split by movie
      */
-    function nodeYearPosX(d) {
+    function nodeMoviePosX(d) {
         return movieCenters[d.movie].x;
     }
 
-    function nodeYearPosY(d) {
+    /*
+     * Provides a y value for each node to be used with the split by movie
+     */
+    function nodeMoviePosY(d) {
         return movieCenters[d.movie].y;
     }
 
+    /*
+     * Provides a y value for each node to be used with the split by group
+     */
     function nodeGroupPos(d) {
         return groupCenters[d.group].y;
     }
 
     /*
      * Sets visualization in "single group mode".
-     * The year labels are hidden and the force layout
+     * The movie labels are hidden and the force layout
      * tick function is set to move all nodes to the
      * center of the visualization.
      */
     function groupBubbles() {
         hideMovieTitles();
 
-        // @v4 Reset the 'x' force to draw the bubbles to the center.
+        // Reset the 'x' and 'y' force to draw the bubbles to the center.
         simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
         simulation.force('y', d3.forceY().strength(forceStrength).y(center.y));
 
-        // @v4 We can reset the alpha value and restart the simulation
+        // We can reset the alpha value and restart the simulation
         simulation.alpha(1).restart();
     }
 
 
     /*
-     * Sets visualization in "split by year mode".
-     * The year labels are shown and the force layout
+     * Sets visualization in "split by movie mode".
+     * The movie title labels are shown and the force layout
      * tick function is set to move nodes to the
-     * yearCenter of their data's year.
+     * movieTitleCenter of their data's movie.
      */
     function splitBubbles() {
         showMovieTitles();
 
-        // @v4 Reset the 'x' force to draw the bubbles to their year center
-        simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPosX));
-        simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYearPosY));
+        // Reset the 'x' and 'y' force to draw the bubbles to their movie center
+        simulation.force('x', d3.forceX().strength(forceStrength).x(nodeMoviePosX));
+        simulation.force('y', d3.forceY().strength(forceStrength).y(nodeMoviePosY));
 
 
-        // @v4 We can reset the alpha value and restart the simulation
+        // We can reset the alpha value and restart the simulation
         simulation.alpha(1).restart();
     }
 
+
+    /*
+     * Sets visualization in "split by group mode".
+     * The force layout tick function is set to move nodes to the
+     * groupCenter of their data's group.
+     */
     function vertSplitBubbles() {
-        // @v4 Reset the 'x' force to draw the bubbles to their year center
+        // Reset the 'y' force to draw the bubbles to their group center
         simulation.force('y', d3.forceY().strength(forceStrength).y(nodeGroupPos));
 
 
-        // @v4 We can reset the alpha value and restart the simulation
+        // We can reset the alpha value and restart the simulation
         simulation.alpha(1).restart();
 
     }
 
     /*
-     * Hides Year title displays.
+     * Hides Movie title displays.
      */
     function hideMovieTitles() {
         svg.selectAll('.movietitle').remove();
     }
 
     /*
-     * Shows Year title displays.
+     * Shows Movie title displays.
      */
     function showMovieTitles() {
         // Another way to do this would be to create
-        // the year texts once and then just hide them.
-        var yearsData = d3.keys(movieTitleX);
+        // the movie texts once and then just hide them.
+        var moviesData = d3.keys(movieTitleX);
         var movieTitles = svg.selectAll('.movietitle')
-            .data(yearsData);
+            .data(moviesData);
 
         movieTitles.enter().append('text')
             .attr('class', 'movietitle')
@@ -332,12 +348,12 @@ function bubbleChart() {
     /*
      * Externally accessible function (this is attached to the
      * returned chart function). Allows the visualization to toggle
-     * between "single group" and "split by year" modes.
+     * between "single group", "split by movie" and "split by group" modes.
      *
-     * displayName is expected to be a string and either 'year' or 'all'.
+     * displayName is expected to be a string and either 'movie', 'group' or 'all'.
      */
     chart.toggleDisplay = function (displayName) {
-        if (displayName === 'year') {
+        if (displayName === 'movie') {
             splitBubbles();
         } else if (displayName === 'group') {
             vertSplitBubbles();
