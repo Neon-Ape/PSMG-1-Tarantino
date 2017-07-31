@@ -122,10 +122,10 @@ function sankeyFlow() {
 
         // Function called on mouseover to display node details in a tooltip
         function showNodeDetail(d) {
-            var content = '<span class="name">Word occurrences: </span><span class="value">' +
-                d.value +
-                '</span><br/>' + '<span class="name">Name: </span><span class="value">' +
+            var content = '<span class="name">Term: </span><span class="value">' +
                 d.name +
+                '</span><br/>' + '<span class="name">Word occurrences: </span><span class="value">' +
+                d.value +
                 '</span><br/>';
             tooltip.showTooltip(content, d3.event);
         }
