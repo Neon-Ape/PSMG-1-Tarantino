@@ -18,3 +18,38 @@ a, a:visited, a:active {
   fill: var(--darkgrey-color);
   cursor: default;
 }
+
+.ass {
+  fill: var(--ass-color);
+  stroke: var(--shit-color);
+}
+
+.shit {
+  fill: var(--shit-color);
+  stroke: var(--fuck-color);
+}
+
+.fuck {
+  fill: var(--fuck-color);
+  stroke: var(--racial-color);
+}
+
+.racial {
+  fill: var(--racial-color);
+  stroke: var(--genital-color);
+}
+
+.genital {
+  fill: var(--genital-color);
+  stroke: var(--blasphemy-color);
+}
+
+.blasphemy {
+  fill: var(--blasphemy-color);
+  stroke: var(--other-color);
+}
+
+.other {
+  fill: var(--other-color);
+  stroke: var(--other-color);
+}

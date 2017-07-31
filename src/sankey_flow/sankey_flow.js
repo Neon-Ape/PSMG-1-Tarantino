@@ -10,7 +10,7 @@
 
 function sankeyFlow() {
 
-    var tooltip = floatingTooltip("gates_tooltip", VAR_TOOLTIP_GATES);
+    var tooltip = floatingTooltip("gates_tooltip", VAR_TOOLTIP_WIDTH);
 
     // Set the sankey diagram properties
     var sankey = d3.sankey()

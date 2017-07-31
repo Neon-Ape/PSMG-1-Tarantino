@@ -23,7 +23,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   var xkey = "type";
   var gkey = "movie"; // what we group by
 
-  var tooltip = floatingTooltip("gates_tooltip", VAR_TOOLTIP_GATES);
+  var tooltip = floatingTooltip("gates_tooltip", VAR_TOOLTIP_WIDTH);
 
   // group all the events by type
   data.forEach(function(d) {
