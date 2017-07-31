@@ -5,7 +5,6 @@ path {
 
 .graph {
     font-family: sans-serif;
-    font-size: 11px;
 }
 
 
@@ -19,6 +18,8 @@ path {
     pointer-events: none;
     font-size: 11px;
     fill: var(--white-color);
+    font-weight: 200;
+
 }
 
 #SankeyFlow .link {

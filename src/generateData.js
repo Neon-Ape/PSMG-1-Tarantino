@@ -149,14 +149,11 @@ function makeSankey(curseWords) {
         this.type = type;
     }
 
-
     function SankeyLink(source, target, value) {
         this.source = source;
         this.target = target;
         this.value = value;
     }
-
-    //var categories = ["fuck", "ass", "shit", "racial", "genital", "blashemy", "other"];
 
     var sankey420 = {
         nodes: [],
@@ -164,8 +161,6 @@ function makeSankey(curseWords) {
     };
 
     var i = 0;
-
-    //categories.forEach(pushNode(d));
 
     var movieLookup = {
         value: [],
@@ -206,9 +201,6 @@ function makeSankey(curseWords) {
         sankey420.links.push(new SankeyLink(source, target, word.value));
 
     }
-    console.log("sankey:");
-    console.log(sankey420);
-    console.log("sankey done");
     return sankey420;
 }
 
