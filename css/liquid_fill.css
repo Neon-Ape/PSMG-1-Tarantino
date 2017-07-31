@@ -18,20 +18,22 @@ svg.liquidfill2{
     fill: var(--darkgrey-color);
 }
 
-p#imdb_tag {
-    position: absolute;
+#imdb_tag {
+    position: relative;
     height: auto;
-    width: auto;
-    top: 770px;
-    left: 710px;
+    top: 310px;
+    left: 0;
+    right: 0;
+    text-align: center;
     font-size: larger;
 
 }
-p#rotten_tomatoes_tag{
-    position: absolute;
+#rotten_tomatoes_tag{
+    position: relative;
     height: auto;
-    width: auto;
-    top: 1010px;
-    left: 770px;
+    top: 510px;
+    left: 0;
+    right: 0;
+    text-align: center;
     font-size: larger;
 }
