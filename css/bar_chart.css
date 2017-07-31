@@ -15,7 +15,6 @@ label {
   cursor: pointer;
   text-align: center;
   font-size: 13px;
-  /*border: 1px solid #e0e0e0;*/
   text-decoration: none;
 }
 
@@ -29,14 +28,13 @@ input[type="radio"]:checked+label{
 }
 
 .legend{
-	font-size: 25px;
+  font-size: 25px;
   fill: var(--white-color);
 }
 
-.tick{
-	font-size: 18px;
+.tick {
+  font-size: 18px;
   font-family: "Oswald", sans serif;
-  fill: var(--white-color);
 }
 
 .radio {

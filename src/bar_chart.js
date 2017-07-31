@@ -130,15 +130,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       });
 
   // creates the coordinate system
-  svg.append("g")
+  var xaxis = svg.append("g")
       .attr("class", "xaxis")
       .attr("transform", "translate("+ VAR_AXIS_POSITION_BARCHART+"," + VAR_HEIGHT_BC + ")")
-      .call(d3.axisBottom(x).tickSizeOuter(0));
+      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .selectAll("text").style("fill", "white");
 
-  svg.append("g")
+  var yaxis = svg.append("g")
       .attr("class", "yaxis")
       .attr("transform", "translate("+ VAR_AXIS_POSITION_BARCHART+",0)")
-      .call(d3.axisLeft(y).tickSizeOuter(0));
+      .call(d3.axisLeft(y).tickSizeOuter(0))
+      .selectAll("text")
+      .style("fill", "white");
 
   // defines and creates legend of the bar chart
   var legend = svg.selectAll(".legend")
