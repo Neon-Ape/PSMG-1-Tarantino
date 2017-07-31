@@ -3,6 +3,11 @@ div#liquidfill {
 }
 svg.liquidfill{
     margin: 18px;
+    margin-top: 50px;
+}
+svg.liquidfill2{
+    margin: 18px;
+
 }
 
 .liquidFillGaugeText {
@@ -11,4 +16,22 @@ svg.liquidfill{
 
 .liquidFillOuterCircle {
     fill: var(--darkgrey-color);
+}
+
+p#imdb_tag {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 770px;
+    left: 710px;
+    font-size: larger;
+
+}
+p#rotten_tomatoes_tag{
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 1010px;
+    left: 770px;
+    font-size: larger;
 }

@@ -47,28 +47,14 @@ function liquidGauge() {
     config.displayPercent = false;
     config.valueCountUp = true;
 
+    // Make the chart
     var chart = function (ratingType, data) {
-        console.log(data);
         for (var i = 0; i < data.length; i++) {
            loadLiquidFillGauge(ratingType + "fillgauge" + (i+1), data[i].rating, VAR_GET_CLASS(data[i].movie),config);
-           console.log(ratingType + "fillgauge" + (i+1));
-
         }
-
-/*
-        var gauge1 = loadLiquidFillGauge("fillgauge1", 8.3, config);
-        var gauge2 = loadLiquidFillGauge("fillgauge2", 8.9, config);
-        var gauge3 = loadLiquidFillGauge("fillgauge3", 7.5, config);
-        var gauge4 = loadLiquidFillGauge("fillgauge4", 8.1, config);
-        var gauge5 = loadLiquidFillGauge("fillgauge5", 8.0, config);
-        var gauge6 = loadLiquidFillGauge("fillgauge6", 8.3, config);
-        var gauge7 = loadLiquidFillGauge("fillgauge7", 8.4, config);
-        */
     };
 
     function loadLiquidFillGauge(elementId, value, circleClass, config) {
-        console.log("Liquidgauge( elementId: " + elementId + ", value: " + value + ")");
-        console.log(config);
         if (config === null) {
             config = liquidFillGaugeDefaultSettings();
         }
@@ -78,8 +64,6 @@ function liquidGauge() {
         var locationX = parseInt(gauge.style("width")) / 2 - radius;
         var locationY = parseInt(gauge.style("height")) / 2 - radius;
         var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value)) / config.maxValue;
-
-        console.log("some Variables set!");
 
         var waveHeightScale;
         if (config.waveHeightScaling) {
@@ -94,7 +78,6 @@ function liquidGauge() {
 
         var textPixels = (config.textSize * radius / 2);
         var textFinalValue = parseFloat(value).toFixed(2);
-        console.log(textFinalValue);
         var textStartValue = config.valueCountUp ? config.minValue : textFinalValue;
         var percentText = config.displayPercent ? "%" : "";
         var circleThickness = config.circleThickness * radius;
@@ -102,7 +85,6 @@ function liquidGauge() {
         var fillCircleMargin = circleThickness + circleFillGap;
         var fillCircleRadius = radius - fillCircleMargin;
         var waveHeight = fillCircleRadius * waveHeightScale(fillPercent * 100);
-
         var waveLength = fillCircleRadius * 2 / config.waveCount;
         var waveClipCount = 1 + config.waveCount;
         var waveClipWidth = waveLength * waveClipCount;
@@ -121,8 +103,6 @@ function liquidGauge() {
                 return parseFloat(value).toFixed(2);
             };
         }
-
-        console.log("all variables set!");
 
         // Data for building the clip wave area.
         var data = [];
@@ -223,9 +203,8 @@ function liquidGauge() {
                     const i = d3.interpolateNumber(text1InterpolatorValue, textFinalValue);
                     return function(t){
                         text1InterpolatorValue = textRounder(i(t));
-                        // Set the gauge's text with the new value and append the % sign
-                        // to the end
-                        text1.text(text1InterpolatorValue + percentText);
+                        // Set the gauge's text with the new value
+                        text1.text(text1InterpolatorValue);
                     }
                 });
             text2.transition()
@@ -234,9 +213,8 @@ function liquidGauge() {
                     const i = d3.interpolateNumber(text2InterpolatorValue, textFinalValue);
                     return function(t){
                         text2InterpolatorValue = textRounder(i(t));
-                        // Set the gauge's text with the new value and append the % sign
-                        // to the end
-                        text2.text(text2InterpolatorValue + percentText);
+                        // Set the gauge's text with the new value
+                        text2.text(text2InterpolatorValue);
                     }
                 });
         }
@@ -255,9 +233,6 @@ function liquidGauge() {
             waveGroup.attr('transform', 'translate(' + waveGroupXPosition + ',' + waveRiseScale(fillPercent) + ')');
         }
 
-        console.log("Stuff set");
-        console.log(config.waveAnimate);
-
         if (config.waveAnimate) {
             animateWave();
         }
@@ -266,107 +241,18 @@ function liquidGauge() {
             wave.attr('transform', 'translate(' + waveAnimateScale(wave.attr('T')) + ',0)');
             wave.transition()
                 .duration(config.waveAnimateTime * (1 - wave.attr('T')));
-            console.log("set duration");
             wave.transition()
                 .ease(d3.easeLinear);
-            console.log("set ease");
             wave.transition()
                 .attr('transform', 'translate(' + waveAnimateScale(1) + ',0)');
-            console.log("set attr(transform)");
             wave.transition()
                 .attr('T', 1);
-            console.log("set attr(T");
             wave.transition()
                 .on('end', function () {
                     wave.attr('T', 0);
                     //animateWave();
                 });
-            console.log("animateWave finished");
         }
-
-        /*
-         function GaugeUpdater() {
-         this.update = function (value) {
-         var newFinalValue = parseFloat(value).toFixed(2);
-         var textRounderUpdater = function (value) {
-         return Math.round(value);
-         };
-         if (parseFloat(newFinalValue) != parseFloat(textRounderUpdater(newFinalValue))) {
-         textRounderUpdater = function (value) {
-         return parseFloat(value).toFixed(1);
-         };
-         }
-         if (parseFloat(newFinalValue) != parseFloat(textRounderUpdater(newFinalValue))) {
-         textRounderUpdater = function (value) {
-         return parseFloat(value).toFixed(2);
-         };
-         }
-
-         var textTween = function () {
-         var i = d3.interpolate(this.textContent, parseFloat(value).toFixed(2));
-         return function (t) {
-         this.textContent = textRounderUpdater(i(t)) + percentText;
-         }
-         };
-
-         text1.transition()
-         .duration(config.waveRiseTime)
-         .tween("text", textTween);
-         text2.transition()
-         .duration(config.waveRiseTime)
-         .tween("text", textTween);
-
-         var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value)) / config.maxValue;
-         var waveHeight = fillCircleRadius * waveHeightScale(fillPercent * 100);
-         var waveRiseScale = d3.scaleLinear()
-         // The clipping area size is the height of the fill circle + the wave height, so we position the clip wave
-         // such that the it will overlap the fill circle at all when at 0%, and will totally cover the fill
-         // circle at 100%.
-         .range([(fillCircleMargin + fillCircleRadius * 2 + waveHeight), (fillCircleMargin - waveHeight)])
-         .domain([0, 1]);
-         var newHeight = waveRiseScale(fillPercent);
-         var waveScaleX = d3.scaleLinear().range([0, waveClipWidth]).domain([0, 1]);
-         var waveScaleY = d3.scaleLinear().range([0, waveHeight]).domain([0, 1]);
-         var newClipArea;
-         if (config.waveHeightScaling) {
-         newClipArea = d3.area()
-         .x(function (d) {
-         return waveScaleX(d.x);
-         })
-         .y0(function (d) {
-         return waveScaleY(Math.sin(Math.PI * 2 * config.waveOffset * -1 + Math.PI * 2 * (1 - config.waveCount) + d.y * 2 * Math.PI));
-         })
-         .y1(function (d) {
-         return (fillCircleRadius * 2 + waveHeight);
-         });
-         } else {
-         newClipArea = clipArea;
-         }
-
-         var newWavePosition = config.waveAnimate ? waveAnimateScale(1) : 0;
-         wave.transition()
-         .duration(0)
-         .transition()
-         .duration(config.waveAnimate ? (config.waveAnimateTime * (1 - wave.attr('T'))) : (config.waveRiseTime))
-         .ease('linear')
-         .attr('d', newClipArea)
-         .attr('transform', 'translate(' + newWavePosition + ',0)')
-         .attr('T', '1')
-         .on("end", function () {
-         if (config.waveAnimate) {
-         wave.attr('transform', 'translate(' + waveAnimateScale(0) + ',0)');
-         animateWave(config.waveAnimateTime);
-         }
-         });
-         waveGroup.transition()
-         .duration(config.waveRiseTime)
-         .attr('transform', 'translate(' + waveGroupXPosition + ',' + newHeight + ')')
-         }
-         }
-
-         return new GaugeUpdater();
-         */
     }
-
     return chart;
 }
