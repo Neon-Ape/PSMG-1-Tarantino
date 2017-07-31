@@ -15,12 +15,12 @@
     --basterds-color: #4a674a;
     --django-color: #730000;
 
-    --ass-color: #fdfdfd;
-    --shit-color: #d4d4d4;
-    --fuck-color: #aaaaaa;
-    --racial-color: #7f7f7f;
-    --genital-color: #555555;
-    --blasphemy-color: #2a2a2a;
-    --other-color: #070707;
+    --ass-color: #f3e4d6;
+    --shit-color: #d59d6b;
+    --fuck-color: var(--sand-color);
+    --racial-color: #7a4c23;
+    --genital-color: #553518;
+    --blasphemy-color: #3b2511;
+    --other-color: #291a0c;
 }
 
