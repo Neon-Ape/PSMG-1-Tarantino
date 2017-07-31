@@ -1,3 +1,5 @@
+// it makes nodes, it should get a recode, but it's already the 3rd recode and this needs to get done
+// code written @ 3 in the morning isn't the best, what a revelation
 function NodeFactory(width, offset, separator) {
     this._width = width;
     this._offset = offset;
@@ -69,7 +71,8 @@ function NodeFactory(width, offset, separator) {
 
 }
 
-
+// basically i with some functionality welded on
+// more 3 in the morning code
 function Stepper() {
     this._value = 0;
     this._step = 1;
@@ -88,7 +91,7 @@ function Stepper() {
     this.step = function () {
         this._value += this._step;
     };
-    this.reset = function (value = 0) {
+    this.reset = function (value = 0) { // WebStorm says this is wrong. It's not, it works, duh
         this._value = value;
     }
 }
@@ -102,6 +105,7 @@ function Node(movie, count, x, timeline, step) {
     this.timeline = timeline;
 }
 
+// for every graph point a timeline is generated containing all the words contained in that node
 function Timeline(data, start, end, rawWidth, offset, movie) {
     if(start<0) { start = 0}
     this.times = [];

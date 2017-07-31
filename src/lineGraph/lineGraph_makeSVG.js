@@ -1,7 +1,14 @@
-/*
- Scale creation
- */
+// create SVG Container
+function makeSVGContainer(selector, width, height) {
+    var svg = d3.select(selector)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
 
+    return svg;
+}
+
+// create Y-Axis lines and text
 function makeScaleSVG(scaleData, svg) {
 
     var scale = svg.selectAll('.scale')
@@ -47,9 +54,9 @@ function makeScaleSVG(scaleData, svg) {
 }
 
 /*
- Graph creation
+ * create graph links
+ * class by movie so styling can be handled by CSS
  */
-
 function makeLinksSVG(linkData, svg) {
     var links = svg.selectAll('.link')
         .data(linkData, function (d) {
@@ -74,6 +81,10 @@ function makeLinksSVG(linkData, svg) {
     return links.merge(linksE);
 }
 
+/*
+ * create graph points
+ * class by movie so styling can be handled by CSS
+ */
 function makePointsSVG(nodeData, svg) {
     var points = svg.selectAll('.bubble')
         .data(nodeData, function (d) {
@@ -95,9 +106,12 @@ function makePointsSVG(nodeData, svg) {
 }
 
 /*
- Timeline creation
+ * create Timeline
+ * each Timeline is a svg <g> element
+ * containing a <line> for each timestamped word
+ * and a <text> element containing 2 <tspan> to get 2 lines of text
+ * everything is classed by movie, styling is handled by CSS where possible
  */
-
 function makeTimelineSVG(nodeData, svg) {
     times = svg.selectAll('g .timeline')
         .data(nodeData, function (d) {
@@ -109,24 +123,36 @@ function makeTimelineSVG(nodeData, svg) {
         .attr('x1', VAR_LG_TIMELINE_VALUES['x1'])
         .attr('x2', VAR_LG_TIMELINE_VALUES['x2'])
         .attr('y1', VAR_LG_TIMELINE_VALUES['y1'])
-        .attr('y2', VAR_LG_TIMELINE_VALUES['y2'])
-        .each(function (parentData) {
-            d3.select(this).classed(VAR_GET_CLASS(parentData.movie), true);
-            d3.select(this).selectAll('line')
-                .data(parentData.timeline.times)
-                .enter()
-                .append('line')
-                .classed(VAR_GET_CLASS(parentData.movie), true)
-                .attr('x1', VAR_LG_TIMELINE_VALUES['x1'])
-                .attr('x2', VAR_LG_TIMELINE_VALUES['x2'])
-                .attr('y1', VAR_LG_TIMELINE_VALUES['y1'])
-                .attr('y2', VAR_LG_TIMELINE_VALUES['y2'])
-                .attr('stroke-width', Number(VAR_LG_TIMELINE_VALUES['stroke-width']))
-                .attr('opacity', 0);
-        });
+        .attr('y2', VAR_LG_TIMELINE_VALUES['y2']);
 
     times = times.merge(timesE);
 
+    times = addLines(times);
+    times = addText(times);
+
+    console.log(times);
+    return times;
+}
+
+function addLines(times) {
+    times.each(function (parentData) {
+        d3.select(this).classed(VAR_GET_CLASS(parentData.movie), true);
+        d3.select(this).selectAll('line')
+            .data(parentData.timeline.times)
+            .enter()
+            .append('line')
+            .classed(VAR_GET_CLASS(parentData.movie), true)
+            .attr('x1', VAR_LG_TIMELINE_VALUES['x1'])
+            .attr('x2', VAR_LG_TIMELINE_VALUES['x2'])
+            .attr('y1', VAR_LG_TIMELINE_VALUES['y1'])
+            .attr('y2', VAR_LG_TIMELINE_VALUES['y2'])
+            .attr('stroke-width', Number(VAR_LG_TIMELINE_VALUES['stroke-width']))
+            .attr('opacity', 0);
+    });
+    return times;
+}
+
+function addText(times) {
     times.append('text')
         .each(function (d) {
             d3.select(this).classed(VAR_GET_CLASS(d.movie), true);
@@ -146,10 +172,6 @@ function makeTimelineSVG(nodeData, svg) {
         .text(function (d) {
             return d.timeline.start + " - " + d.timeline.end + " min";
         });
-
-
-
-    console.log(times);
     return times;
 }
 
