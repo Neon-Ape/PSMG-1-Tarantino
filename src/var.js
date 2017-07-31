@@ -22,7 +22,59 @@ var VAR_GET_CLASS = function (movie) {
     return VAR_MOVIE_CLASSES[movie];
 };
 
-var VAR_TOOLTIP_GATES = 240;
+var VAR_TOOLTIP_WIDTH = 240;
+
+
+// BUBBLECHART Variables
+
+var VAR_BC_SVG_WIDTH = 1200;
+var VAR_BC_SVG_HEIGHT = 800;
+var VAR_BC_TOOLTIP_TITLE = 'bubblechart_tooltip';
+var VAR_BC_TOOLTIP_WIDTH = 240;
+var VAR_BC_CENTER = { x: VAR_BC_SVG_WIDTH * 0.5, y: VAR_BC_SVG_HEIGHT *0.8/ 2 };
+var VAR_BC_MOVIE_TITLE_X_LOOKUP = {
+    "Reservoir Dogs" : VAR_BC_SVG_WIDTH*0.15,
+    "Pulp Fiction" : VAR_BC_SVG_WIDTH*0.3,
+    "Jackie Brown" : VAR_BC_SVG_WIDTH*0.45,
+    "Kill Bill: Vol. 1" : VAR_BC_SVG_WIDTH*0.56,
+    "Kill Bill: Vol. 2" : VAR_BC_SVG_WIDTH*0.66,
+    "Inglorious Basterds" : VAR_BC_SVG_WIDTH*0.75,
+    "Django Unchained" : VAR_BC_SVG_WIDTH*0.85
+};
+var VAR_BC_MOVIE_CENTER_LOOKUP = {
+    "Reservoir Dogs" : { x: VAR_BC_SVG_WIDTH*0.2, y: VAR_BC_SVG_HEIGHT/2},
+    "Pulp Fiction" : { x: VAR_BC_SVG_WIDTH*0.31, y: VAR_BC_SVG_HEIGHT/2},
+    "Jackie Brown" : { x: VAR_BC_SVG_WIDTH*0.42, y: VAR_BC_SVG_HEIGHT/2},
+    "Kill Bill: Vol. 1" : { x: VAR_BC_SVG_WIDTH*0.52, y: VAR_BC_SVG_HEIGHT/2},
+    "Kill Bill: Vol. 2" : { x: VAR_BC_SVG_WIDTH*0.62, y: VAR_BC_SVG_HEIGHT/2},
+    "Inglorious Basterds" : { x: VAR_BC_SVG_WIDTH*0.72, y: VAR_BC_SVG_HEIGHT/2},
+    "Django Unchained" : { x: VAR_BC_SVG_WIDTH*0.80, y: VAR_BC_SVG_HEIGHT/2}
+};
+var VAR_BC_GROUP_CENTER_LOOKUP = {
+    "ass" : {y: VAR_BC_SVG_HEIGHT*2/9},
+    "shit" : {y: VAR_BC_SVG_HEIGHT*2.8/9},
+    "fuck" : {y: VAR_BC_SVG_HEIGHT*3.7/9},
+    "racial" : {y: VAR_BC_SVG_HEIGHT*4.7/9},
+    "genital" : {y: VAR_BC_SVG_HEIGHT*5.4/9},
+    "blasphemy" : {y: VAR_BC_SVG_HEIGHT*6.3/9},
+    "other" : {y: VAR_BC_SVG_HEIGHT*7.1/9}
+};
+var VAR_BC_SIMU_FORCE_STRENGTH = 0.05;
+var VAR_BC_SIMU_CHARGE_MULTIPLIER = 2.0;
+var VAR_BC_SIMU_VELOCITY_DECAY = 0.15;
+var VAR_BC_SIMU_SCALE_POW = {
+    'exponent': 0.5,
+    'range': {
+        'low': 1,
+        'high': 65
+    }
+};
+var VAR_BC_X_RANDOM_MULTIPLIER = 900;
+var VAR_BC_Y_RANDOM_MULTIPLIER = 800;
+
+var VAR_BC_ANIMATION_DURATION = 2000;
+var VAR_BC_SVG_BUBBLE_STROKE_WIDTH = 2;
+var VAR_BC_SVG_MOVIE_TITLES_Y = 40;
 
 // LINEGRAPH Variables
 
